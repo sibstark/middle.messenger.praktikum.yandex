@@ -1,5 +1,6 @@
 import {RenderLoginPage} from "./pages/login";
 import {RenderRegistrationPage} from "./pages/registration";
+import {RenderProfilePage} from "./pages/profile";
 
 (function () {
     const root = document.getElementById("root");
@@ -8,5 +9,8 @@ import {RenderRegistrationPage} from "./pages/registration";
     }
     if (location.href.includes("/registration")) {
         root.innerHTML = RenderRegistrationPage();
+    }
+    if (location.href.includes("/profile")) {
+        root.innerHTML = RenderProfilePage();
     }
 })();
