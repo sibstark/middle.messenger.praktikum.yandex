@@ -1,7 +1,5 @@
 <div class="chat-message {{externalClasses}}">
-    {{#if @partial-block}}
-        {{> @partial-block }}
-    {{/if}}
+    {{{content}}}
     {{message}}
     {{#if time}}
         <div class="chat-message__footer">

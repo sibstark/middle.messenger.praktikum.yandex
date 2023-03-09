@@ -93,7 +93,7 @@ export const RenderProfilePage = () => {
     });
     const uploadPhotoContent = UploadPhoto({content: selectFileButton});
 
-    const updatePhotoModal = Modal({content: uploadPhotoContent, externalClasses: "modal_active"});
+    const updatePhotoModal = Modal({content: uploadPhotoContent});
 
     const profileForm = `<form action="/app" method="GET">
 ${loadPhoto}
