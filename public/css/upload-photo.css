@@ -1,0 +1,23 @@
+.upload-photo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 308px;
+    &__title {
+        color: var(--color-black);
+        font-weight: 500;
+    }
+    &__content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+        &_error {
+            color: var(--color-danger);
+        }
+        &_uploaded {
+            color: var(--color-grey-mountain);
+        }
+    }
+}

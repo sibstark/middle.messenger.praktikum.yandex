@@ -1,0 +1,29 @@
+.form-control {
+    display: flex;
+    flex-direction: column;
+    &__label {
+        color: var(--color-grey);
+        font-size: 0.75rem;
+    }
+    &__input {
+        margin-top: 0.5rem;
+        background: var(--color-grey-sky);
+        border: 1px solid var(--color-grey-secondary);
+        border-radius: 0.25rem;
+        padding: 0.375rem 0.5rem;
+        color: var(--color-grey-mountain);
+        font-size: 0.875rem;
+        &_error {
+            border-color: var(--color-danger);
+        }
+    }
+    &__error-label {
+        color: var(--color-danger);
+        font-size: 0.5rem;
+        margin-top: 0.25rem;
+    }
+    &__image {
+        align-self: center;
+        cursor: pointer;
+    }
+}

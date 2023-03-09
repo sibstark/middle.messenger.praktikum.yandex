@@ -1,0 +1,6 @@
+.person-avatar {
+    background: var(--color-grey-ground);
+    width: 2.875rem;
+    height: 2.875rem;
+    border-radius: 50%;
+}

@@ -1,0 +1,37 @@
+{
+  "name": "sprint_1",
+  "version": "1.0.0",
+  "author": "Oleg Briukhanov",
+  "license": "ISC",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "start": "parcel index.html --no-cache",
+    "start:login": "parcel ./src/pages/login/login.hbs --no-cache",
+    "start:registration": "parcel ./src/pages/registration/registration.hbs --no-cache",
+    "start:profile": "parcel ./src/pages/profile/profile.hbs --no-cache",
+    "start:chat": "parcel ./src/pages/chat/chat.hbs --no-cache",
+    "start:404": "parcel ./src/pages/404/404.hbs --no-cache",
+    "start:500": "parcel ./src/pages/500/500.hbs --no-cache",
+    "server": "node server.js",
+    "build": "parcel build index.hbs"
+  },
+  "targets": {
+    "default": {
+      "distDir": "./build"
+    }
+  },
+  "keywords": [],
+  "devDependencies": {
+    "@anikin/parcel-transformer-handlebars": "^1.0.9",
+    "@parcel/transformer-inline-string": "^2.8.3",
+    "autoprefixer": "^10.4.13",
+    "handlebars": "^4.7.7",
+    "parcel": "^2.8.3",
+    "postcss-nested": "^6.0.1"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "path": "^0.12.7"
+  }
+}
