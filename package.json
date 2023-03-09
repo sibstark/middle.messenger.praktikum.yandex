@@ -10,18 +10,18 @@
     "build": "parcel build index.html"
   },
   "engines": {
-    "node": "=18.12.1"
+    "node": ">=18.12.1"
   },
   "keywords": [],
   "devDependencies": {
     "@anikin/parcel-transformer-handlebars": "^1.0.9",
     "@parcel/transformer-inline-string": "^2.8.3",
     "autoprefixer": "^10.4.13",
-    "handlebars": "^4.7.7",
     "parcel": "^2.8.3",
     "postcss-nested": "^6.0.1"
   },
   "dependencies": {
+    "handlebars": "^4.7.7",
     "express": "^4.18.2",
     "path": "^0.12.7"
   }
