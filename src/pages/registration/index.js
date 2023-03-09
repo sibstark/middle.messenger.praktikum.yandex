@@ -1,40 +1,67 @@
-import { AuthorizationContainer, Page } from "../../modules";
-import { FormControl, Button, Link } from "../../components";
+import {AuthorizationContainer, Page} from "../../modules";
+import {FormControl, Button} from "../../components";
 
+const controls = [{
+    externalClasses: "authorization-container__form-control",
+    label: "First name",
+    name: "first_name",
+    type: "text",
+    placeholder: "First name"
+}, {
+    externalClasses: "authorization-container__form-control",
+    label: "Second name",
+    name: "second_name",
+    type: "text",
+    placeholder: "Second name"
+}, {
+    externalClasses: "authorization-container__form-control",
+    label: "Login",
+    name: "login",
+    type: "text",
+    placeholder: "Login"
+}, {
+    externalClasses: "authorization-container__form-control",
+    label: "Email",
+    name: "email",
+    type: "text",
+    placeholder: "Email"
+}, {
+    externalClasses: "authorization-container__form-control",
+    label: "Phone",
+    name: "phone",
+    type: "text",
+    placeholder: "Phone",
+    inputClasses: "form-control__input_error",
+    errorText: "Required"
+}, {
+    externalClasses: "authorization-container__form-control",
+    label: "Confirm password",
+    name: "confirmPassword",
+    type: "password",
+    placeholder: "Confirm password",
+    inputClasses: "form-control__input_error",
+    errorText: "Don't match"
+}, {
+    externalClasses: "authorization-container__form-control",
+    label: "Password",
+    name: "password",
+    type: "password",
+    placeholder: "Password",
+    inputClasses: "form-control__input_error",
+    errorText: "Don't match"
+}];
 export const RenderRegistrationPage = () => {
-    const login = FormControl(
-        { externalClasses: "authorization-container__form-control",
-        label: "Login",
-        name: "login",
-        type: "text",
-        placeholder: "Login"
-        });
-
-    const password = FormControl(
-        { externalClasses: "authorization-container__form-control",
-            label: "Password",
-            name: "password",
-            type: "password",
-            placeholder: "Password"
-        });
-
-    const submit = Button(
-        { type: "submit",
-            text: "Sign in",
-            externalClasses: "button_blue button_full-width authorization-container__form-control"
-        });
-
-    const registrationLink = Link(
-        { text: "Create account",
-            externalClasses: "link__blue",
-            href: "/registration" });
+    const renderedControls = controls.map(control => FormControl(control)).join("");
+    const submit = Button({
+        type: "submit",
+        text: "Sign up",
+        externalClasses: "button_blue button_full-width authorization-container__form-control"
+    });
 
     const registrationForm = `<form>
-${login}
-${password}
+${renderedControls}
 ${submit}
-${registrationLink}
 </form>`
-    const authorizationContainer = AuthorizationContainer({ header: "Registration", form: registrationForm});
-    return Page({ body: authorizationContainer, externalClasses: "page_centered" });
+    const authorizationContainer = AuthorizationContainer({header: "Registration", form: registrationForm});
+    return Page({body: authorizationContainer, externalClasses: "page_centered"});
 }
