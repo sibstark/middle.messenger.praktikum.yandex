@@ -1,0 +1,39 @@
+.dropdown {
+    position: relative;
+    display: inline-block;
+    &_active &__trigger {
+        color: var(--color-blue);
+    }
+    &_active &__content {
+        visibility: visible;
+    }
+    &__trigger {
+        /* this class needs to add onClick handler */
+        cursor: pointer;
+    }
+    &__content {
+        position: absolute;
+        right: 0;
+        top: calc(100% + 10px);
+        visibility: hidden;
+        padding: 1rem;
+        z-index: 1;
+        background: var(--color-white);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        border-radius: 0.25rem;
+        &_position-left {
+            right: 0;
+        }
+        &_position-right {
+            left: 0;
+            right: unset;
+        }
+        &_position-bottom {
+            top: calc(100% + 10px);
+        }
+        &_position-top {
+            top: unset;
+            bottom: 100%;
+        }
+    }
+}

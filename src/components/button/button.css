@@ -1,0 +1,20 @@
+.button {
+    border-radius: 0.25rem;
+    padding: 0.6875rem;
+    border: none;
+    &_full-width {
+        width: 100%;
+    }
+    &_blue {
+        background: var(--color-blue);
+        color: var(--color-white);
+    }
+    &_link {
+        cursor: pointer;
+        background: none;
+        padding: 0;
+        border: none;
+        color: var(--color-blue);
+        text-decoration: underline;
+    }
+}

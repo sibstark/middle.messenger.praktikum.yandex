@@ -1,0 +1,20 @@
+<div class="chat-media-preview {{externalClasses}}">
+    {{> avatar }}
+    <div class="chat-media-preview__content message-preview">
+        <div>
+            <h5>{{name}}</h5>
+            <div class="message-preview__text">
+                {{text}}
+            </div>
+        </div>
+        <div class="message-preview__meta">
+            <div class="message-timer-bar">
+                <span class="message-timer-bar__time">{{time}}</span>
+                <img src="/src/public/images/cross.svg" class="message-timer-bar__action" alt="Delete this chat action">
+            </div>
+            <div class="round-pill">
+                <span>{{count}}</span>
+            </div>
+        </div>
+    </div>
+</div>

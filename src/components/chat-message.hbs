@@ -1,0 +1,11 @@
+<div class="chat-message {{externalClasses}}">
+    {{#if @partial-block}}
+        {{> @partial-block }}
+    {{/if}}
+    {{message}}
+    {{#if time}}
+        <div class="chat-message__footer">
+            <span class="chat-message__time">{{time}}</span>
+        </div>
+    {{/if}}
+</div>

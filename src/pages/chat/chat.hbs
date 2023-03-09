@@ -1,0 +1,97 @@
+---
+title: Chat
+stylesheets:
+- /src/public/css/main.css
+- /src/public/css/button.css
+- /src/public/css/authorization-container.css
+- /src/public/css/form-control.css
+- /src/public/css/upload-photo.css
+- /src/public/css/modal.css
+- /src/public/css/chat.css
+- /src/public/css/avatar.css
+- /src/public/css/chat-input.css
+- /src/public/css/chat-message.css
+- /src/public/css/dropdown.css
+- /src/public/css/dropdown-item.css
+items:
+- { name: "Peter", text: "haha", time: "10:42", count: 3 }
+- { name: "Alex", text: "Friends, I have a special news for you! Jenny and me going to go bla bla bla", time: "10:43", count: 2 }
+- { name: "Artur", text: "Friends, I have a special news for you! Jenny and me going to go bla bla bla", time: "10:43", count: 2 }
+- { name: "Anton", text: "Friends, I have a special news for you! Jenny and me going to go bla bla bla", time: "10:43", count: 2 }
+- { name: "Mom", text: "Hi, Mom! I love you!", time: "10:43", count: 5, externalClasses: "chat-media-preview_active" }
+- { name: "Dan", text: "Hi, how are you?", time: "10:43", count: 2 }
+- { name: "Sveta", text: "Hi, how are you?", time: "10:43", count: 2 }
+- { name: "Alena", text: "Hi, how are you?", time: "10:43", count: 2 }
+- { name: "Oleg", text: "Hi, how are you?", time: "10:43", count: 2 }
+- { name: "Work", text: "Hi, how are you?", time: "10:43", count: 2 }
+- { name: "Sigismund", text: "Hi, how are you?", time: "10:43", count: 2 }
+---
+
+{{#extend "main"}}
+    {{#content "content"}}
+        <div class="page chat-page">
+            <aside class="chat-sidebar">
+                <div class="chat-sidebar-header">
+                    <div class="chat-header-profile-nav">
+                        <a class="chat-header-profile-nav__link">
+                            <span class="chat-header-profile-nav__link-text">
+                                Profile
+                            </span>
+                            <img src="/src/public/images/shevron-right.svg" alt="Referral to profile page on click" />
+                        </a>
+                    </div>
+                    {{> chat-input placeholder="Search" externalClasses="chat-sidebar-header__search-input" }}
+                </div>
+                <div class="chat-sidebar-chat-list">
+                    {{#each items}}
+                        {{> chatmediapreview }}
+                    {{/each}}
+                </div>
+            </aside>
+            <div class="chat-area">
+                <div class="chat-area__header">
+                    <div class="chat-header-media">
+                        {{> avatar }}
+                        <h5 class="chat-header-media__title">Mom</h5>
+                    </div>
+                    {{#> dropdown externalClasses="dropdown_active" }}
+                        {{#> dropdown-trigger }}
+                            <img src="/src/public/images/dots.svg" alt="Chat actions">
+                        {{/dropdown-trigger}}
+                        {{#> dropdown-content }}
+                            {{> dropdown-item icon="/src/public/images/round-plus.svg" title="Добавить пользователя" }}
+                            {{> dropdown-item icon="/src/public/images/round-cross.svg" title="Удалить пользователя" }}
+                        {{/dropdown-content }}
+                    {{/dropdown}}
+                </div>
+                <div class="chat-area__messages">
+                    <div class="timeline-date">19 June</div>
+                    {{> chat-message time="11:32" message="Jenny and I have been friends for a long time. We usually do everything together and have so much fun. From days out to being each other's support when times are tough, we always have each others back. We have shared so many memories that we will always cherish. Jenny is my best friend and I wouldn't have it any" }}
+                    {{#> chat-message externalClasses="chat-message_image" }}
+                        <img src="/src/public/images/camera.png" alt="Sent message picture">
+                    {{/chat-message}}
+                    {{> chat-message time="11:42" message="Jenny and I have been friends for a long time. We usually do everything together and have so much fun. From days out to being each other's support when times are tough, we always have each others back. We have shared so many memories that we will always cherish. Jenny is my best friend and I wouldn't have it any" }}
+                    {{> chat-message time="11:52" externalClasses="chat-message_own" message="Hi, Mom! I love you!" }}
+                </div>
+                <div class="chat-area__footer">
+                    <div class="message-bar">
+                        {{#> dropdown externalClasses="dropdown_active" }}
+                            {{#> dropdown-trigger }}
+                                <img src="/src/public/images/clip.svg" width="32" height="32" alt="Additional action for message" />
+                            {{/dropdown-trigger}}
+                            {{#> dropdown-content position="dropdown__content_position-top dropdown__content_position-right" }}
+                                {{> dropdown-item icon="/src/public/images/media.svg" title="Фото или Видео" }}
+                                {{> dropdown-item icon="/src/public/images/file.svg" title="Файл" }}
+                                {{> dropdown-item icon="/src/public/images/round-dot.svg" title="Локация" }}
+                            {{/dropdown-content }}
+                        {{/dropdown}}
+                        {{> chat-input placeholder="Message" externalClasses="chat-input_text-left message-bar__message-input" }}
+                        <button class="round-pill message-bar__send-message">
+                            <img src="/src/public/images/arrow-right.svg" alt="Send message button">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/content}}
+{{/extend}}

@@ -1,0 +1,18 @@
+.error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__title {
+        color: var(--color-blue);
+        font-size: 3rem;
+    }
+    &__content {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        color: var(--color-black);
+        font-size: 1.25rem;
+    }
+    &_danger &__title {
+        color: var(--color-danger);
+    }
+}

@@ -1,0 +1,37 @@
+.chat-message {
+    padding: 0.5rem;
+    background: var(--color-grey-ground);
+    border-radius: 0.25rem;
+    color: var(--color-black);
+    max-width: 400px;
+    font-size: 0.75rem;
+    margin-top: 1rem;
+    &__footer {
+        display: flex;
+        justify-content: end;
+    }
+    &__time {
+        margin-top: 0.25rem;
+        font-size: 0.5rem;
+        color: var(--color-grey);
+    }
+    &__status {
+        margin-top: 0.25rem;
+        margin-right: 0.25rem;
+    }
+    &_own {
+        color: var(--color-white);
+        background: var(--color-blue);
+        align-self: flex-end;
+    }
+    &_image {
+        background: var(--color-white);
+        padding: unset;
+    }
+    &_own &__time {
+        color: var(--color-white);
+    }
+    &_own &__status {
+        color: var(--color-white);
+    }
+}

@@ -1,0 +1,18 @@
+---
+title: 404
+stylesheets:
+- ../../public/css/main.css
+- ../../public/css/button.css
+- ../../public/css/authorization-container.css
+- ../../public/css/form-control.css
+- ../../public/css/upload-photo.css
+- ../../public/css/modal.css
+- ../../public/css/errors.css
+---
+{{#extend "main"}}
+    {{#content "content"}}
+        <div class="page page_centered">
+            {{> errorcontainer body="Not found" code=404}}
+        </div>
+    {{/content}}
+{{/extend}}
