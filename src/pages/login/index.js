@@ -34,7 +34,7 @@ export const RenderLoginPage = () => {
             href: "/registration"
         });
 
-    const loginForm = `<form>
+    const loginForm = `<form action="/app" method="GET">
 ${login}
 ${password}
 ${submit}
