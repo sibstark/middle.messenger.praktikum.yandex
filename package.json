@@ -4,22 +4,13 @@
   "author": "Oleg Briukhanov",
   "license": "ISC",
   "description": "",
-  "type": "module",
   "scripts": {
     "start": "parcel index.html --no-cache",
-    "start:login": "parcel ./src/pages/login/login.hbs --no-cache",
-    "start:registration": "parcel ./src/pages/registration/registration.hbs --no-cache",
-    "start:profile": "parcel ./src/pages/profile/profile.hbs --no-cache",
-    "start:chat": "parcel ./src/pages/chat/chat.hbs --no-cache",
-    "start:404": "parcel ./src/pages/404/404.hbs --no-cache",
-    "start:500": "parcel ./src/pages/500/500.hbs --no-cache",
     "server": "node server.js",
-    "build": "parcel build index.hbs"
+    "build": "parcel build index.html"
   },
-  "targets": {
-    "default": {
-      "distDir": "./build"
-    }
+  "engines": {
+    "node": "=18.12.1"
   },
   "keywords": [],
   "devDependencies": {

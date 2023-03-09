@@ -106,6 +106,7 @@ export const RenderChatPage = () => {
     const membersAction = MembersAction();
     const messageActions = MessageActions();
     const input = ChatInput({
+        name: "message",
         placeholder: "Message",
         externalClasses: "chat-input_text-left message-bar__message-input"
     });
