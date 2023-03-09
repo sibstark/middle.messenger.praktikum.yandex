@@ -3,16 +3,12 @@
   "version": "1.0.0",
   "author": "Oleg Briukhanov",
   "license": "ISC",
-  "description": "",
+  "description": "Yandex.Практикум проект",
   "scripts": {
     "start": "parcel index.html --no-cache",
     "server": "node server.js",
     "build": "parcel build index.html"
   },
-  "engines": {
-    "node": ">=18.12.1"
-  },
-  "keywords": [],
   "devDependencies": {
     "@anikin/parcel-transformer-handlebars": "^1.0.9",
     "@parcel/transformer-inline-string": "^2.8.3",
