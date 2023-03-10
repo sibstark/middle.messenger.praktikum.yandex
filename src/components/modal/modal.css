@@ -7,6 +7,7 @@
     background: rgba(0, 0, 0, 0.5);
     visibility: hidden;
     transition: visibility 0.3s linear;
+
     &__content {
         position: absolute;
         top: -50%;
@@ -18,9 +19,11 @@
         padding: 1rem;
         transition: all 0.3s linear;
     }
+
     &_active &__content {
         top: 50%;
     }
+
     &_active {
         visibility: visible;
     }

@@ -5,13 +5,16 @@
     padding: 0.5rem;
     border-radius: 0.25rem;
     transition: background-color 0.2s linear;
+
     &__icon {
         margin-right: 1rem;
     }
+
     &__title {
         font-size: 0.75rem;
         white-space: nowrap;
     }
+
     &:hover {
         background: var(--color-grey-secondary);
     }

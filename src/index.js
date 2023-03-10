@@ -4,7 +4,7 @@ import {RenderProfilePage} from "./pages/profile";
 import {Render404Page} from "./pages/404";
 import {Render500Page} from "./pages/500";
 import {RenderChatPage} from "./pages/chat";
-import { path } from "./pages/routes";
+import {path} from "./pages/routes";
 
 (function () {
     const pathname = location.pathname;

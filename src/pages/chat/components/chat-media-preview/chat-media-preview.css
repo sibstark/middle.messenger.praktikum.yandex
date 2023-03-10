@@ -32,6 +32,7 @@
         justify-content: space-between;
         align-items: end;
     }
+
     &__counter {
         font-size: 0.75rem;
         width: 20px;
