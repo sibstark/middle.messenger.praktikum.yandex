@@ -1,8 +1,11 @@
+// this is only need to catch .env config and set to process, by default this doesn't work correctly
+// https://stackoverflow.com/questions/71762254/app-not-running-on-port-defined-in-env-file-nodejs
+require("dotenv").config();
 const express = require("express");
 const path = require("path");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 
 app.use(express.static("dist"));

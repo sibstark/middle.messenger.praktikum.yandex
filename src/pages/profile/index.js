@@ -107,5 +107,5 @@ ${updatePhotoModal}
 </form>
 `
     const authorizationContainer = AuthorizationContainer({header: "Profile", form: profileForm});
-    return Page({body: authorizationContainer, externalClasses: "page_centered"});
+    return Page({body: `<main>${authorizationContainer}</main>`, externalClasses: "page_centered"});
 }

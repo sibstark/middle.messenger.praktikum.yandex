@@ -41,5 +41,5 @@ ${submit}
 ${registrationLink}
 </form>`
     const authorizationContainer = AuthorizationContainer({header: "Login", form: loginForm});
-    return Page({body: authorizationContainer, externalClasses: "page_centered"});
+    return Page({body: `<main>${authorizationContainer}</main>`, externalClasses: "page_centered"});
 }
