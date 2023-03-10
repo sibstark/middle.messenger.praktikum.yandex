@@ -64,5 +64,5 @@ ${renderedControls}
 ${submit}
 </form>`
     const authorizationContainer = AuthorizationContainer({header: "Registration", form: registrationForm});
-    return Page({body: authorizationContainer, externalClasses: "page_centered"});
+    return Page({body: `<main>${authorizationContainer}</main>`, externalClasses: "page_centered"});
 }

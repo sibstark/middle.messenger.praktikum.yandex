@@ -125,5 +125,5 @@ export const RenderChatPage = () => {
     ${sidebar}
     ${area}
     `
-    return Page({body: body, externalClasses: "page_row"});
+    return `<main>${Page({body: body, externalClasses: "page_row"})}</main>`;
 }
