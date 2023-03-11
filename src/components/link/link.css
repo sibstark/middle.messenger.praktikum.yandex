@@ -1,0 +1,7 @@
+.link {
+    font-size: 0.75rem;
+
+    &__blue {
+        color: var(--color-blue);
+    }
+}

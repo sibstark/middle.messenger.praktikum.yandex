@@ -1,0 +1,38 @@
+.chat-sidebar {
+    height: 100vh;
+    width: 350px;
+    background: var(--color-grey-sky);
+}
+
+.chat-sidebar-header {
+    max-height: 78px;
+    margin: 1rem 0.5rem 0 0.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-grey-wolf);
+
+    &__search-input {
+        margin-top: 1rem;
+    }
+}
+
+.chat-header-profile-nav {
+    color: var(--color-grey);
+    display: flex;
+    justify-content: end;
+    font-size: 0.75rem;
+
+    &__link {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    &__link-text {
+        margin-right: 0.5rem;
+    }
+}
+
+.chat-sidebar-chat-list {
+    overflow-x: scroll;
+    max-height: calc(100vh - 78px);
+}
