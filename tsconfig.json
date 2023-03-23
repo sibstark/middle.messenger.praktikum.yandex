@@ -8,6 +8,7 @@
       "@components/*": ["src/components/*"],
       "@modules": ["src/modules"],
       "@pages": ["src/pages"],
+      "@infrastructure": ["src/infrastructure"],
       "@routes": ["src/pages/routes.ts"]
     },
     "outDir": "dist",
@@ -29,7 +30,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "lib": ["esnext", "dom"]
+    "noUnusedParameters": false,
+    "lib": ["esnext", "dom", "dom.iterable"]
   }
 }

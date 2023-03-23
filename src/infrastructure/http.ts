@@ -19,23 +19,50 @@ function queryStringify(data: Record<string, string | string[]> = {}): string {
 
   return `?${query}`;
 }
+export type TOptions = {
+  timeout?: number;
+  headers?: Record<string, string>;
+  data?: Record<string, any>;
+};
 
-export class HTTPTransport {
-  get = (url, options = {}) =>
+type TRequestOptions = TOptions & {
+  method: METHODS;
+};
+
+export type TMethod = (
+  url: string,
+  options: TOptions
+) => Promise<XMLHttpRequest>;
+interface IHTTPTransport {
+  get: TMethod;
+  post: TMethod;
+  put: TMethod;
+  delete: TMethod;
+  patch: TMethod;
+}
+export class HTTPTransport implements IHTTPTransport {
+  get: TMethod = (url, options = {}) =>
     this.request(url, { ...options, method: METHODS.GET }, options.timeout);
 
-  post = (url, options = {}) =>
+  post: TMethod = (url, options = {}) =>
     this.request(url, { ...options, method: METHODS.POST }, options.timeout);
 
-  put = (url, options = {}) =>
+  put: TMethod = (url, options = {}) =>
     this.request(url, { ...options, method: METHODS.PUT }, options.timeout);
 
-  delete = (url, options = {}) =>
+  delete: TMethod = (url, options = {}) =>
     this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
 
-  request = (url, options, timeout = 5000) => {
+  patch: TMethod = (url, options = {}) =>
+    this.request(url, { ...options, method: METHODS.PATCH }, options.timeout);
+
+  request = (
+    url: string,
+    options: TRequestOptions,
+    timeout: number = 5000
+  ): Promise<XMLHttpRequest> => {
     const { method, data, headers = {} } = options;
-    return new Promise((resolve, reject) => {
+    return new Promise<XMLHttpRequest>((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       if (method === METHODS.GET && data) {
         url += queryStringify(data);
@@ -57,16 +84,22 @@ export class HTTPTransport {
       if (method === METHODS.GET || !data) {
         xhr.send();
       } else {
-        xhr.send(data);
+        xhr.send(JSON.stringify(data));
       }
     });
   };
 }
 
-function fetchWithRetry(url: string, options = { retries: 2 }) {
+type TRetryOptions = TOptions & {
+  retries: number;
+};
+export function fetchWithRetry(
+  url: string,
+  options: TRetryOptions = { retries: 2 }
+) {
   let { retries } = options;
   const http = new HTTPTransport();
-  function retry(err) {
+  function retry(err?: Error): Promise<any> {
     if (retries === 0) {
       throw err;
     }
