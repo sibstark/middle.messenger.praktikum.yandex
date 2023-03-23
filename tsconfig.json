@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@types": ["src/types.ts"],
+      "@utils": ["src/utils"],
+      "@components": ["src/components"],
+      "@components/*": ["src/components/*"],
+      "@modules": ["src/modules"],
+      "@pages": ["src/pages"],
+      "@routes": ["src/pages/routes.ts"]
+    },
+    "outDir": "dist",
+    "target": "es2016",
+    "declaration": false,
+    "module": "commonjs",
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "lib": ["esnext", "dom"]
+  }
+}
