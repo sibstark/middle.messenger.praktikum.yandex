@@ -6,3 +6,4 @@ export * from "./round-pill";
 export * from "./label";
 export * from "./input";
 export * from "./form";
+export * from "./main";

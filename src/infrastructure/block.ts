@@ -10,7 +10,8 @@ export type Tag =
   | "a"
   | "button"
   | "label"
-  | "form";
+  | "form"
+  | "main";
 export type TProps = Children & {
   [index: string | symbol]: any;
 };
@@ -72,7 +73,7 @@ export class Block<T extends TProps = Record<string | symbol, any>> {
   }
 
   private _registerEvents(eventBus: EventBus) {
-    eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
+    eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
@@ -83,10 +84,13 @@ export class Block<T extends TProps = Record<string | symbol, any>> {
     this._element = this._createDocumentElement(tag);
   }
 
-  protected init() {
+  private _init() {
     this._createResources();
+    this.init();
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
+
+  protected init() {}
 
   _componentDidMount() {
     this.componentDidMount();
@@ -127,6 +131,10 @@ export class Block<T extends TProps = Record<string | symbol, any>> {
 
   private get element() {
     return this._element;
+  }
+
+  public get name(): string | null | undefined {
+    return this._element?.getAttribute("name");
   }
 
   private _getChildren(propsAndChildren: T): {

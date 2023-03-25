@@ -1,86 +1,87 @@
 import { AuthorizationContainer, Page } from "@modules";
-import { FormControl, Button } from "@components";
-import { concatArrayTemplates } from "@utils";
-import { FormControlProps } from "@components/form-control/types";
+import {
+  FormControl, Button, Form, Main, FormControlProps
+} from "@components";
 
-const controls: FormControlProps[] = [
+const controlsMap: FormControlProps[] = [
   {
     classes: "authorization-container__form-control",
-    label: "First name",
+    title: "First name",
     name: "first_name",
     type: "text",
     placeholder: "First name"
   },
   {
     classes: "authorization-container__form-control",
-    label: "Second name",
+    title: "Second name",
     name: "second_name",
     type: "text",
     placeholder: "Second name"
   },
   {
     classes: "authorization-container__form-control",
-    label: "Login",
+    title: "Login",
     name: "login",
     type: "text",
     placeholder: "Login"
   },
   {
     classes: "authorization-container__form-control",
-    label: "Email",
+    title: "Email",
     name: "email",
     type: "text",
     placeholder: "Email"
   },
   {
     classes: "authorization-container__form-control",
-    label: "Phone",
+    title: "Phone",
     name: "phone",
     type: "text",
-    placeholder: "Phone",
-    inputClasses: "form-control__input_error",
-    errorText: "Required"
+    placeholder: "Phone"
   },
   {
     classes: "authorization-container__form-control",
-    label: "Confirm password",
+    title: "Confirm password",
     name: "confirmPassword",
     type: "password",
-    placeholder: "Confirm password",
-    inputClasses: "form-control__input_error",
-    errorText: "Don't match"
+    placeholder: "Confirm password"
   },
   {
     classes: "authorization-container__form-control",
-    label: "Password",
+    title: "Password",
     name: "password",
     type: "password",
-    placeholder: "Password",
-    inputClasses: "form-control__input_error",
-    errorText: "Don't match"
+    placeholder: "Password"
   }
 ];
 export const RenderRegistrationPage = () => {
-  const renderedControls = concatArrayTemplates(
-    controls.map((control: FormControlProps) => FormControl(control))
+  const controls = controlsMap.map(
+    (control: FormControlProps) => new FormControl(control)
   );
-  const submit = Button({
+  const submit = new Button({
     type: "submit",
     text: "Sign up",
     classes:
       "button_blue button_full-width authorization-container__form-control"
   });
 
-  const registrationForm = `<form action="/app" method="GET">
-${renderedControls}
-${submit}
-</form>`;
-  const authorizationContainer = AuthorizationContainer({
+  const form = new Form(
+    {
+      name: "registration_form",
+      content: [...controls, submit]
+    },
+    {}
+  );
+
+  const container = new AuthorizationContainer({
     header: "Registration",
-    form: registrationForm
+    body: form
   });
-  return Page({
-    body: `<main>${authorizationContainer}</main>`,
+  const main = new Main({
+    body: container
+  });
+  return new Page({
+    body: main,
     classes: "page_centered"
   });
 };

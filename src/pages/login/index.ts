@@ -1,5 +1,8 @@
 import { AuthorizationContainer, Page } from "@modules";
-import { FormControl, Button, Link, Form } from "@components";
+import {
+  FormControl, Button, Link, Form, Main
+} from "@components";
+import { loginValidation, passValidation } from "@utils";
 
 export const RenderLoginPage = () => {
   const login = new FormControl({
@@ -31,18 +34,27 @@ export const RenderLoginPage = () => {
     href: "/registration"
   });
 
-  const loginForm = `<form action="/app" method="GET">
-${login}
-${password}
-${submit}
-${registrationLink}
-</form>`;
-  const authorizationContainer = AuthorizationContainer({
+  const form = new Form(
+    {
+      name: "login_form",
+      content: [login, password, submit, registrationLink]
+    },
+    {
+      login: loginValidation,
+      password: passValidation
+    }
+  );
+
+  const container = new AuthorizationContainer({
     header: "Login",
-    form: loginForm
+    body: form
   });
-  return Page({
-    body: `<main>${authorizationContainer}</main>`,
+
+  const main = new Main({
+    body: container
+  });
+  return new Page({
+    body: main,
     classes: "page_centered"
   });
 };

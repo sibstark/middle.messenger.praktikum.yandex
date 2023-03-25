@@ -1,37 +1,109 @@
-import { Block } from "@infrastructure";
+import { Block, EventBlock } from "@infrastructure";
+import { IValidation } from "@types";
 import template from "./form.hbs";
-import { FromProps } from "./types";
+import { FromProps, TValidationScheme } from "./types";
+import { FormControl } from "../form-control";
 
 export class Form extends Block<FromProps> {
-  constructor(props: FromProps) {
+  validationScheme: TValidationScheme;
+
+  constructor(props: FromProps, scheme: TValidationScheme) {
     super("form", props);
+    this.validationScheme = scheme;
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.subscribe();
+  }
+
+  _findElementByName(name: string): IValidation | undefined {
+    if (Array.isArray(this.children.content)) {
+      const element = (this.children.content as EventBlock[]).find(
+        _ => _.name === name
+      );
+      return element ? (element as IValidation) : undefined;
+    }
+    return undefined;
+  }
+
+  _constructContext() {
+    if (Array.isArray(this.children.content)) {
+      const controls = this.children.content.filter(
+        _ => _ instanceof FormControl
+      ) as FormControl[];
+      return controls.reduce((acc, cur) => {
+        acc[cur.name as string] = cur.value;
+        return acc;
+      }, {} as Record<string, string>);
+    }
+    return {};
+  }
+
+  subscribe() {
+    let blocks: EventBlock[] = [];
+
+    if (Array.isArray(this.children.content)) {
+      blocks = this.children.content.filter(
+        _ => _ instanceof EventBlock
+      ) as EventBlock[];
+    }
+
+    blocks.forEach(_ => {
+      _.addEvent("focus", this.onFocus);
+      _.addEvent("blur", this.onBlur);
+    });
   }
 
   addEvents() {
-    this._element!.addEventListener("submit", this.onSubmit);
+    this._element!.addEventListener("submit", this.onSubmit.bind(this));
   }
 
   protected removeEvents() {
-    this._element!.removeEventListener("submit", this.onFocus);
+    this._element!.removeEventListener("submit", this.onSubmit.bind(this));
   }
 
   onSubmit(e: Event) {
-    const form = e.target as HTMLFormElement;
+    e.preventDefault();
+    const context = this._constructContext();
+    const blocks = (this.children.content as Block[]).filter(
+      _ => _ instanceof EventBlock
+    ) as FormControl[];
+    const isValid = blocks.every(_ => {
+      const status = this.validationScheme[_.name as string]?.(
+        _.value,
+        context
+      );
+      if (status?.isValid) {
+        _?.makeSuccess();
+      } else {
+        _?.makeError(status.error || "Required");
+      }
+      return status?.isValid;
+    });
+    if (isValid) {
+      console.log(`Form ${this.props.name}`, context);
+    }
+  }
+
+  _validOnEvent(e: Event) {
+    const input = e.target as HTMLInputElement;
+    const element = this._findElementByName(input.name);
+    const rule = this.validationScheme[input.name];
+    const context = this._constructContext();
+    const status = rule(input.value, context);
+    if (status.isValid) {
+      element?.makeSuccess();
+    } else {
+      element?.makeError(status.error || "Required");
+    }
   }
 
   onFocus(e: Event) {
-    const input = e.target as HTMLInputElement;
-    const name = input.name;
-    console.log("Focus", name);
+    this._validOnEvent(e);
   }
 
   onBlur(e: Event) {
-    const input = e.target as HTMLInputElement;
-    const name = input.name;
-    console.log("Blur", name);
+    this._validOnEvent(e);
   }
 
   protected render(): DocumentFragment {

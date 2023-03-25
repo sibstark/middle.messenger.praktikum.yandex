@@ -1,11 +1,13 @@
-import { Children, Events, ExternalClasses } from "@types";
-import { Block } from "@infrastructure";
+import {
+  Children, Events, ExternalClasses, TValidationFunc
+} from "@types";
+import { Block, EventBlock } from "@infrastructure";
 
-export type TValidationFunc = (input: HTMLInputElement, context: any) => void;
+export type TValidationScheme = Record<string, TValidationFunc>;
 
 export type FromProps = Children &
   Events &
   ExternalClasses<{
-    content: Block | Block[];
-    validationScheme?: Record<string, RegExp | TValidationFunc>;
+    name: string;
+    content: (Block | EventBlock)[];
   }>;

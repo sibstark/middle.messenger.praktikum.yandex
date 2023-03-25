@@ -1,12 +1,12 @@
 import { renderTemplate } from "@utils";
 import { Input, Label } from "@components";
-import { Block } from "@infrastructure";
+import { EventBlock } from "@infrastructure";
 import template from "./form-control.hbs";
 import emptyTemplate from "./empty-form-control.hbs";
 import { EmptyFormControlProps, FormControlProps } from "./types";
 import "./form-control.css";
 
-export class FormControl extends Block<FormControlProps> {
+export class FormControl extends EventBlock<FormControlProps> {
   label: Label;
 
   input: Input;
@@ -35,13 +35,18 @@ export class FormControl extends Block<FormControlProps> {
     this.makeSuccess = this.makeSuccess.bind(this);
   }
 
+  public get value(): string {
+    return (this.input.getContent() as HTMLInputElement).value;
+  }
+
+  public get name(): string | null | undefined {
+    return this.input.getContent()?.getAttribute("name");
+  }
+
   makeError(error: string) {
     this.label.setProps({
       text: error,
       classes: "form-control__error-label form-control__error-label_shown"
-    });
-    this.input.setProps({
-      classes: "form-control__input form-control__input_error"
     });
   }
 
@@ -50,9 +55,16 @@ export class FormControl extends Block<FormControlProps> {
       text: "",
       classes: "form-control__error-label"
     });
-    this.input.setProps({
-      classes: "form-control__input"
-    });
+  }
+
+  // eslint-disable-next-line no-undef
+  public addEvent(name: string, event: EventListener) {
+    this.input.addEvent(name, event);
+  }
+
+  // eslint-disable-next-line no-undef
+  public removeEvent(name: string, event: EventListener) {
+    this.input.removeEvent(name, event);
   }
 
   protected render(): DocumentFragment {
@@ -65,3 +77,5 @@ export class FormControl extends Block<FormControlProps> {
 
 export const EmptyFormControl = ({ content, classes }: EmptyFormControlProps) =>
   renderTemplate(emptyTemplate, { content, classes });
+
+export * from "./types";

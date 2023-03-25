@@ -1,21 +1,18 @@
-import {
-  Button, Link, RoundPill, Form, FormControl
-} from "@components";
+import { Form, FormControl } from "@components";
+import { loginValidation } from "@utils";
 import { ArrowRight } from "./pages/chat/components";
 
 const fc = new FormControl({
   title: "Login",
   name: "login",
   type: "text",
-  placeholder: "Placeholder",
-  events: {
-    focus: () => console.log("focus"),
-    blur: () => console.log("blur")
-  }
+  placeholder: "Placeholder"
 });
 
 const form = new Form({
-  content: fc
+  content: [fc]
+}, {
+  login: loginValidation
 });
 
 const root = document.getElementById("root") as HTMLElement;
@@ -23,5 +20,5 @@ const root = document.getElementById("root") as HTMLElement;
 root.append(form.getContent());
 
 setTimeout(() => {
-  fc.makeError("Required");
+  // fc.makeError("Required");
 }, 3000);

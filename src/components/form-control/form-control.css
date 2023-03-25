@@ -15,10 +15,10 @@
     padding: 0.375rem 0.5rem;
     color: var(--color-grey-mountain);
     font-size: 0.875rem;
+  }
 
-    &_error {
-      border-color: var(--color-danger);
-    }
+  &_error &__input {
+    border-color: var(--color-danger);
   }
 
   &__error-label {

@@ -1,4 +1,6 @@
+import { Block } from "@infrastructure";
+
 export type AuthorizationContainerProps = {
   header: string;
-  form: string;
+  body: Block;
 }

@@ -6,6 +6,7 @@ import { Render404Page } from "./pages/404";
 import { Render500Page } from "./pages/500";
 import { RenderChatPage } from "./pages/chat";
 
+/*
 (function () {
   const { pathname } = window.location;
   const root = document.getElementById("root") as HTMLElement;
@@ -39,3 +40,11 @@ import { RenderChatPage } from "./pages/chat";
   }
   window.location.href = path.notFound;
 }());
+ */
+
+const { pathname } = window.location;
+const root = document.getElementById("root") as HTMLElement;
+if (pathname.includes(path.login)) {
+  const page = RenderLoginPage();
+  root.append(page.getContent());
+}

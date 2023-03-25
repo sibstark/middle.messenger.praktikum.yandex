@@ -25,7 +25,8 @@
     "import/no-extraneous-dependencies": "off",
     "prefer-template": "off",
     "no-unused-vars": "warn",
-    "prefer-destructuring": "off"
+    "prefer-destructuring": "off",
+    "no-this-before-super": "off"
   },
   "settings": {
     "import/resolver": {
