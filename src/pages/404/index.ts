@@ -1,9 +1,13 @@
 import { ErrorContainer, Page } from "@modules";
+import { Main } from "@components";
 
 export const Render404Page = () => {
-  const errorContainer = ErrorContainer({ body: "Not found", code: 404 });
-  return Page({
-    body: `<main>${errorContainer}</main>`,
+  const container = new ErrorContainer({ body: "Not found", code: 404 });
+  const main = new Main({
+    body: container
+  });
+  return new Page({
+    body: main,
     classes: "page_centered"
   });
 };

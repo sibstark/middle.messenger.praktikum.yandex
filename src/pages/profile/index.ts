@@ -140,7 +140,7 @@ export const RenderProfilePage = () => {
   const toChatLink = new Link({
     text: "Back to chat",
     classes: "link__blue",
-    href: "/chat"
+    href: "/app"
   });
 
   const passwordForm = new Form(

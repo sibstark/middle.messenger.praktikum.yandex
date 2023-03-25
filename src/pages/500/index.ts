@@ -1,13 +1,17 @@
 import { ErrorContainer, Page } from "@modules";
+import { Main } from "@components";
 
 export const Render500Page = () => {
-  const errorContainer = ErrorContainer({
+  const container = new ErrorContainer({
     body: "Something went wrong",
     code: 500,
     classes: "error-container_danger"
   });
-  return Page({
-    body: `<main>${errorContainer}</main>`,
+  const main = new Main({
+    body: container
+  });
+  return new Page({
+    body: main,
     classes: "page_centered"
   });
 };

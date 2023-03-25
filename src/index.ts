@@ -58,6 +58,16 @@ function render() {
   if (pathname.includes(path.profile)) {
     const page = RenderProfilePage();
     root.append(page.getContent());
+    return;
+  }
+  if (pathname.includes(path.notFound)) {
+    const page = Render404Page();
+    root.append(page.getContent());
+    return;
+  }
+  if (pathname.includes(path.serverError)) {
+    const page = Render500Page();
+    root.append(page.getContent());
   }
 }
 
