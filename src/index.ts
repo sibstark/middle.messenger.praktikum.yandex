@@ -41,10 +41,18 @@ import { RenderChatPage } from "./pages/chat";
   window.location.href = path.notFound;
 }());
  */
-
-const { pathname } = window.location;
 const root = document.getElementById("root") as HTMLElement;
-if (pathname.includes(path.login)) {
-  const page = RenderLoginPage();
-  root.append(page.getContent());
+
+function render() {
+  const { pathname } = window.location;
+  if (pathname.includes(path.login)) {
+    const page = RenderLoginPage();
+    root.append(page.getContent());
+  }
+  if (pathname.includes(path.registration)) {
+    const page = RenderRegistrationPage();
+    root.append(page.getContent());
+  }
 }
+
+render();

@@ -18,7 +18,6 @@ export interface IValidation {
 }
 
 export type TValidationStatus = {
-  isValid: boolean;
   error?: string;
 };
 export type TValidationFunc = (

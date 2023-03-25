@@ -73,12 +73,12 @@ export class Form extends Block<FromProps> {
         _.value,
         context
       );
-      if (status?.isValid) {
-        _?.makeSuccess();
+      if (status?.error) {
+        _?.makeError(status.error);
       } else {
-        _?.makeError(status.error || "Required");
+        _?.makeSuccess();
       }
-      return status?.isValid;
+      return !status?.error;
     });
     if (isValid) {
       console.log(`Form ${this.props.name}`, context);
@@ -90,11 +90,11 @@ export class Form extends Block<FromProps> {
     const element = this._findElementByName(input.name);
     const rule = this.validationScheme[input.name];
     const context = this._constructContext();
-    const status = rule(input.value, context);
-    if (status.isValid) {
-      element?.makeSuccess();
+    const status = rule?.(input.value, context);
+    if (status?.error) {
+      element?.makeError(status.error);
     } else {
-      element?.makeError(status.error || "Required");
+      element?.makeSuccess();
     }
   }
 

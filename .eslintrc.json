@@ -26,7 +26,8 @@
     "prefer-template": "off",
     "no-unused-vars": "warn",
     "prefer-destructuring": "off",
-    "no-this-before-super": "off"
+    "no-this-before-super": "off",
+    "no-useless-escape": "off"
   },
   "settings": {
     "import/resolver": {
