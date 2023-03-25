@@ -3,7 +3,14 @@ import { v4 } from "uuid";
 import { Children } from "@types";
 import { EventBus } from "./event-bus";
 
-export type Tag = "div" | "input" | "template";
+export type Tag =
+  | "div"
+  | "input"
+  | "template"
+  | "a"
+  | "button"
+  | "label"
+  | "form";
 export type TProps = Children & {
   [index: string | symbol]: any;
 };
@@ -26,15 +33,15 @@ export class Block<T extends TProps = Record<string | symbol, any>> {
     FLOW_RENDER: "flow:render"
   };
 
-  _element: HTMLElement | null = null;
+  protected _element: HTMLElement | null = null;
 
   _meta: TMeta;
 
-  protected props: TProps;
+  protected props: T;
 
   protected eventBus: () => EventBus;
 
-  protected children: Record<string, Block> = {};
+  protected children: Record<string, Block | Block[]> = {};
 
   protected readonly _id: string;
 
@@ -84,25 +91,29 @@ export class Block<T extends TProps = Record<string | symbol, any>> {
   _componentDidMount() {
     this.componentDidMount();
     Object.values(this.children).forEach(child => {
-      child.dispatchComponentDidMount();
+      if (Array.isArray(child)) {
+        child.forEach(_ => _.dispatchComponentDidMount());
+      } else {
+        child.dispatchComponentDidMount();
+      }
     });
   }
 
   // Может переопределять пользователь, необязательно трогать
-  componentDidMount(oldProps?: T) {}
+  public componentDidMount(oldProps?: T) {}
 
   dispatchComponentDidMount() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
-  _componentDidUpdate(oldProps: T, newProps: T) {
+  private _componentDidUpdate(oldProps: T, newProps: T) {
     if (this.componentDidUpdate(oldProps, newProps)) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
   }
 
   // Может переопределять пользователь, необязательно трогать
-  componentDidUpdate(oldProps: T, newProps: T) {
+  public componentDidUpdate(oldProps: T, newProps: T) {
     return true;
   }
 
@@ -114,19 +125,25 @@ export class Block<T extends TProps = Record<string | symbol, any>> {
     Object.assign(this.props, nextProps);
   };
 
-  get element() {
+  private get element() {
     return this._element;
   }
 
   private _getChildren(propsAndChildren: T): {
-    children: Record<string, Block>;
+    children: Record<string, Block | Block[]>;
     props: Record<string, any>;
   } {
-    const children: Record<string, Block> = propsAndChildren.children || {};
+    const children: Record<string, Block | Block[]> =
+      propsAndChildren.children || {};
     const props: Record<string, any> = {};
 
     Object.entries(propsAndChildren).forEach(([key, value]) => {
-      if (value instanceof Block) {
+      if (
+        value instanceof Block ||
+        (Array.isArray(value) &&
+          value.length > 0 &&
+          value.every(_ => _ instanceof Block))
+      ) {
         children[key] = value;
       } else {
         props[key] = value;
@@ -136,12 +153,17 @@ export class Block<T extends TProps = Record<string | symbol, any>> {
     return { children, props };
   }
 
+  protected addEvents() {}
+
+  protected removeEvents() {}
+
   private _addEvents() {
     const { events = {} } = this.props;
 
     Object.keys(events).forEach(eventName => {
       this._element!.addEventListener(eventName, events[eventName]);
     });
+    this.addEvents();
   }
 
   private _removeEvents() {
@@ -149,28 +171,33 @@ export class Block<T extends TProps = Record<string | symbol, any>> {
     Object.keys(events).forEach(eventName => {
       this._element!.removeEventListener(eventName, events[eventName]);
     });
+    this.removeEvents();
   }
 
   private _render() {
     this._removeEvents();
     const fragment = this.render();
-    const newElement = fragment.firstElementChild as HTMLElement;
-    if (this._element && newElement) {
-      this._element.replaceWith(newElement);
+    const element = fragment.firstElementChild as HTMLElement;
+    // this needs to update html node and rerender content
+    if (this._element && element) {
+      this._element.replaceWith(element);
     }
-    this._element = newElement;
+    this._element = element;
     this._addEvents();
   }
 
-  protected compile(template: string, context: any): DocumentFragment {
+  protected compile(template: string, context: TProps): DocumentFragment {
     const contextAndStubs = { ...context };
-    Object.entries(this.children).forEach(([key, child]) => {
+    Object.entries(this.children).forEach(([name, child]) => {
+      // need to add array of children as one prop
+      // notice: this doesn't work if dont use {{{}}} brackets
+      // got this code from webinar on 23.03
       if (Array.isArray(child)) {
-        contextAndStubs[key] = child.map(
-          (child: Block) => `<div data-id="${child._id}"></div>`
-        );
+        contextAndStubs[name] = child
+          .map((child: Block) => `<div data-id="${child._id}"></div>`)
+          .join("");
       } else {
-        contextAndStubs[key] = `<div data-id="${child._id}"></div>`;
+        contextAndStubs[name] = `<div data-id="${child._id}"></div>`;
       }
     });
     const html = renderTemplate(template, contextAndStubs);
@@ -179,6 +206,7 @@ export class Block<T extends TProps = Record<string | symbol, any>> {
     ) as HTMLTemplateElement;
     fragment.innerHTML = html;
     const replaceStub = (component: Block) => {
+      // find already html with necessary id and replace by dom content, not plain text
       const stub = fragment.content.querySelector(
         `[data-id="${component._id}"]`
       );
@@ -186,9 +214,7 @@ export class Block<T extends TProps = Record<string | symbol, any>> {
       if (!stub) {
         return;
       }
-
       component.getContent()?.append(...Array.from(stub.childNodes));
-
       stub.replaceWith(component.getContent());
     };
 
@@ -208,11 +234,11 @@ export class Block<T extends TProps = Record<string | symbol, any>> {
     return new DocumentFragment();
   }
 
-  getContent(): HTMLElement {
+  public getContent(): HTMLElement {
     return this.element!;
   }
 
-  private _makePropsProxy(props: TProps) {
+  private _makePropsProxy(props: TProps): T {
     // Можно и так передать this
     // Такой способ больше не применяется с приходом ES6+
     const _self = this;
@@ -230,7 +256,7 @@ export class Block<T extends TProps = Record<string | symbol, any>> {
       deleteProperty() {
         throw new Error("нет доступа");
       }
-    });
+    }) as T;
   }
 
   private _createDocumentElement(tag: Tag): HTMLElement | HTMLTemplateElement {

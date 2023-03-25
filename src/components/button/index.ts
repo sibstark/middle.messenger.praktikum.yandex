@@ -3,12 +3,16 @@ import template from "./button.hbs";
 import { ButtonProps } from "./types";
 import "./button.css";
 
-export class Button1 extends Block<ButtonProps> {
+export class Button extends Block<ButtonProps> {
   constructor(props: ButtonProps) {
-    super("input", props);
+    super("button", props);
   }
 
   protected render(): DocumentFragment {
-    return this.compile(template, this.props);
+    const classes = this.props.classes ? ` ${this.props.classes}` : "";
+    return this.compile(template, {
+      ...this.props,
+      classes: "button" + classes
+    });
   }
 }

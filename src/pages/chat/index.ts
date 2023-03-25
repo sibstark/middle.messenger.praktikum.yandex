@@ -138,7 +138,7 @@ export const RenderChatPage = () => {
     placeholder: "Message",
     classes: "chat-input_text-left message-bar__message-input"
   });
-  const submit = RoundPill({
+  const submit = new RoundPill({
     content: ArrowRight,
     classes: "message-bar__send-message"
   });

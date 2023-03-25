@@ -1,14 +1,16 @@
-import { ExternalClasses } from "@types";
+import { Children, Events, ExternalClasses } from "@types";
 
-export type FormControlProps = ExternalClasses<{
-  label: string;
-  name: string;
-  type: string;
-  placeholder?: string;
-  inputClasses?: string;
-  errorText?: string;
-}>;
+export type FormControlProps = Children &
+  Events &
+  ExternalClasses<{
+    title: string;
+    name: string;
+    type: string;
+    placeholder?: string;
+  }>;
 
-export type EmptyFormControlProps = ExternalClasses<{
-  content: string;
-}>;
+export type EmptyFormControlProps = Children &
+  Events &
+  ExternalClasses<{
+    content: string;
+  }>;

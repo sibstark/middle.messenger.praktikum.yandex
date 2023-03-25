@@ -1,5 +1,7 @@
-import { ExternalClasses } from "@types";
+import { Children, Events, ExternalClasses } from "@types";
 
-export type RoundPillProps = ExternalClasses<{
-  content: string;
-}>;
+export type RoundPillProps = Children &
+  Events &
+  ExternalClasses<{
+    content: string;
+  }>;

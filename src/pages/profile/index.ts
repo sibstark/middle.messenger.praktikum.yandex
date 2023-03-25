@@ -93,27 +93,27 @@ export const RenderProfilePage = () => {
     changePassControls.map((control) => FormControl(control))
   );
 
-  const save = Button({
+  const save = new Button({
     type: "submit",
     text: "Save",
     classes:
       "button_blue button_full-width authorization-container__form-control"
   });
 
-  const changePass = Button({
+  const changePass = new Button({
     type: "submit",
     text: "Change password",
     classes:
       "button_blue button_full-width authorization-container__form-control"
   });
-  const selectFileButton = Button({
+  const selectFileButton = new Button({
     type: "button",
     text: "Select a file",
     classes: "button_link"
   });
   const uploadPhotoContent = UploadPhoto({ content: selectFileButton });
 
-  const updatePhotoModal = Modal({ content: uploadPhotoContent });
+  const updatePhotoModal = Modal({ children: uploadPhotoContent });
 
   const profileForm = `<form action="/app" method="GET">
 ${loadPhoto}

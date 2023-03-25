@@ -1,3 +1,5 @@
-import { ExternalClasses } from "@types";
+import { Children, Events, ExternalClasses } from "@types";
 
-export type LinkProps = ExternalClasses<{ href: string; text: string }>;
+export type LinkProps = Children &
+  Events &
+  ExternalClasses<{ href: string; text: string }>;

@@ -1,15 +1,27 @@
-import { Button1 } from "@components";
+import {
+  Button, Link, RoundPill, Form, FormControl
+} from "@components";
+import { ArrowRight } from "./pages/chat/components";
 
-const button = new Button1({
-  classes: "classes112",
-  type: "submit",
-  text: "my button",
+const fc = new FormControl({
+  title: "Login",
+  name: "login",
+  type: "text",
+  placeholder: "Placeholder",
   events: {
-    click: () => {
-      console.log("clicked");
-    }
+    focus: () => console.log("focus"),
+    blur: () => console.log("blur")
   }
 });
 
+const form = new Form({
+  content: fc
+});
+
 const root = document.getElementById("root") as HTMLElement;
-root.append(button.getContent());
+
+root.append(form.getContent());
+
+setTimeout(() => {
+  fc.makeError("Required");
+}, 3000);

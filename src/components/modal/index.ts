@@ -1,7 +1,14 @@
-import { renderTemplate } from "@utils";
+import { Block } from "@infrastructure";
 import template from "./modal.hbs";
 import { ModalProps } from "./types";
 import "./modal.css";
 
-export const Modal = ({ content, classes }: ModalProps) =>
-  renderTemplate(template, { content, classes });
+export class Modal extends Block<ModalProps> {
+  constructor(props: ModalProps) {
+    super("div", props);
+  }
+
+  protected render(): DocumentFragment {
+    return this.compile(template, this.props);
+  }
+}

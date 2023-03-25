@@ -5,7 +5,7 @@ export type ExternalClasses<T> = T & {
 };
 
 export type Children = {
-  children?: Record<string, Block>;
+  children?: Record<string, Block | Block[]>;
 };
 
 export type Events = {

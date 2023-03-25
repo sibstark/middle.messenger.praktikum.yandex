@@ -1,5 +1,6 @@
-import { ExternalClasses } from "@types";
+import { Children, Events, ExternalClasses } from "@types";
+import { Block } from "@infrastructure";
 
-export type ModalProps = ExternalClasses<{
-  content: string;
-}>;
+export type ModalProps = ExternalClasses<Children & Events> & {
+  content: Block | Block[];
+};
