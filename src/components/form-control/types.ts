@@ -1,4 +1,5 @@
 import { Children, Events, ExternalClasses } from "@types";
+import { Block } from "@infrastructure";
 
 export type FormControlProps = Children &
   Events &
@@ -12,5 +13,5 @@ export type FormControlProps = Children &
 export type EmptyFormControlProps = Children &
   Events &
   ExternalClasses<{
-    content: string;
+    body: string | Block;
   }>;

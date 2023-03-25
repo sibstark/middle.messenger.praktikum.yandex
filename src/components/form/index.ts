@@ -68,17 +68,18 @@ export class Form extends Block<FromProps> {
     const blocks = (this.children.content as Block[]).filter(
       _ => _ instanceof EventBlock
     ) as FormControl[];
-    const isValid = blocks.every(_ => {
+    let isValid = true;
+    blocks.forEach(_ => {
       const status = this.validationScheme[_.name as string]?.(
         _.value,
         context
       );
       if (status?.error) {
+        isValid = false;
         _?.makeError(status.error);
       } else {
         _?.makeSuccess();
       }
-      return !status?.error;
     });
     if (isValid) {
       console.log(`Form ${this.props.name}`, context);

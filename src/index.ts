@@ -48,9 +48,15 @@ function render() {
   if (pathname.includes(path.login)) {
     const page = RenderLoginPage();
     root.append(page.getContent());
+    return;
   }
   if (pathname.includes(path.registration)) {
     const page = RenderRegistrationPage();
+    root.append(page.getContent());
+    return;
+  }
+  if (pathname.includes(path.profile)) {
+    const page = RenderProfilePage();
     root.append(page.getContent());
   }
 }

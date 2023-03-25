@@ -1,8 +1,6 @@
-import { renderTemplate } from "@utils";
 import { Input, Label } from "@components";
 import { EventBlock } from "@infrastructure";
 import template from "./form-control.hbs";
-import emptyTemplate from "./empty-form-control.hbs";
 import { EmptyFormControlProps, FormControlProps } from "./types";
 import "./form-control.css";
 
@@ -75,7 +73,14 @@ export class FormControl extends EventBlock<FormControlProps> {
   }
 }
 
-export const EmptyFormControl = ({ content, classes }: EmptyFormControlProps) =>
-  renderTemplate(emptyTemplate, { content, classes });
+export class EmptyFormControl extends EventBlock<EmptyFormControlProps> {
+  constructor(props: EmptyFormControlProps) {
+    super("div", props);
+  }
+
+  protected render(): DocumentFragment {
+    return this.compile(template, this.props);
+  }
+}
 
 export * from "./types";
