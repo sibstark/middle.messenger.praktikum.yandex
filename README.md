@@ -17,7 +17,7 @@
 
 2. Ссылка на опубликованное приложение Netlify
 
-   https://deploy--sparkling-cuchufli-0c2c7d.netlify.app/login
+   https://sparkling-cuchufli-0c2c7d.netlify.app/
 
 ---
 
