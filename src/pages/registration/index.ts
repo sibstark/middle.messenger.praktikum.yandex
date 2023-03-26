@@ -1,5 +1,7 @@
 import { AuthorizationContainer, Page } from "@modules";
-import { FormControl, Button, Form, Main, FormControlProps } from "@components";
+import {
+  FormControl, Button, Form, Main, FormControlProps
+} from "@components";
 import {
   confirmPassValidation,
   emailValidation,

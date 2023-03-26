@@ -2,14 +2,6 @@
     position: relative;
     display: inline-block;
 
-    &_active &__trigger {
-        color: var(--color-blue);
-    }
-
-    &_active &__content {
-        visibility: visible;
-    }
-
     &__trigger {
         /* this class needs to add onClick handler */
         cursor: pointer;
@@ -23,7 +15,7 @@
         padding: 1rem;
         z-index: 1;
         background: var(--color-white);
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0 10px rgb(0 0 0 / 20%);
         border-radius: 0.25rem;
 
         &_position-left {
@@ -43,5 +35,14 @@
             top: unset;
             bottom: 100%;
         }
+    }
+
+
+    &_active &__trigger {
+        color: var(--color-blue);
+    }
+
+    &_active &__content {
+        visibility: visible;
     }
 }

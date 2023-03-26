@@ -74,6 +74,7 @@ export class HTTPTransport implements IHTTPTransport {
           xhr.setRequestHeader(key, value);
         });
       }
+      // eslint-disable-next-line func-names
       xhr.onload = function () {
         resolve(xhr);
       };

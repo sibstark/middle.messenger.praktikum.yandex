@@ -6,7 +6,7 @@
 
 .chat-sidebar-header {
     max-height: 78px;
-    margin: 1rem 0.5rem 0 0.5rem;
+    margin: 1rem 0.5rem 0;
     padding-bottom: 1rem;
     border-bottom: 1px solid var(--color-grey-wolf);
 

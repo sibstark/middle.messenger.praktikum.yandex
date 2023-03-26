@@ -28,7 +28,8 @@
     "prefer-destructuring": "off",
     "no-this-before-super": "off",
     "no-useless-escape": "off",
-    "max-classes-per-file": "off"
+    "max-classes-per-file": "off",
+    "no-console": "off"
   },
   "settings": {
     "import/resolver": {
