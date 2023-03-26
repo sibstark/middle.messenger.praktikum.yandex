@@ -1,3 +1,8 @@
+---
+
+[Ссылка на PR Sprint 2](https://github.com/sibstark/middle.messenger.praktikum.yandex/pull/3)
+
+---
 1. Ссылка на дизайн в фигма
 
    https://www.figma.com/file/kk8JFSQ5PF8cJwT9sj4gxT/Yandex.Practicum-chat-design?node-id=0%3A1&t=V5fw9KRbaANdXjNm-0
