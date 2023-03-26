@@ -56,26 +56,24 @@ const Round = `<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns
               fill="#3369F3"/>
     </svg>`;
 export const MembersAction = () => {
-  const add = DropdownItem({ icon: Plus, title: "Добавить пользователя" });
-  const remove = DropdownItem({ icon: Cross, title: "Удалить пользователя" });
-  const content = add + remove;
-  return Dropdown({
+  const add = new DropdownItem({ icon: Plus, title: "Добавить пользователя" });
+  const remove = new DropdownItem({ icon: Cross, title: "Удалить пользователя" });
+  return new Dropdown({
     classes: "dropdown_active",
     trigger: ThreeDots,
-    content
+    content: [add, remove]
   });
 };
 
 export const MessageActions = () => {
-  const addMedia = DropdownItem({ icon: Media, title: "Фото или Видео" });
-  const addFile = DropdownItem({ icon: File, title: "Файл" });
-  const addLocation = DropdownItem({ icon: Round, title: "Локация" });
-  const content = addMedia + addFile + addLocation;
+  const addMedia = new DropdownItem({ icon: Media, title: "Фото или Видео" });
+  const addFile = new DropdownItem({ icon: File, title: "Файл" });
+  const addLocation = new DropdownItem({ icon: Round, title: "Локация" });
   const position = "dropdown__content_position-top dropdown__content_position-right";
-  return Dropdown({
+  return new Dropdown({
     classes: "dropdown_active",
     trigger: Clip,
-    content,
+    content: [addMedia, addFile, addLocation],
     position
   });
 };

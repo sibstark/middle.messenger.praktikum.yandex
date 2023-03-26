@@ -1,6 +1,5 @@
 import { Page } from "@modules";
-import { concatArrayTemplates } from "@utils";
-import { RoundPill } from "@components";
+import { Main, RoundPill } from "@components";
 import {
   ArrowRight,
   ChatInput,
@@ -123,14 +122,12 @@ const messageList: ChatMessageProps[] = [
   }
 ];
 export const RenderChatPage = () => {
-  const chats = concatArrayTemplates(
-    chatList.map(chat => ChatMediaPreview(chat))
-  );
+  const chats = chatList.map(chat => new ChatMediaPreview(chat));
   const search = ChatInput({
     placeholder: "Search",
     classes: "chat-sidebar-header__search-input"
   });
-  const sidebar = ChatSidebar({ href: "/profile", chats, search });
+  const sidebar = new ChatSidebar({ href: "/profile", chats, search });
   const membersAction = MembersAction();
   const messageActions = MessageActions();
   const input = ChatInput({
@@ -140,22 +137,25 @@ export const RenderChatPage = () => {
   });
   const submit = new RoundPill({
     content: ArrowRight,
-    classes: "message-bar__send-message"
+    classes: "message-bar__send-message",
+    events: {
+      click: () => {
+        if (input.value) {
+          console.log("message", {
+            message: input.value
+          });
+        }
+      }
+    }
   });
-  const messages = concatArrayTemplates(
-    messageList.map((msg: ChatMessageProps) => ChatMessage(msg))
-  );
-  const area = ChatArea({
+  const messages = messageList.map(msg => new ChatMessage(msg));
+  const area = new ChatArea({
     name: "Mom",
     membersAction,
     messageActions,
-    input,
     messages,
-    submit
+    sendMessage: [input, submit]
   });
-  const body = `
-    ${sidebar}
-    ${area}
-    `;
-  return `<main>${Page({ body, classes: "page_row" })}</main>`;
+  const page = new Page({ body: [sidebar, area], classes: "page_row" });
+  return new Main({ body: page });
 };

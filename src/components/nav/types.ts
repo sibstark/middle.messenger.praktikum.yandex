@@ -1,6 +1,6 @@
 import { ExternalClasses } from "@types";
 import { Block } from "@infrastructure";
 
-export type PageProps = ExternalClasses<{
+export type NavProps = ExternalClasses<{
   body: Block | Block[];
 }>;

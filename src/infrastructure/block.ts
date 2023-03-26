@@ -11,7 +11,9 @@ export type Tag =
   | "button"
   | "label"
   | "form"
-  | "main";
+  | "main"
+  | "aside"
+  | "nav";
 export type TProps = Children & {
   [index: string | symbol]: any;
 };

@@ -7,3 +7,4 @@ export * from "./label";
 export * from "./input";
 export * from "./form";
 export * from "./main";
+export * from "./nav";

@@ -1,19 +1,16 @@
-import { renderTemplate } from "@utils";
+import { Block } from "@infrastructure";
 import template from "./chat-message.hbs";
 import { ChatMessageProps } from "./types";
 import "./chat-message.css";
 
-export const ChatMessage = ({
-  classes,
-  content,
-  message,
-  time
-}: ChatMessageProps) =>
-  renderTemplate(template, {
-    classes,
-    content,
-    message,
-    time
-  });
+export class ChatMessage extends Block<ChatMessageProps> {
+  constructor(props: ChatMessageProps) {
+    super("div", props);
+  }
+
+  protected render(): DocumentFragment {
+    return this.compile(template, this.props);
+  }
+}
 
 export * from "./types";

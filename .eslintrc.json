@@ -24,7 +24,7 @@
     "no-use-before-define": "off",
     "import/no-extraneous-dependencies": "off",
     "prefer-template": "off",
-    "no-unused-vars": "warn",
+    "no-unused-vars": "off",
     "prefer-destructuring": "off",
     "no-this-before-super": "off",
     "no-useless-escape": "off",

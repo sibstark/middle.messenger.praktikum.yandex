@@ -1,1 +1,3 @@
-export type ChatSidebarProps = { search: string; chats: string; href: string };
+import { Block } from "@infrastructure";
+
+export type ChatSidebarProps = { search: Block; chats: Block[]; href: string };

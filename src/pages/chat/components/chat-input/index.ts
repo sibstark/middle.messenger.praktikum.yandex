@@ -1,11 +1,11 @@
-import { renderTemplate } from "@utils";
-import template from "./chat-input.hbs";
+import { Input } from "@components";
+import { classnames } from "@utils";
 import { ChatInputProps } from "./types";
-import "./chat-input.css";
 
-export const ChatInput = ({
-  classes,
-  placeholder,
-  name
-}: ChatInputProps) =>
-  renderTemplate(template, { classes, placeholder, name });
+export const ChatInput = ({ classes, placeholder, name }: ChatInputProps) =>
+  new Input({
+    type: "text",
+    classes: classnames("chat-input", classes),
+    placeholder,
+    name
+  });

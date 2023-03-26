@@ -1,12 +1,17 @@
-import { renderTemplate } from "@utils";
+import { Block } from "@infrastructure";
 import template from "./dropdown.hbs";
 import { DropdownProps } from "./types";
 import "./dropdown.css";
 
-export const Dropdown = ({
-  classes, trigger, position, content
-}: DropdownProps) => renderTemplate(template, {
-  classes, trigger, position, content
-});
+export class Dropdown extends Block<DropdownProps> {
+  constructor(props: DropdownProps) {
+    super("div", props);
+  }
+
+  protected render(): DocumentFragment {
+    return this.compile(template, this.props);
+  }
+}
 
 export * from "./dropdown-item";
+export * from "./types";

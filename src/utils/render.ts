@@ -7,7 +7,3 @@ export function renderTemplate(
   const compiledTemplate = Handlebars.compile(template);
   return compiledTemplate(context);
 }
-
-export function concatArrayTemplates<T>(list: T[]) {
-  return list.join("");
-}

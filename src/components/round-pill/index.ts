@@ -1,18 +1,16 @@
 import { Block } from "@infrastructure";
+import { classnames } from "@utils";
 import template from "./round-pill.hbs";
 import { RoundPillProps } from "./types";
 import "./round-pill.css";
 
 export class RoundPill extends Block<RoundPillProps> {
   constructor(props: RoundPillProps) {
-    super("button", props);
+    const classes = classnames("round-pill", props.classes);
+    super("button", { ...props, classes });
   }
 
   protected render(): DocumentFragment {
-    const classes = this.props.classes ? ` ${this.props.classes}` : "";
-    return this.compile(template, {
-      ...this.props,
-      classes: "round-pill" + classes
-    });
+    return this.compile(template, this.props);
   }
 }

@@ -12,3 +12,5 @@ export class Link extends Block<LinkProps> {
     return this.compile(template, this.props);
   }
 }
+
+export * from "./types";

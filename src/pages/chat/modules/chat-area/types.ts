@@ -1,8 +1,10 @@
+import { Block } from "@infrastructure";
+
 export type ChatAreaProps = {
+  avatar?: Block
   name: string;
-  membersAction: string;
-  messages: string;
-  messageActions: string;
-  input: string;
-  submit: string;
+  membersAction: Block;
+  messages: Block[];
+  messageActions: Block;
+  sendMessage: Block | Block[];
 };

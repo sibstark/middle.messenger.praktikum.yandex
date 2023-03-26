@@ -1,4 +1,5 @@
 import { ExternalClasses } from "@types";
+import { Block } from "@infrastructure";
 
 export type DropdownItemProps = {
   icon: string;
@@ -6,7 +7,7 @@ export type DropdownItemProps = {
 }
 
 export type DropdownProps = ExternalClasses<{
-  trigger: string;
+  trigger: Block | string;
   position?: string;
-  content: string;
+  content: Block[];
 }>
