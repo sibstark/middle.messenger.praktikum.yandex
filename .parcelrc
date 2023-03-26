@@ -1,6 +1,6 @@
 {
     "extends": "@parcel/config-default",
     "transformers": {
-        "bundle-text:*": ["...", "@parcel/transformer-inline-string"]
+        "*.hbs": ["...", "@parcel/transformer-inline-string"]
     }
 }
