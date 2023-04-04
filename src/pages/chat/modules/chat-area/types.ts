@@ -1,7 +1,7 @@
 import { Block } from "@infrastructure";
 
 export type ChatAreaProps = {
-  avatar?: Block
+  avatar?: Block;
   name: string;
   membersAction: Block;
   messages: Block[];

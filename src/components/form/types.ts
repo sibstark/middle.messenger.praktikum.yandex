@@ -1,6 +1,4 @@
-import {
-  Children, Events, ExternalClasses, TValidationFunc
-} from "@types";
+import { Children, Events, ExternalClasses, TValidationFunc } from "@types";
 import { Block, EventBlock } from "@infrastructure";
 
 export type TValidationScheme = Record<string, TValidationFunc>;

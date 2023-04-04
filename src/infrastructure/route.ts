@@ -11,7 +11,11 @@ export class Route {
 
   private readonly _props: IRootQuery;
 
-  constructor(pathname: string, view: new () => Block<TProps>, props: IRootQuery) {
+  constructor(
+    pathname: string,
+    view: new () => Block<TProps>,
+    props: IRootQuery
+  ) {
     this._pathname = pathname;
     this._blockClass = view;
     this._block = null;

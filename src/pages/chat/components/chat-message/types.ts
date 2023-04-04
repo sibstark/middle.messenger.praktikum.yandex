@@ -4,4 +4,4 @@ export type ChatMessageProps = ExternalClasses<{
   content?: string;
   message: string;
   time: string;
-}>
+}>;

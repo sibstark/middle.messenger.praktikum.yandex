@@ -6,5 +6,5 @@ export type ChatMediaPreviewProps = ExternalClasses<{
   text: string;
   time: string;
   count: number;
-  avatar?: Block
-}>
+  avatar?: Block;
+}>;

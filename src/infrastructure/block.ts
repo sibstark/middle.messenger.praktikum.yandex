@@ -28,7 +28,9 @@ type TMeta = {
   tag: Tag;
   props: TProps;
 };
-export class Block<T extends TProps = Record<string | symbol, any>> implements IRenderer {
+export class Block<T extends TProps = Record<string | symbol, any>>
+  implements IRenderer
+{
   static EVENTS: Record<string, Event> = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",
