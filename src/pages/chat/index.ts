@@ -121,41 +121,43 @@ const messageList: ChatMessageProps[] = [
     classes: "chat-message_own"
   }
 ];
-export const RenderChatPage = () => {
-  const chats = chatList.map(chat => new ChatMediaPreview(chat));
-  const search = ChatInput({
-    placeholder: "Search",
-    classes: "chat-sidebar-header__search-input"
-  });
-  const sidebar = new ChatSidebar({ href: "/profile", chats, search });
-  const membersAction = MembersAction();
-  const messageActions = MessageActions();
-  const input = ChatInput({
-    name: "message",
-    placeholder: "Message",
-    classes: "chat-input_text-left message-bar__message-input"
-  });
-  const submit = new RoundPill({
-    content: ArrowRight,
-    classes: "message-bar__send-message",
-    events: {
-      click: () => {
-        if (input.value) {
-          console.log("message", {
-            message: input.value
-          });
+export class RenderChatPage extends Main {
+  constructor() {
+    const chats = chatList.map(chat => new ChatMediaPreview(chat));
+    const search = ChatInput({
+      placeholder: "Search",
+      classes: "chat-sidebar-header__search-input"
+    });
+    const sidebar = new ChatSidebar({ href: "/profile", chats, search });
+    const membersAction = MembersAction();
+    const messageActions = MessageActions();
+    const input = ChatInput({
+      name: "message",
+      placeholder: "Message",
+      classes: "chat-input_text-left message-bar__message-input"
+    });
+    const submit = new RoundPill({
+      content: ArrowRight,
+      classes: "message-bar__send-message",
+      events: {
+        click: () => {
+          if (input.value) {
+            console.log("message", {
+              message: input.value
+            });
+          }
         }
       }
-    }
-  });
-  const messages = messageList.map(msg => new ChatMessage(msg));
-  const area = new ChatArea({
-    name: "Mom",
-    membersAction,
-    messageActions,
-    messages,
-    sendMessage: [input, submit]
-  });
-  const page = new Page({ body: [sidebar, area], classes: "page_row" });
-  return new Main({ body: page });
-};
+    });
+    const messages = messageList.map(msg => new ChatMessage(msg));
+    const area = new ChatArea({
+      name: "Mom",
+      membersAction,
+      messageActions,
+      messages,
+      sendMessage: [input, submit]
+    });
+    const page = new Page({ body: [sidebar, area], classes: "page_row" });
+    super({ body: page });
+  }
+}

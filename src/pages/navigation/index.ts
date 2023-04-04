@@ -1,6 +1,4 @@
-import {
-  LinkProps, Main, Nav, Link
-} from "@components";
+import { LinkProps, Main, Nav, Link } from "@components";
 import { Page } from "@modules";
 import { path } from "@routes";
 import "./nav.css";
@@ -42,17 +40,19 @@ const linksMap: LinkProps[] = [
     target: "_blank"
   }
 ];
-export const RenderNavPage = () => {
-  const links = linksMap.map(_ => new Link(_));
-  const nav = new Nav({
-    body: links,
-    classes: "pages-navigation"
-  });
-  const main = new Main({
-    body: nav
-  });
-  return new Page({
-    body: main,
-    classes: "page_centered"
-  });
-};
+export class RenderNavPage extends Page {
+  constructor() {
+    const links = linksMap.map(_ => new Link(_));
+    const nav = new Nav({
+      body: links,
+      classes: "pages-navigation"
+    });
+    const main = new Main({
+      body: nav
+    });
+    super({
+      body: main,
+      classes: "page_centered"
+    });
+  }
+}

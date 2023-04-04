@@ -1,7 +1,5 @@
 import { AuthorizationContainer, Page } from "@modules";
-import {
-  FormControl, Button, Form, Main, FormControlProps
-} from "@components";
+import { FormControl, Button, Form, Main, FormControlProps } from "@components";
 import {
   confirmPassValidation,
   emailValidation,
@@ -62,42 +60,44 @@ const controlsMap: FormControlProps[] = [
     placeholder: "Confirm password"
   }
 ];
-export const RenderRegistrationPage = () => {
-  const controls = controlsMap.map(
-    (control: FormControlProps) => new FormControl(control)
-  );
-  const submit = new Button({
-    type: "submit",
-    text: "Sign up",
-    classes:
-      "button_blue button_full-width authorization-container__form-control"
-  });
+export class RenderRegistrationPage extends Page {
+  constructor() {
+    const controls = controlsMap.map(
+      (control: FormControlProps) => new FormControl(control)
+    );
+    const submit = new Button({
+      type: "submit",
+      text: "Sign up",
+      classes:
+        "button_blue button_full-width authorization-container__form-control"
+    });
 
-  const form = new Form(
-    {
-      name: "registration_form",
-      content: [...controls, submit]
-    },
-    {
-      first_name: nameValidation,
-      second_name: nameValidation,
-      login: loginValidation,
-      email: emailValidation,
-      phone: phoneValidation,
-      password: passValidation,
-      confirmPassword: confirmPassValidation
-    }
-  );
+    const form = new Form(
+      {
+        name: "registration_form",
+        content: [...controls, submit]
+      },
+      {
+        first_name: nameValidation,
+        second_name: nameValidation,
+        login: loginValidation,
+        email: emailValidation,
+        phone: phoneValidation,
+        password: passValidation,
+        confirmPassword: confirmPassValidation
+      }
+    );
 
-  const container = new AuthorizationContainer({
-    header: "Registration",
-    body: form
-  });
-  const main = new Main({
-    body: container
-  });
-  return new Page({
-    body: main,
-    classes: "page_centered"
-  });
-};
+    const container = new AuthorizationContainer({
+      header: "Registration",
+      body: form
+    });
+    const main = new Main({
+      body: container
+    });
+    super({
+      body: main,
+      classes: "page_centered"
+    });
+  }
+}

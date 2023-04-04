@@ -89,82 +89,88 @@ const loadPhotoContent = `
 </svg>
 <input type="file" name="avatar" style="display: none" />`;
 
-export const RenderProfilePage = () => {
-  const loadPhoto = new EmptyFormControl({
-    classes: "authorization-container__form-control",
-    body: loadPhotoContent
-  });
-  const updateControls = updateProfileControls.map(
-    control => new FormControl(control)
-  );
-  const passwordControls = changePassControls.map(
-    control => new FormControl(control)
-  );
+export class RenderProfilePage extends Page {
+  constructor() {
+    const loadPhoto = new EmptyFormControl({
+      classes: "authorization-container__form-control",
+      body: loadPhotoContent
+    });
+    const updateControls = updateProfileControls.map(
+      control => new FormControl(control)
+    );
+    const passwordControls = changePassControls.map(
+      control => new FormControl(control)
+    );
 
-  const save = new Button({
-    type: "submit",
-    text: "Save",
-    classes:
-      "button_blue button_full-width authorization-container__form-control"
-  });
+    const save = new Button({
+      type: "submit",
+      text: "Save",
+      classes:
+        "button_blue button_full-width authorization-container__form-control"
+    });
 
-  const changePass = new Button({
-    type: "submit",
-    text: "Change password",
-    classes:
-      "button_blue button_full-width authorization-container__form-control"
-  });
-  const selectFileButton = new Button({
-    type: "button",
-    text: "Select a file",
-    classes: "button_link"
-  });
-  const uploadPhoto = new UploadPhoto({ content: selectFileButton });
-  const updatePhotoModal = new Modal({ content: uploadPhoto });
+    const changePass = new Button({
+      type: "submit",
+      text: "Change password",
+      classes:
+        "button_blue button_full-width authorization-container__form-control"
+    });
+    const selectFileButton = new Button({
+      type: "button",
+      text: "Select a file",
+      classes: "button_link"
+    });
+    const uploadPhoto = new UploadPhoto({ content: selectFileButton });
+    const updatePhotoModal = new Modal({ content: uploadPhoto });
 
-  const updateForm = new Form(
-    {
-      content: [loadPhoto, ...updateControls, save],
-      name: "update_profile"
-    },
-    {
-      first_name: nameValidation,
-      second_name: nameValidation,
-      display_name: nameValidation,
-      login: loginValidation,
-      email: emailValidation,
-      phone: phoneValidation
-    }
-  );
+    const updateForm = new Form(
+      {
+        content: [loadPhoto, ...updateControls, save],
+        name: "update_profile"
+      },
+      {
+        first_name: nameValidation,
+        second_name: nameValidation,
+        display_name: nameValidation,
+        login: loginValidation,
+        email: emailValidation,
+        phone: phoneValidation
+      }
+    );
 
-  const toChatLink = new Link({
-    text: "Back to chat",
-    classes: "link__blue",
-    href: "/app"
-  });
+    const toChatLink = new Link({
+      text: "Back to chat",
+      classes: "link__blue",
+      href: "/app"
+    });
 
-  const passwordForm = new Form(
-    {
-      content: [...passwordControls, changePass, updatePhotoModal, toChatLink],
-      name: "change_password"
-    },
-    {
-      oldPassword: passValidation,
-      newPassword: newPasswordPassValidation
-    }
-  );
+    const passwordForm = new Form(
+      {
+        content: [
+          ...passwordControls,
+          changePass,
+          updatePhotoModal,
+          toChatLink
+        ],
+        name: "change_password"
+      },
+      {
+        oldPassword: passValidation,
+        newPassword: newPasswordPassValidation
+      }
+    );
 
-  const container = new AuthorizationContainer({
-    header: "Profile",
-    body: [updateForm, passwordForm]
-  });
+    const container = new AuthorizationContainer({
+      header: "Profile",
+      body: [updateForm, passwordForm]
+    });
 
-  const main = new Main({
-    body: container
-  });
-
-  return new Page({
-    body: main,
-    classes: "page_centered"
-  });
-};
+    const main = new Main({
+      body: container
+    });
+    super({
+      body: main,
+      classes: "page_centered"
+    });
+  }
+}

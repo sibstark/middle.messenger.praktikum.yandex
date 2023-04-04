@@ -12,6 +12,14 @@ export type Events = {
   events?: Record<string, Function>;
 };
 
+export interface IRootQuery {
+  root: string;
+}
+
+export interface IRenderer {
+  getContent(): HTMLElement;
+}
+
 export interface IValidation {
   makeSuccess(): void;
   makeError(error: string): void;

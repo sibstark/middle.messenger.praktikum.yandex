@@ -1,6 +1,6 @@
 import { renderTemplate } from "@utils";
 import { v4 } from "uuid";
-import { Children } from "@types";
+import { Children, IRenderer } from "@types";
 import { EventBus } from "./event-bus";
 
 export type Tag =
@@ -28,7 +28,7 @@ type TMeta = {
   tag: Tag;
   props: TProps;
 };
-export class Block<T extends TProps = Record<string | symbol, any>> {
+export class Block<T extends TProps = Record<string | symbol, any>> implements IRenderer {
   static EVENTS: Record<string, Event> = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",
@@ -106,6 +106,7 @@ export class Block<T extends TProps = Record<string | symbol, any>> {
   }
 
   // Может переопределять пользователь, необязательно трогать
+  // @ts-ignore
   public componentDidMount(oldProps?: T) {}
 
   dispatchComponentDidMount() {
@@ -119,6 +120,7 @@ export class Block<T extends TProps = Record<string | symbol, any>> {
   }
 
   // Может переопределять пользователь, необязательно трогать
+  // @ts-ignore
   public componentDidUpdate(oldProps: T, newProps: T) {
     return true;
   }
@@ -280,5 +282,9 @@ export class Block<T extends TProps = Record<string | symbol, any>> {
 
   public hide() {
     this.getContent().style.display = "none";
+  }
+
+  public unmount() {
+    this.getContent().remove();
   }
 }

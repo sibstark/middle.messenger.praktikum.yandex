@@ -1,4 +1,5 @@
 import Handlebars from "handlebars";
+import { IRenderer } from "@types";
 
 export function renderTemplate(
   template: string,
@@ -6,4 +7,9 @@ export function renderTemplate(
 ): string {
   const compiledTemplate = Handlebars.compile(template);
   return compiledTemplate(context);
+}
+
+export function render(query: string, block: IRenderer) {
+  const root = document.getElementById(query) as HTMLElement;
+  root.append(block.getContent());
 }
