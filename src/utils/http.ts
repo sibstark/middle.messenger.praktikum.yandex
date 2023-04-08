@@ -1,3 +1,5 @@
+import { isArrayOrObject, isPlainObject, PlainObject } from "./object";
+
 enum METHODS {
   GET = "GET",
   PUT = "PUT",
@@ -5,20 +7,75 @@ enum METHODS {
   DELETE = "DELETE",
   PATCH = "PATCH"
 }
-function queryStringify(data: Record<string, string | string[]> = {}): string {
-  const query = Object.entries(data)
-    .reduce((acc, [key, value]) => {
-      if (Array.isArray(value)) {
-        acc.push(`${key}=${value.join(",")}`);
-      } else {
-        acc.push(`${key}=${value}`);
-      }
-      return acc;
-    }, [] as string[])
-    .join("&");
+type StringIndexed = Record<string, any>;
 
-  return `?${query}`;
+function getKey(key: string, parentKey?: string) {
+  return parentKey ? `${parentKey}[${key}]` : key;
 }
+
+function getParams(data: PlainObject | [], parentKey?: string) {
+  const result: [string, string][] = [];
+
+  for (const [key, value] of Object.entries(data)) {
+    if (isArrayOrObject(value)) {
+      // @ts-ignore
+      result.push(...getParams(value, getKey(key, parentKey)));
+    } else {
+      result.push([getKey(key, parentKey), encodeURIComponent(String(value))]);
+    }
+  }
+
+  return result;
+}
+
+export function queryString2(data: PlainObject) {
+  if (!isPlainObject(data)) {
+    throw new Error("input must be an object");
+  }
+
+  return getParams(data)
+    .map(arr => arr.join("="))
+    .join("&");
+}
+
+function queryStringify(data: StringIndexed): string | never {
+  if (typeof data !== "object") {
+    throw new Error("Data must be object");
+  }
+
+  const keys = Object.keys(data);
+  return keys.reduce((result, key, index) => {
+    const value = data[key];
+    const endLine = index < keys.length - 1 ? "&" : "";
+
+    if (Array.isArray(value)) {
+      const arrayValue = value.reduce<StringIndexed>(
+        (result, arrData, index) => ({
+          ...result,
+          [`${key}[${index}]`]: arrData
+        }),
+        {}
+      );
+
+      return `${result}${queryStringify(arrayValue)}${endLine}`;
+    }
+
+    if (typeof value === "object") {
+      const objValue = Object.keys(value || {}).reduce<StringIndexed>(
+        (result, objKey) => ({
+          ...result,
+          [`${key}[${objKey}]`]: value[objKey]
+        }),
+        {}
+      );
+
+      return `${result}${queryStringify(objValue)}${endLine}`;
+    }
+
+    return `${result}${key}=${value}${endLine}`;
+  }, "");
+}
+
 export type TOptions = {
   timeout?: number;
   headers?: Record<string, string>;

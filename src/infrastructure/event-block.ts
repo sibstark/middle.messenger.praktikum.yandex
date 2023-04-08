@@ -32,6 +32,7 @@ export class EventBlock<T extends TProps = Record<string | symbol, any>>
     this._element!.addEventListener(name, event);
   }
 
+  // @ts-ignore
   makeError(error: string) {}
 
   makeSuccess() {}

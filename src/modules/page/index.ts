@@ -1,4 +1,4 @@
-import { Block } from "@infrastructure";
+import { Block } from "@utils";
 import template from "./page.hbs";
 import { PageProps } from "./types";
 import "./page.css";

@@ -1,7 +1,7 @@
-import { renderTemplate } from "@utils";
 import { v4 } from "uuid";
 import { Children, IRenderer } from "@types";
 import { EventBus } from "./event-bus";
+import { renderTemplate } from "./render";
 
 export type Tag =
   | "div"

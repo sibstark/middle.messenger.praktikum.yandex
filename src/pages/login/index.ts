@@ -1,6 +1,6 @@
 import { AuthorizationContainer, Page } from "@modules";
 import { FormControl, Button, Link, Form, Main } from "@components";
-import { loginValidation, passValidation } from "@utils";
+import { loginValidation, passValidation, StoreEvents, store } from "@utils";
 
 export class RenderLoginPage extends Page {
   constructor() {
@@ -56,6 +56,12 @@ export class RenderLoginPage extends Page {
     super({
       body: main,
       classes: "page_centered"
+    });
+
+    // подписываемся на событие
+    store.on(StoreEvents.Updated, () => {
+      // вызываем обновление компонента, передав данные из хранилища
+      this.setProps(store.getState());
     });
   }
 }

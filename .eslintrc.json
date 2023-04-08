@@ -34,7 +34,12 @@
     "no-useless-escape": "off",
     "max-classes-per-file": "off",
     "no-console": "off",
-    "no-constructor-return": "off"
+    "no-constructor-return": "off",
+    "no-continue": "off",
+    "no-restricted-syntax": "off",
+    "no-prototype-builtins": "off",
+    "guard-for-in": "off",
+    "no-return-assign": "off"
   },
   "settings": {
     "import/resolver": {
