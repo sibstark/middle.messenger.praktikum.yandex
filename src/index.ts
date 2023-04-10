@@ -1,5 +1,5 @@
 import { path } from "@routes";
-import { Router } from "@infrastructure";
+import { Router } from "@utils";
 import { RenderLoginPage } from "./pages/login";
 import { RenderRegistrationPage } from "./pages/registration";
 import { RenderProfilePage } from "./pages/profile";

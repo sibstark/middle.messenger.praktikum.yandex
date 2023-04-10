@@ -8,7 +8,6 @@
       "@components/*": ["src/components/*"],
       "@modules": ["src/modules"],
       "@pages": ["src/pages"],
-      "@infrastructure": ["src/infrastructure"],
       "@routes": ["src/pages/routes.ts"]
     },
     "outDir": "dist",

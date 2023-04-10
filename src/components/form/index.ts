@@ -54,7 +54,7 @@ export class Form extends Block<FromProps> {
     });
   }
 
-  addEvents() {
+  protected addEvents() {
     this._element!.addEventListener("submit", this.onSubmit.bind(this));
   }
 

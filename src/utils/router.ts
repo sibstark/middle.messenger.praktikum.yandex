@@ -14,13 +14,14 @@ export class Router {
 
   private _currentRoute: Route | null = null;
 
-  constructor(rootQuery: string) {
+  constructor(rootQuery?: string) {
     if (Router.__instance) {
       return Router.__instance;
     }
-
+    if (rootQuery) {
+      this._rootQuery = rootQuery;
+    }
     this.routes = [];
-    this._rootQuery = rootQuery;
     this.history = window.history;
     this._currentRoute = null;
 

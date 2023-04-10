@@ -1,4 +1,4 @@
-import { LinkProps, Main, Nav, Link } from "@components";
+import { RouteLink, LinkProps, Main, Nav } from "@components";
 import { Page } from "@modules";
 import { path } from "@routes";
 import "./nav.css";
@@ -6,13 +6,11 @@ import "./nav.css";
 const linksMap: LinkProps[] = [
   {
     href: path.login,
-    text: "Login form page",
-    target: "_blank"
-  },
+    text: "Login form page"
+  } /*
   {
     href: path.registration,
-    text: "Registration form page",
-    target: "_blank"
+    text: "Registration form page"
   },
   {
     href: path.profile,
@@ -38,11 +36,11 @@ const linksMap: LinkProps[] = [
     href: path.nav,
     text: "Navigation (current) page",
     target: "_blank"
-  }
+  } */
 ];
 export class RenderNavPage extends Page {
   constructor() {
-    const links = linksMap.map(_ => new Link(_));
+    const links = linksMap.map(_ => new RouteLink(_));
     const nav = new Nav({
       body: links,
       classes: "pages-navigation"

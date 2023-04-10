@@ -279,7 +279,7 @@ export class Block<T extends TProps = Record<string | symbol, any>>
   }
 
   public show() {
-    this.getContent().style.display = "block";
+    // this.getContent().style.display = "block";
   }
 
   public hide() {

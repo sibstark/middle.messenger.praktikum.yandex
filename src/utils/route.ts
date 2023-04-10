@@ -41,11 +41,8 @@ export class Route {
   render() {
     if (!this._block) {
       this._block = new this._blockClass();
-      render(this._props.root, this._block);
-      // this._block.show();
-      return;
     }
-
+    render(this._props.root, this._block);
     this._block.show();
   }
 }
