@@ -1,4 +1,4 @@
-import { Block, EventBlock } from "@infrastructure";
+import { Block, EventBlock } from "@utils";
 import { IValidation } from "@types";
 import template from "./form.hbs";
 import { FromProps, TValidationScheme } from "./types";

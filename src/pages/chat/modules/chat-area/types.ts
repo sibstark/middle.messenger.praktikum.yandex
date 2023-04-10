@@ -1,4 +1,4 @@
-import { Block } from "@infrastructure";
+import { Block } from "@utils";
 
 export type ChatAreaProps = {
   avatar?: Block;

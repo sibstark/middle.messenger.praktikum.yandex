@@ -1,5 +1,5 @@
 import { Children, Events, ExternalClasses } from "@types";
-import { Block } from "@infrastructure";
+import { Block } from "@utils";
 
 export type FormControlProps = Children &
   Events &

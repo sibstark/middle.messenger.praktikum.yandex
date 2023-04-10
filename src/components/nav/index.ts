@@ -1,4 +1,4 @@
-import { Block } from "@infrastructure";
+import { Block } from "@utils";
 import template from "./nav.hbs";
 import { NavProps } from "./types";
 

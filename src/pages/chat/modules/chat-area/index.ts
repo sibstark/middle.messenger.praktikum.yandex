@@ -1,4 +1,4 @@
-import { Block } from "@infrastructure";
+import { Block } from "@utils";
 import template from "./chat-area.hbs";
 import { Avatar } from "../../components";
 import { ChatAreaProps } from "./types";

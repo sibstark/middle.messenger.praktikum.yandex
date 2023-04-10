@@ -1,4 +1,4 @@
-import { Block } from "@infrastructure";
+import { Block } from "@utils";
 import template from "./chat-media-preview.hbs";
 import { Avatar } from "../avatar";
 import { ChatMediaPreviewProps } from "./types";

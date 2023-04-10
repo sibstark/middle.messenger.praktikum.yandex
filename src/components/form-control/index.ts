@@ -1,5 +1,5 @@
 import { Input, Label } from "@components";
-import { EventBlock } from "@infrastructure";
+import { EventBlock } from "@utils";
 import template from "./form-control.hbs";
 import { EmptyFormControlProps, FormControlProps } from "./types";
 import "./form-control.css";

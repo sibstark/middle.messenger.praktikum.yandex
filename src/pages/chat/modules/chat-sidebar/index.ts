@@ -1,4 +1,4 @@
-import { Block } from "@infrastructure";
+import { Block } from "@utils";
 import template from "./chat-sidebar.hbs";
 import { ChatSidebarProps } from "./types";
 import "./chat-sidebar.css";

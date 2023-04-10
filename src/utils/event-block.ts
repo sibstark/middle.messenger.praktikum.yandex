@@ -1,5 +1,5 @@
 import { IValidation } from "@types";
-import { Block, Tag, TProps } from "./block";
+import { Block, Tag, TProps } from "@utils";
 
 export class EventBlock<T extends TProps = Record<string | symbol, any>>
   extends Block<T>

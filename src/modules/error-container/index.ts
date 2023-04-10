@@ -1,4 +1,4 @@
-import { Block } from "@infrastructure";
+import { Block } from "@utils";
 import { Link } from "@components";
 import template from "./error-container.hbs";
 import { ErrorContainerProps } from "./types";

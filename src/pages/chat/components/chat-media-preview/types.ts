@@ -1,5 +1,5 @@
 import { ExternalClasses } from "@types";
-import { Block } from "@infrastructure";
+import { Block } from "@utils";
 
 export type ChatMediaPreviewProps = ExternalClasses<{
   name: string;

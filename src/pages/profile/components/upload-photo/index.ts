@@ -1,4 +1,4 @@
-import { Block } from "@infrastructure";
+import { Block } from "@utils";
 import template from "./upload-photo.hbs";
 import { UploadPhotoProps } from "./types";
 import "./upload-photo.css";

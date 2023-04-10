@@ -1,4 +1,4 @@
-import { Block } from "@infrastructure";
+import { Block } from "@utils";
 import template from "./button.hbs";
 import { ButtonProps } from "./types";
 import "./button.css";

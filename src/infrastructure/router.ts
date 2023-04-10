@@ -1,4 +1,4 @@
-import { Block } from "./block";
+import { Block } from "@utils";
 import { Route } from "./route";
 
 export class Router {

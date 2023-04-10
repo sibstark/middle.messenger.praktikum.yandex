@@ -1,4 +1,4 @@
-import { Block } from "@infrastructure";
+import { Block } from "@utils";
 import template from "./link.hbs";
 import { LinkProps } from "./types";
 import "./link.css";

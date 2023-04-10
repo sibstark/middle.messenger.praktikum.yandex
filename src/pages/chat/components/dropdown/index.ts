@@ -1,4 +1,4 @@
-import { Block } from "@infrastructure";
+import { Block } from "@utils";
 import template from "./dropdown.hbs";
 import { DropdownProps } from "./types";
 import "./dropdown.css";

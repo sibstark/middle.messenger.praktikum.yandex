@@ -1,4 +1,4 @@
-import { Block } from "@infrastructure";
+import { Block } from "@utils";
 import template from "./chat-message.hbs";
 import { ChatMessageProps } from "./types";
 import "./chat-message.css";

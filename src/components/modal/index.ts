@@ -1,4 +1,4 @@
-import { Block } from "@infrastructure";
+import { Block } from "@utils";
 import template from "./modal.hbs";
 import { ModalProps } from "./types";
 import "./modal.css";

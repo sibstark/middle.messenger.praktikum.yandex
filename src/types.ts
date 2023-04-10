@@ -1,4 +1,4 @@
-import { Block, EventBlock } from "@infrastructure";
+import { Block, EventBlock } from "@utils";
 
 export type ExternalClasses<T> = T & {
   classes?: string;

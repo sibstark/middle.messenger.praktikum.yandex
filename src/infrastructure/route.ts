@@ -1,6 +1,5 @@
-import { render, isEqual } from "@utils";
+import { render, isEqual, TProps, Block } from "@utils";
 import { IRootQuery } from "@types";
-import { TProps, Block } from "./block";
 
 export class Route {
   private _pathname: string;
