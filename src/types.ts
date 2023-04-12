@@ -32,3 +32,10 @@ export type TValidationFunc = (
   value: string,
   context: any
 ) => TValidationStatus;
+
+export type TStore = Record<string, unknown>;
+
+export type Action<T> = {
+  success: boolean;
+  entity: T;
+};

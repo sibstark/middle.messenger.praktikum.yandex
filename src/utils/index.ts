@@ -6,4 +6,6 @@ export * from "./block";
 export * from "./event-bus";
 export * from "./event-block";
 export * from "./router";
+export * from "./route";
 export * from "./http";
+export * from "./connectors";

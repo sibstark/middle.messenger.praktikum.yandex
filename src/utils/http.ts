@@ -129,7 +129,7 @@ export class HTTPTransport implements IHTTPTransport {
       if (method === METHODS.GET && data) {
         url += queryStringify(data);
       }
-      xhr.open(method, url);
+      xhr.open(method, this.endpoint + url);
       xhr.withCredentials = true;
       xhr.responseType = "json";
       xhr.setRequestHeader("Content-Type", "application/json");

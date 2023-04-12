@@ -2,6 +2,7 @@ import { v4 } from "uuid";
 import { Children, IRenderer } from "@types";
 import { EventBus } from "./event-bus";
 import { renderTemplate } from "./render";
+import { isEqual } from "./object";
 
 export type Tag =
   | "div"
@@ -13,7 +14,8 @@ export type Tag =
   | "form"
   | "main"
   | "aside"
-  | "nav";
+  | "nav"
+  | "span";
 export type TProps = Children & {
   [index: string | symbol]: any;
 };
@@ -124,7 +126,7 @@ export class Block<T extends TProps = Record<string | symbol, any>>
   // Может переопределять пользователь, необязательно трогать
   // @ts-ignore
   public componentDidUpdate(oldProps: T, newProps: T) {
-    return true;
+    return !isEqual(oldProps, newProps);
   }
 
   public setProps = (nextProps: Partial<T>) => {

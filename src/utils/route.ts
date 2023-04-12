@@ -8,7 +8,7 @@ export class Route {
 
   private _block: Block | null;
 
-  private readonly _props: IRootQuery;
+  protected readonly _props: IRootQuery;
 
   constructor(
     pathname: string,
@@ -21,28 +21,33 @@ export class Route {
     this._props = props;
   }
 
-  navigate(pathname: string) {
+  public get path() {
+    return this._pathname;
+  }
+
+  public navigate(pathname: string) {
     if (this.match(pathname)) {
       this._pathname = pathname;
       this.render();
     }
   }
 
-  leave() {
+  public leave() {
     if (this._block) {
       this._block.unmount();
     }
   }
 
-  match(pathname: string) {
+  public match(pathname: string) {
     return isEqual(pathname, this._pathname);
   }
 
-  render() {
+  public render() {
     if (!this._block) {
       this._block = new this._blockClass();
     }
     render(this._props.root, this._block);
+    this._block.dispatchComponentDidMount();
     this._block.show();
   }
 }

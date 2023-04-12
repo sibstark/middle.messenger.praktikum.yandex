@@ -42,6 +42,7 @@
   "alias": {
     "@types": "./src/types.ts",
     "@utils": "./src/utils",
+    "@controllers": "./src/controllers",
     "@components": "./src/components",
     "@components/*": "./src/components/*",
     "@modules": "./src/modules",

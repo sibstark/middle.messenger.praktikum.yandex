@@ -1,3 +1,4 @@
+import { TStore } from "@types";
 import { EventBus } from "./event-bus";
 import { Block, Tag } from "./block";
 import { isEqual, set } from "./object";
@@ -6,7 +7,7 @@ export enum StoreEvents {
   Updated = "updated"
 }
 class Store extends EventBus {
-  private state: Record<string, unknown> = {};
+  private state: TStore = {};
 
   public getState() {
     return this.state;

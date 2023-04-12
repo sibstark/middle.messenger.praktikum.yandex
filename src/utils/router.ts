@@ -28,12 +28,21 @@ export class Router {
     Router.__instance = this;
   }
 
+  public get path() {
+    return this._currentRoute?.path;
+  }
+
   use(pathname: string, block: new () => Block) {
     // Вместо трёх точек напишем отдельную сущность — об этом речь пойдёт ниже
     const route = new Route(pathname, block, { root: this._rootQuery });
 
     this.routes.push(route);
     // Возврат this — основа паттерна "Builder" («Строитель»)
+    return this;
+  }
+
+  useCustom(route: Route) {
+    this.routes.push(route);
     return this;
   }
 

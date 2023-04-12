@@ -5,6 +5,7 @@
       "@types": ["src/types.ts"],
       "@utils": ["src/utils"],
       "@components": ["src/components"],
+      "@controllers": ["src/controllers"],
       "@components/*": ["src/components/*"],
       "@modules": ["src/modules"],
       "@pages": ["src/pages"],

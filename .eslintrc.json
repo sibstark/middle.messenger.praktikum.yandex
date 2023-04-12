@@ -40,7 +40,8 @@
     "no-prototype-builtins": "off",
     "guard-for-in": "off",
     "no-return-assign": "off",
-    "prefer-promise-reject-errors": "off"
+    "prefer-promise-reject-errors": "off",
+    "consistent-return": "off"
   },
   "settings": {
     "import/resolver": {

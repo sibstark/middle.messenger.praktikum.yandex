@@ -1,49 +1,10 @@
 import { AuthorizationContainer, Page } from "@modules";
-import { FormControl, Button, Link, Form, Main } from "@components";
-import { loginValidation, passValidation, StoreEvents, store } from "@utils";
+import { Main } from "@components";
+import { LoginForm } from "./form";
 
 export class RenderLoginPage extends Page {
   constructor() {
-    const login = new FormControl({
-      classes: "authorization-container__form-control",
-      title: "Login",
-      name: "login",
-      type: "text",
-      placeholder: "Login"
-    });
-
-    const password = new FormControl({
-      classes: "authorization-container__form-control",
-      title: "Password",
-      name: "password",
-      type: "password",
-      placeholder: "Password"
-    });
-
-    const submit = new Button({
-      type: "submit",
-      text: "Sign in",
-      classes:
-        "button_blue button_full-width authorization-container__form-control"
-    });
-
-    const registrationLink = new Link({
-      text: "Create account",
-      classes: "link__blue",
-      href: "/registration"
-    });
-
-    const form = new Form(
-      {
-        name: "login_form",
-        content: [login, password, submit, registrationLink]
-      },
-      {
-        login: loginValidation,
-        password: passValidation
-      }
-    );
-
+    const form = LoginForm();
     const container = new AuthorizationContainer({
       header: "Login",
       body: form
@@ -56,12 +17,6 @@ export class RenderLoginPage extends Page {
     super({
       body: main,
       classes: "page_centered"
-    });
-
-    // подписываемся на событие
-    store.on(StoreEvents.Updated, () => {
-      // вызываем обновление компонента, передав данные из хранилища
-      this.setProps(store.getState());
     });
   }
 }

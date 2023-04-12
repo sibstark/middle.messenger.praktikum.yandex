@@ -8,11 +8,11 @@ enum Path {
   nav = "nav"
 }
 export const path: Record<Path, string> = {
-  [Path.login]: "/login",
-  [Path.registration]: "/registration",
-  [Path.profile]: "/profile",
+  [Path.login]: "/",
+  [Path.registration]: "/sign-up",
+  [Path.profile]: "/settings",
   [Path.notFound]: "/not-found",
   [Path.serverError]: "/server-error",
-  [Path.app]: "/app",
-  [Path.nav]: "/"
+  [Path.app]: "/messenger",
+  [Path.nav]: "/nav"
 };
