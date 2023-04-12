@@ -7,7 +7,7 @@ const linksMap: LinkProps[] = [
   {
     href: path.login,
     text: "Login form page"
-  } /*
+  },
   {
     href: path.registration,
     text: "Registration form page"
@@ -36,7 +36,7 @@ const linksMap: LinkProps[] = [
     href: path.nav,
     text: "Navigation (current) page",
     target: "_blank"
-  } */
+  }
 ];
 export class RenderNavPage extends Page {
   constructor() {

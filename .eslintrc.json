@@ -39,7 +39,8 @@
     "no-restricted-syntax": "off",
     "no-prototype-builtins": "off",
     "guard-for-in": "off",
-    "no-return-assign": "off"
+    "no-return-assign": "off",
+    "prefer-promise-reject-errors": "off"
   },
   "settings": {
     "import/resolver": {

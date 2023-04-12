@@ -86,10 +86,7 @@ type TRequestOptions = TOptions & {
   method: METHODS;
 };
 
-export type TMethod = (
-  url: string,
-  options: TOptions
-) => Promise<XMLHttpRequest>;
+export type TMethod = <T>(url: string, options?: TOptions) => Promise<T>;
 interface IHTTPTransport {
   get: TMethod;
   post: TMethod;
@@ -98,6 +95,14 @@ interface IHTTPTransport {
   patch: TMethod;
 }
 export class HTTPTransport implements IHTTPTransport {
+  static API_URL = "https://ya-praktikum.tech/api/v2";
+
+  protected endpoint: string;
+
+  constructor(endpoint: string) {
+    this.endpoint = `${HTTPTransport.API_URL}${endpoint}`;
+  }
+
   get: TMethod = (url, options = {}) =>
     this.request(url, { ...options, method: METHODS.GET }, options.timeout);
 
@@ -113,31 +118,40 @@ export class HTTPTransport implements IHTTPTransport {
   patch: TMethod = (url, options = {}) =>
     this.request(url, { ...options, method: METHODS.PATCH }, options.timeout);
 
-  request = (
+  request = <T>(
     url: string,
     options: TRequestOptions,
     timeout: number = 5000
-  ): Promise<XMLHttpRequest> => {
+  ): Promise<T> => {
     const { method, data, headers = {} } = options;
-    return new Promise<XMLHttpRequest>((resolve, reject) => {
+    return new Promise<T>((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       if (method === METHODS.GET && data) {
         url += queryStringify(data);
       }
       xhr.open(method, url);
+      xhr.withCredentials = true;
+      xhr.responseType = "json";
+      xhr.setRequestHeader("Content-Type", "application/json");
       xhr.timeout = timeout;
       if (Object.keys(headers).length > 0) {
         Object.entries(headers).forEach(([key, value]) => {
           xhr.setRequestHeader(key, value);
         });
       }
-      // eslint-disable-next-line func-names
-      xhr.onload = function () {
-        resolve(xhr);
+
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status < 400) {
+            resolve(xhr.response);
+          } else {
+            reject(xhr.response);
+          }
+        }
       };
-      xhr.onabort = reject;
-      xhr.onerror = reject;
-      xhr.ontimeout = reject;
+      xhr.onabort = () => reject({ reason: "abort" });
+      xhr.onerror = () => reject({ reason: "network error" });
+      xhr.ontimeout = () => reject({ reason: "timeout" });
 
       if (method === METHODS.GET || !data) {
         xhr.send();
@@ -156,7 +170,7 @@ export function fetchWithRetry(
   options: TRetryOptions = { retries: 2 }
 ) {
   let { retries } = options;
-  const http = new HTTPTransport();
+  const http = new HTTPTransport(url);
   function retry(err?: Error): Promise<any> {
     if (retries === 0) {
       throw err;
