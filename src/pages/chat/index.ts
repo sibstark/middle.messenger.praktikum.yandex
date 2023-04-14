@@ -1,5 +1,6 @@
 import { Page } from "@modules";
 import { Main, RoundPill } from "@components";
+import { path } from "@routes";
 import {
   ArrowRight,
   ChatInput,
@@ -128,7 +129,7 @@ export class RenderChatPage extends Main {
       placeholder: "Search",
       classes: "chat-sidebar-header__search-input"
     });
-    const sidebar = new ChatSidebar({ href: "/profile", chats, search });
+    const sidebar = new ChatSidebar({ href: path.profile, chats, search });
     const membersAction = MembersAction();
     const messageActions = MessageActions();
     const input = ChatInput({

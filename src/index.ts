@@ -20,8 +20,8 @@ function protectedRoute(): boolean {
 }
 window.addEventListener("DOMContentLoaded", async () => {
   store.on(StoreEvents.Updated, () => {
-    const user: any = connectUser(store.getState());
-    if (!user.user && protectedRoute()) {
+    const user = connectUser(store.getState());
+    if (!user && protectedRoute()) {
       router.go(path.login);
     }
   });

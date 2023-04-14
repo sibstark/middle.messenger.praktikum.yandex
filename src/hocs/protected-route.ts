@@ -1,5 +1,13 @@
-import { Block, store, StoreEvents, TProps, Route, Router } from "@utils";
-import { IRootQuery, TStore } from "@types";
+import {
+  Block,
+  store,
+  StoreEvents,
+  TProps,
+  Route,
+  Router,
+  TStore
+} from "@utils";
+import { IRootQuery } from "@types";
 
 function connectUser(store: TStore) {
   return store.user;

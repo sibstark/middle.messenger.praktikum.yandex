@@ -8,6 +8,7 @@ export type FormControlProps = Children &
     name: string;
     type: string;
     placeholder?: string;
+    value?: string | number;
   }>;
 
 export type EmptyFormControlProps = Children &

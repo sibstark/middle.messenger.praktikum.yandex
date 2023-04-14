@@ -2,7 +2,7 @@ import { FormControl, Button, Form, RouteLink, Text } from "@components";
 import { loginValidation, passValidation } from "@utils";
 import { path } from "@routes";
 import { authController } from "@controllers";
-import { SigninRequest } from "@api";
+import { SigninRequest } from "@types";
 
 export function LoginForm() {
   const text = new Text({

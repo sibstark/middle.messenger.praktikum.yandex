@@ -40,7 +40,7 @@
     "uuid": "^9.0.0"
   },
   "alias": {
-    "@types": "./src/types.ts",
+    "@types": "./src/types",
     "@utils": "./src/utils",
     "@controllers": "./src/controllers",
     "@components": "./src/components",

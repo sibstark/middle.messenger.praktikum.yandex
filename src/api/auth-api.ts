@@ -1,5 +1,5 @@
-import BaseAPI from "../base-api";
-import { SigninRequest, User, SignupRequest } from "./types";
+import { SigninRequest, User, SignupRequest } from "@types";
+import BaseAPI from "./base-api";
 
 export class AuthAPI extends BaseAPI {
   constructor() {
@@ -30,5 +30,3 @@ export class AuthAPI extends BaseAPI {
 
   read = undefined;
 }
-
-export * from "./types";

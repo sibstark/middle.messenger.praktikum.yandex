@@ -111,3 +111,5 @@ export class Form extends Block<FormProps> {
     return this.compile(template, this.props);
   }
 }
+
+export * from "./types";

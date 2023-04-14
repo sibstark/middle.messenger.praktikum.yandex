@@ -1,13 +1,29 @@
-import { TStore } from "@types";
+import { User } from "@types";
 import { EventBus } from "./event-bus";
-import { Block, Tag } from "./block";
 import { isEqual, set } from "./object";
+import { Block } from "./block";
 
+export type WithFetching<T> = T & {
+  fetching: boolean;
+};
+
+export type UserStore = WithFetching<{
+  user: User | null;
+}>;
+
+export type TStore = {
+  user: UserStore;
+};
 export enum StoreEvents {
   Updated = "updated"
 }
 class Store extends EventBus {
-  private state: TStore = {};
+  private state: TStore = {
+    user: {
+      user: null,
+      fetching: false
+    }
+  };
 
   public getState() {
     return this.state;
@@ -18,15 +34,13 @@ class Store extends EventBus {
     this.emit(StoreEvents.Updated);
   }
 }
-export function connect(
-  mapStateToProps: (state: Record<string, unknown>) => Record<string, unknown>
-) {
+export function connect(mapStateToProps: (store: TStore) => any) {
   // используем class expression
-  return (Component: typeof Block) => {
+  return (Component: any) => {
     return class extends Component {
-      constructor(tag: Tag, props: Record<string, unknown>) {
+      constructor(...args: any) {
         let state = mapStateToProps(store.getState());
-        super(tag, { ...props, ...mapStateToProps(store.getState()) });
+        super(...args, state);
 
         // подписываемся на событие
         store.on(StoreEvents.Updated, () => {
@@ -41,7 +55,7 @@ export function connect(
           state = newState;
         });
       }
-    };
+    } as typeof Block;
   };
 }
 

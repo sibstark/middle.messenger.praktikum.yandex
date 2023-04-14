@@ -1,7 +1,7 @@
 .text {
     font-size: 0.75rem;
 
-    &_succes {
+    &_success {
         color: var(--color-success);
     }
 

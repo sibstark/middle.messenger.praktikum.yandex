@@ -1,6 +1,7 @@
-import { AuthAPI, SigninRequest, SignupRequest } from "@api";
+import { AuthAPI } from "@api";
+import { SigninRequest, SignupRequest, Action } from "@types";
 import { Router, store } from "@utils";
-import { Action } from "@types";
+import { path } from "@routes";
 
 class AuthController {
   private api: AuthAPI;
@@ -12,13 +13,21 @@ class AuthController {
     this.api = new AuthAPI();
   }
 
-  async signup(data: SignupRequest) {
+  async signup(data: SignupRequest): Promise<Action<any>> {
+    store.set("user.fetching", true);
     try {
       await this.api.signup(data);
-      await this.fetchUser();
-      this.router.go("/profile");
+      const user = await this.fetchUser();
+      this.router.go(path.app);
+      return user;
     } catch (e) {
       console.log("signup", console.log);
+      return {
+        success: false,
+        entity: e
+      };
+    } finally {
+      store.set("user.fetching", false);
     }
   }
 
@@ -26,7 +35,9 @@ class AuthController {
     store.set("user.fetching", true);
     try {
       await this.api.singin(data);
-      return await this.fetchUser();
+      const user = await this.fetchUser();
+      this.router.go(path.app);
+      return user;
     } catch (e) {
       store.set("user.error", e);
       return {
@@ -41,7 +52,8 @@ class AuthController {
   async logout() {
     try {
       await this.api.logout();
-      this.router.go("/");
+      store.set("user.user", null);
+      this.router.go(path.login);
     } catch (e) {
       console.log("logout", e);
     }

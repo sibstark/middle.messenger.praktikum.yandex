@@ -22,7 +22,8 @@ export class FormControl extends EventBlock<FormControlProps> {
       type: props.type,
       placeholder: props.placeholder,
       classes: "form-control__input",
-      events: props.events
+      events: props.events,
+      value: props.value
     });
     props.children.label = label;
     props.children.input = input;
