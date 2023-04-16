@@ -16,7 +16,9 @@ export class UserAPI extends BaseAPI {
   }
 
   changeAvatar(data: FormData) {
-    return this.http.put<User>("/profile/avatar", { data });
+    return this.http.put<User>("/profile/avatar", {
+      data
+    });
   }
 
   changePassword(data: UpdatePasswordRequest) {

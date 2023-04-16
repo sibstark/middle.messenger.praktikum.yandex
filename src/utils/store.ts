@@ -1,6 +1,6 @@
 import { User } from "@types";
 import { EventBus } from "./event-bus";
-import { isEqual, set } from "./object";
+import { cloneDeep, isEqual, set } from "./object";
 import { Block } from "./block";
 
 export type WithFetching<T> = T & {
@@ -39,12 +39,12 @@ export function connect(mapStateToProps: (store: TStore) => any) {
   return (Component: any) => {
     return class extends Component {
       constructor(...args: any) {
-        let state = mapStateToProps(store.getState());
+        let state = cloneDeep(mapStateToProps(store.getState()));
         super(...args, state);
 
         // подписываемся на событие
         store.on(StoreEvents.Updated, () => {
-          const newState = mapStateToProps(store.getState());
+          const newState = cloneDeep(mapStateToProps(store.getState()));
           // вызываем обновление компонента, передав данные из хранилища
           // если что-то из используемых данных поменялось, обновляем компонент
           if (!isEqual(state, newState)) {

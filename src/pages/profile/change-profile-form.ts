@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { FormControl, Button, EmptyFormControl, Form, Text } from "@components";
 import {
   connect,
@@ -10,8 +9,11 @@ import {
 } from "@utils";
 import { UpdateProfileRequest, User } from "@types";
 import { userController } from "@controllers";
-import { loadPhotoContent } from "./content";
+import ProfileAvatar from "./components/avatar";
 
+type ChangeProfileFormProps = {
+  user: User | null;
+};
 class ChangeProfileForm extends Form {
   firstName: FormControl;
 
@@ -27,14 +29,14 @@ class ChangeProfileForm extends Form {
 
   text: Text;
 
-  constructor(props: User) {
+  constructor(props: ChangeProfileFormProps) {
     const firstName = new FormControl({
       classes: "authorization-container__form-control",
       title: "First name",
       name: "first_name",
       type: "text",
       placeholder: "First name",
-      value: props.first_name
+      value: props.user?.first_name
     });
     const secondName = new FormControl({
       classes: "authorization-container__form-control",
@@ -42,7 +44,7 @@ class ChangeProfileForm extends Form {
       name: "second_name",
       type: "text",
       placeholder: "Second name",
-      value: props.second_name
+      value: props.user?.second_name
     });
     const displayName = new FormControl({
       classes: "authorization-container__form-control",
@@ -50,7 +52,7 @@ class ChangeProfileForm extends Form {
       name: "display_name",
       type: "text",
       placeholder: "Display name",
-      value: props.display_name
+      value: props.user?.display_name
     });
     const login = new FormControl({
       classes: "authorization-container__form-control",
@@ -58,7 +60,7 @@ class ChangeProfileForm extends Form {
       name: "login",
       type: "text",
       placeholder: "Login",
-      value: props.login
+      value: props.user?.login
     });
     const email = new FormControl({
       classes: "authorization-container__form-control",
@@ -66,7 +68,7 @@ class ChangeProfileForm extends Form {
       name: "email",
       type: "text",
       placeholder: "Email",
-      value: props.email
+      value: props.user?.email
     });
     const phone = new FormControl({
       classes: "authorization-container__form-control",
@@ -74,11 +76,11 @@ class ChangeProfileForm extends Form {
       name: "phone",
       type: "text",
       placeholder: "Phone",
-      value: props.phone
+      value: props.user?.phone
     });
     const loadPhoto = new EmptyFormControl({
       classes: "authorization-container__form-control",
-      body: loadPhotoContent
+      body: new ProfileAvatar()
     });
 
     const save = new Button({
@@ -87,18 +89,9 @@ class ChangeProfileForm extends Form {
       classes:
         "button_blue button_full-width authorization-container__form-control"
     });
-    /*
-    const selectFileButton = new Button({
-      type: "button",
-      text: "Select a file",
-      classes: "button_link"
-    });
-    */
     const text = new Text({
       text: ""
     });
-    // const uploadPhoto = new UploadPhoto({ content: selectFileButton });
-    // const updatePhotoModal = new Modal({ content: uploadPhoto });
     const content = [
       loadPhoto,
       firstName,

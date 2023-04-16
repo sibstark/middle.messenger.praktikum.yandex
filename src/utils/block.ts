@@ -15,7 +15,8 @@ export type Tag =
   | "main"
   | "aside"
   | "nav"
-  | "span";
+  | "span"
+  | "svg";
 export type TProps = Children & {
   [index: string | symbol]: any;
 };
@@ -124,7 +125,6 @@ export class Block<T extends TProps = Record<string | symbol, any>>
   }
 
   // Может переопределять пользователь, необязательно трогать
-  // @ts-ignore
   public componentDidUpdate(oldProps: T, newProps: T) {
     return !isEqual(oldProps, newProps);
   }

@@ -132,8 +132,8 @@ export class HTTPTransport implements IHTTPTransport {
       xhr.open(method, this.endpoint + url);
       xhr.withCredentials = true;
       xhr.responseType = "json";
-      xhr.setRequestHeader("Content-Type", "application/json");
       xhr.timeout = timeout;
+
       if (Object.keys(headers).length > 0) {
         Object.entries(headers).forEach(([key, value]) => {
           xhr.setRequestHeader(key, value);
@@ -156,7 +156,8 @@ export class HTTPTransport implements IHTTPTransport {
       if (method === METHODS.GET || !data) {
         xhr.send();
       } else {
-        xhr.send(JSON.stringify(data));
+        const d = data instanceof FormData ? data : JSON.stringify(data);
+        xhr.send(d);
       }
     });
   };
