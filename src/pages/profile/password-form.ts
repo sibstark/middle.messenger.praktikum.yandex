@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { FormControl, Button, Form, RouteLink, Text } from "@components";
+import { FormControl, Button, Form, Text } from "@components";
 import { newPasswordPassValidation, passValidation } from "@utils";
 import { UpdatePasswordRequest } from "@types";
 import { userController } from "@controllers";
@@ -27,11 +27,6 @@ export class PasswordForm extends Form {
       type: "password",
       placeholder: "New password"
     });
-    const toChatLink = new RouteLink({
-      text: "Back to chat",
-      classes: "link__blue",
-      href: "/app"
-    });
     const changePass = new Button({
       type: "submit",
       text: "Change password",
@@ -41,7 +36,7 @@ export class PasswordForm extends Form {
     const text = new Text({
       text: ""
     });
-    const content = [oldPassword, newPassword, text, changePass, toChatLink];
+    const content = [oldPassword, newPassword, text, changePass];
     super(
       {
         name: "change_password",

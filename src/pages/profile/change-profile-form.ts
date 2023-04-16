@@ -8,10 +8,25 @@ import {
   nameValidation,
   phoneValidation
 } from "@utils";
-import { User } from "@types";
+import { UpdateProfileRequest, User } from "@types";
+import { userController } from "@controllers";
 import { loadPhotoContent } from "./content";
 
 class ChangeProfileForm extends Form {
+  firstName: FormControl;
+
+  secondName: FormControl;
+
+  displayName: FormControl;
+
+  login: FormControl;
+
+  email: FormControl;
+
+  phone: FormControl;
+
+  text: Text;
+
   constructor(props: User) {
     const firstName = new FormControl({
       classes: "authorization-container__form-control",
@@ -109,6 +124,40 @@ class ChangeProfileForm extends Form {
         phone: phoneValidation
       }
     );
+
+    this.firstName = firstName;
+    this.secondName = secondName;
+    this.displayName = displayName;
+    this.login = login;
+    this.email = email;
+    this.phone = phone;
+    this.phone = phone;
+    this.text = text;
+  }
+
+  protected init() {
+    this.props.onSubmit = this.onChangeProfile.bind(this);
+  }
+
+  async onChangeProfile(data: Record<string, string>) {
+    this.text.setProps({
+      text: "",
+      classes: ""
+    });
+    const request = data as UpdateProfileRequest;
+    const action = await userController.changeProfile(request);
+    if (!action.success) {
+      this.text.setProps({
+        text: action.entity.reason,
+        classes: "text_danger"
+      });
+    }
+    if (action.success) {
+      this.text.setProps({
+        text: "Profile changed",
+        classes: "text_success"
+      });
+    }
   }
 }
 export default connect(connectUser)(ChangeProfileForm);

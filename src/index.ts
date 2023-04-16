@@ -36,8 +36,8 @@ window.addEventListener("DOMContentLoaded", async () => {
     .use("*", RenderNavPage);
 
   const action = await authController.fetchUser();
-  router.start();
   if (!action.success && protectedRoute()) {
     router.go(path.login);
   }
+  router.start();
 });
