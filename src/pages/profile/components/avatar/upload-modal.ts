@@ -15,10 +15,12 @@ export class UploadModal extends Modal {
       events: {
         click: async (e: MouseEvent) => {
           e.stopPropagation();
-          const file = (choose.getContent() as HTMLInputElement).files?.[0];
+          const input = choose.getContent() as HTMLInputElement;
+          const file = input.files?.[0];
           if (file) {
             const action = await userController.changeAvatar(file);
             if (action.success) {
+              input.value = "";
               this.setProps({
                 classes: ""
               });
