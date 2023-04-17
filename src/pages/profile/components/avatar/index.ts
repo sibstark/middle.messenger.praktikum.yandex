@@ -1,4 +1,5 @@
-import { Block, connect, connectUser } from "@utils";
+import { Block, connect } from "@utils";
+import { connectUser } from "@connectors";
 import template from "./avatar.hbs";
 import { ProfileAvatarProps } from "./types";
 import { UploadModal } from "./upload-modal";

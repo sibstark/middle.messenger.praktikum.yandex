@@ -1,24 +1,27 @@
 import { Block } from "@utils";
-import { RouteLink } from "@components";
+import { chatsController } from "@controllers";
 import template from "./chat-sidebar.hbs";
 import { ChatSidebarProps } from "./types";
+import { ChatInput, ProfileLink } from "../../components";
 import "./chat-sidebar.css";
-
-const linkText = `<span class="chat-header-profile-nav__link-text">
-                    Profile
-                </span>
-<svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1 9L5 5L1 1" stroke="#999999"/>
-                </svg>`;
+import { Chats } from "./chats";
 
 export class ChatSidebar extends Block<ChatSidebarProps> {
-  constructor(props: ChatSidebarProps) {
-    const link = new RouteLink({
-      text: linkText,
-      classes: "chat-header-profile-nav__link",
-      href: props.href
+  constructor() {
+    const link = new ProfileLink();
+    const search = new ChatInput({
+      placeholder: "Search",
+      classes: "chat-sidebar-header__search-input",
+      events: {
+        input: (e: Event) => {
+          const value = (e.target as HTMLInputElement).value;
+          console.log("value", value);
+          chatsController.search(value);
+        }
+      }
     });
-    super("aside", { ...props, link });
+    const chats = new Chats();
+    super("aside", { chats, search, link });
   }
 
   protected render(): DocumentFragment {

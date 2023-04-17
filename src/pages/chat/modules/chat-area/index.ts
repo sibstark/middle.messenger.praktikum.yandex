@@ -6,7 +6,9 @@ import "./chat-area.css";
 
 export class ChatArea extends Block<ChatAreaProps> {
   constructor(props: ChatAreaProps) {
-    const avatar = new Avatar({});
+    const avatar = new Avatar({
+      href: ""
+    });
     super("div", { ...props, avatar });
   }
 

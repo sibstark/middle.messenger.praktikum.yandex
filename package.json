@@ -49,6 +49,7 @@
     "@pages": "./src/pages",
     "@hocs": "./src/hocs",
     "@api": "./src/api",
+    "@connectors": "./src/connectors",
     "@routes": "./src/pages/routes.ts"
   }
 }

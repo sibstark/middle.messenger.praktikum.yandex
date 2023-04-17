@@ -1,4 +1,4 @@
-import { User } from "@types";
+import { Chat, Token, User } from "@types";
 import { EventBus } from "./event-bus";
 import { cloneDeep, isEqual, set } from "./object";
 import { Block } from "./block";
@@ -11,8 +11,15 @@ export type UserStore = WithFetching<{
   user: User | null;
 }>;
 
+export type ChatsStore = WithFetching<{
+  filter: string;
+  chats: Chat[];
+  token?: Token;
+}>;
+
 export type TStore = {
   user: UserStore;
+  chats: ChatsStore;
 };
 export enum StoreEvents {
   Updated = "updated"
@@ -22,6 +29,12 @@ class Store extends EventBus {
     user: {
       user: null,
       fetching: false
+    },
+    chats: {
+      filter: "",
+      chats: [],
+      fetching: false,
+      token: undefined
     }
   };
 

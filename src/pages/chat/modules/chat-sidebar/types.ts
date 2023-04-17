@@ -2,7 +2,6 @@ import { Block } from "@utils";
 
 export type ChatSidebarProps = {
   search: Block;
-  chats: Block[];
-  href: string;
-  link?: Block;
+  link: Block;
+  chats: Block;
 };

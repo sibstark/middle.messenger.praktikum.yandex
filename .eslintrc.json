@@ -41,7 +41,8 @@
     "guard-for-in": "off",
     "no-return-assign": "off",
     "prefer-promise-reject-errors": "off",
-    "consistent-return": "off"
+    "consistent-return": "off",
+    "camelcase": "off"
   },
   "settings": {
     "import/resolver": {

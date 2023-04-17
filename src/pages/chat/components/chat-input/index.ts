@@ -2,10 +2,12 @@ import { Input } from "@components";
 import { classnames } from "@utils";
 import { ChatInputProps } from "./types";
 
-export const ChatInput = ({ classes, placeholder, name }: ChatInputProps) =>
-  new Input({
-    type: "text",
-    classes: classnames("chat-input", classes),
-    placeholder,
-    name
-  });
+export class ChatInput extends Input {
+  constructor(props: ChatInputProps) {
+    super({
+      ...props,
+      type: "text",
+      classes: classnames("chat-input", props.classes)
+    });
+  }
+}

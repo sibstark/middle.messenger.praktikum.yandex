@@ -1,5 +1,6 @@
 import { path } from "@routes";
-import { connectUser, Router, store, StoreEvents } from "@utils";
+import { Router, store, StoreEvents } from "@utils";
+import { connectUser } from "@connectors";
 import { authController } from "@controllers";
 import { RenderLoginPage } from "./pages/login";
 import { RenderRegistrationPage } from "./pages/registration";

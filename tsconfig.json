@@ -9,6 +9,7 @@
       "@components/*": ["src/components/*"],
       "@modules": ["src/modules"],
       "@pages": ["src/pages"],
+      "@connectors": ["src/connectors"],
       "@hocs": ["src/hocs"],
       "@api": ["src/api"],
       "@routes": ["src/pages/routes.ts"]

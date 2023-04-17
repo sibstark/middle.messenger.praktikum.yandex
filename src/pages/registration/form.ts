@@ -8,7 +8,7 @@ import {
   phoneValidation
 } from "@utils";
 import { authController } from "@controllers";
-import { SignupRequest } from "@api";
+import { SignupRequest } from "@types";
 
 const controlsMap: FormControlProps[] = [
   {

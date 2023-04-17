@@ -1,90 +1,13 @@
 import { Page } from "@modules";
 import { Main, RoundPill } from "@components";
-import { path } from "@routes";
+import { chatsController } from "@controllers";
 import {
   ArrowRight,
   ChatInput,
-  ChatMediaPreview,
   ChatMessage,
-  ChatMessageProps,
-  ChatMediaPreviewProps
+  ChatMessageProps
 } from "./components";
-import {
-  MembersAction,
-  MessageActions,
-  ChatArea,
-  ChatSidebar
-} from "./modules";
-
-const chatList: ChatMediaPreviewProps[] = [
-  {
-    name: "Peter",
-    text: "haha",
-    time: "10:42",
-    count: 3
-  },
-  {
-    name: "Alex",
-    text: "Friends, I have a special news for you! Jenny and me going to go bla bla bla",
-    time: "10:43",
-    count: 2
-  },
-  {
-    name: "Artur",
-    text: "Friends, I have a special news for you! Jenny and me going to go bla bla bla",
-    time: "10:43",
-    count: 2
-  },
-  {
-    name: "Anton",
-    text: "Friends, I have a special news for you! Jenny and me going to go bla bla bla",
-    time: "10:43",
-    count: 2
-  },
-  {
-    name: "Mom",
-    text: "Hi, Mom! I love you!",
-    time: "10:43",
-    count: 5,
-    classes: "chat-media-preview_active"
-  },
-  {
-    name: "Dan",
-    text: "Hi, how are you?",
-    time: "10:43",
-    count: 2
-  },
-  {
-    name: "Sveta",
-    text: "Hi, how are you?",
-    time: "10:43",
-    count: 2
-  },
-  {
-    name: "Alena",
-    text: "Hi, how are you?",
-    time: "10:43",
-    count: 2
-  },
-  {
-    name: "Oleg",
-    text: "Hi, how are you?",
-    time: "10:43",
-    count: 2
-  },
-  {
-    name: "Work",
-    text: "Hi, how are you?",
-    time: "10:43",
-    count: 2
-  },
-  {
-    name: "Sigismund",
-    text: "Hi, how are you?",
-    time: "10:43",
-    count: 2
-  }
-];
+import { MessageActions, ChatArea, ChatSidebar, ChatActions } from "./modules";
 
 const messageList: ChatMessageProps[] = [
   {
@@ -124,15 +47,9 @@ const messageList: ChatMessageProps[] = [
 ];
 export class RenderChatPage extends Main {
   constructor() {
-    const chats = chatList.map(chat => new ChatMediaPreview(chat));
-    const search = ChatInput({
-      placeholder: "Search",
-      classes: "chat-sidebar-header__search-input"
-    });
-    const sidebar = new ChatSidebar({ href: path.profile, chats, search });
-    const membersAction = MembersAction();
+    const sidebar = new ChatSidebar();
     const messageActions = MessageActions();
-    const input = ChatInput({
+    const input = new ChatInput({
       name: "message",
       placeholder: "Message",
       classes: "chat-input_text-left message-bar__message-input"
@@ -153,12 +70,16 @@ export class RenderChatPage extends Main {
     const messages = messageList.map(msg => new ChatMessage(msg));
     const area = new ChatArea({
       name: "Mom",
-      membersAction,
+      chatActions: new ChatActions(),
       messageActions,
       messages,
       sendMessage: [input, submit]
     });
     const page = new Page({ body: [sidebar, area], classes: "page_row" });
     super({ body: page });
+  }
+
+  componentDidMount() {
+    chatsController.getChats();
   }
 }

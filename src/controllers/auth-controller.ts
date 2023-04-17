@@ -14,6 +14,10 @@ class AuthController {
   }
 
   async signup(data: SignupRequest): Promise<Action<any>> {
+    const user = store.getState().user;
+    if (user?.fetching) {
+      throw new Error("Already in process");
+    }
     store.set("user.fetching", true);
     try {
       await this.api.signup(data);
@@ -21,7 +25,7 @@ class AuthController {
       this.router.go(path.app);
       return user;
     } catch (e) {
-      console.log("signup", console.log);
+      console.log("signup", e);
       return {
         success: false,
         entity: e
@@ -32,6 +36,10 @@ class AuthController {
   }
 
   async signin(data: SigninRequest): Promise<Action<any>> {
+    const user = store.getState().user;
+    if (user?.fetching) {
+      throw new Error("Already in process");
+    }
     store.set("user.fetching", true);
     try {
       await this.api.singin(data);

@@ -16,6 +16,10 @@ class UserController {
   }
 
   async changeProfile(data: UpdateProfileRequest): Promise<Action<any>> {
+    const user = store.getState().user;
+    if (user?.fetching) {
+      throw new Error("Already in process");
+    }
     store.set("user.fetching", true);
     try {
       const user = await this.api.changeProfile(data);
@@ -36,6 +40,10 @@ class UserController {
   }
 
   async changeAvatar(data: Blob): Promise<Action<any>> {
+    const user = store.getState().user;
+    if (user?.fetching) {
+      throw new Error("Already in process");
+    }
     store.set("user.fetching", true);
     try {
       const form = new FormData();
@@ -58,6 +66,10 @@ class UserController {
   }
 
   async changePassword(data: UpdatePasswordRequest): Promise<Action<any>> {
+    const user = store.getState().user;
+    if (user?.fetching) {
+      throw new Error("Already in process");
+    }
     store.set("user.fetching", true);
     try {
       await this.api.changePassword(data);

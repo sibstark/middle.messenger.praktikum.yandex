@@ -1,13 +1,13 @@
 import { FormControl, Button, EmptyFormControl, Form, Text } from "@components";
 import {
   connect,
-  connectUser,
   emailValidation,
   loginValidation,
   nameValidation,
   phoneValidation
 } from "@utils";
 import { UpdateProfileRequest, User } from "@types";
+import { connectUser } from "@connectors";
 import { userController } from "@controllers";
 import ProfileAvatar from "./components/avatar";
 
