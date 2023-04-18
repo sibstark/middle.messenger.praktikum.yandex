@@ -9,8 +9,8 @@ export function chatMap(chat: Chat): ChatPreview {
     title: chat.title,
     avatar: chat.avatar,
     unreadCount: chat.unread_count,
-    text: chat.last_message.content,
-    time: formatDate(chat.last_message.time)
+    text: chat.last_message?.content,
+    time: chat.last_message && formatDate(chat.last_message.time)
   });
 }
 

@@ -16,13 +16,21 @@ export class ChatsApi extends BaseAPI {
 
   createChat(title: string) {
     return this.http.post<Pick<Chat, "id">>("/", {
-      data: { title }
+      data: {
+        title
+      },
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
     });
   }
 
   addUsers(chatId: number, users: number[]) {
     return this.http.put("/users", {
-      data: { chatId, users }
+      data: { chatId, users },
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
     });
   }
 

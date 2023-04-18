@@ -42,7 +42,10 @@
     "no-return-assign": "off",
     "prefer-promise-reject-errors": "off",
     "consistent-return": "off",
-    "camelcase": "off"
+    "camelcase": "off",
+    "no-restricted-globals": "off",
+    "no-alert": "off",
+    "no-useless-return": "off"
   },
   "settings": {
     "import/resolver": {

@@ -1,10 +1,12 @@
 import { Block } from "@utils";
 import { chatsController } from "@controllers";
+import { Button } from "@components";
 import template from "./chat-sidebar.hbs";
 import { ChatSidebarProps } from "./types";
 import { ChatInput, ProfileLink } from "../../components";
-import "./chat-sidebar.css";
 import { Chats } from "./chats";
+import { AddChat } from "./add-chat";
+import "./chat-sidebar.css";
 
 export class ChatSidebar extends Block<ChatSidebarProps> {
   constructor() {
@@ -15,13 +17,25 @@ export class ChatSidebar extends Block<ChatSidebarProps> {
       events: {
         input: (e: Event) => {
           const value = (e.target as HTMLInputElement).value;
-          console.log("value", value);
           chatsController.search(value);
         }
       }
     });
     const chats = new Chats();
-    super("aside", { chats, search, link });
+    const modal = new AddChat();
+    const add = new Button({
+      type: "button",
+      classes: "button_link",
+      text: "Add chat",
+      events: {
+        click: () => {
+          modal.setProps({
+            classes: "modal_active"
+          });
+        }
+      }
+    });
+    super("aside", { chats, search, link, add, modal });
   }
 
   protected render(): DocumentFragment {

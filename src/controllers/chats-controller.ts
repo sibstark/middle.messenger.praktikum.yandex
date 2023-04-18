@@ -1,5 +1,5 @@
 import { ChatsApi } from "@api";
-import { Action, Chat, User } from "@types";
+import { Chat, User } from "@types";
 import { store } from "@utils";
 
 class ChatsController {
@@ -13,10 +13,6 @@ class ChatsController {
   }
 
   async getChats() {
-    const chats = store.getState().chats;
-    if (chats.fetching) {
-      throw new Error("Already in process");
-    }
     store.set("chats.fetching", true);
     try {
       const response = await this.api.getChats();
@@ -25,7 +21,7 @@ class ChatsController {
         title: c.title,
         avatar: c.avatar,
         unread_count: c.unread_count,
-        last_message: {
+        last_message: c.last_message && {
           user: {
             first_name: c.last_message.user.first_name,
             second_name: c.last_message.user.second_name,
@@ -46,54 +42,26 @@ class ChatsController {
     }
   }
 
-  async createChat(title: string): Promise<Action<any>> {
+  async createChat(title: string): Promise<Pick<Chat, "id">> {
+    return this.api.createChat(title);
+  }
+
+  async addUser(chatId: number, userId: number) {
+    await this.api.addUsers(chatId, [userId]);
+  }
+
+  async tryCreateUserChat(user: User) {
     try {
       store.set("chats.fetching", true);
-      const chat = await this.api.createChat(title);
+      const title = user.display_name || user.login;
+      const chat = await this.createChat(title);
+      await this.addUser(chat.id, user.id);
       await this.getChats();
-      return {
-        success: true,
-        entity: chat
-      };
     } catch (e) {
-      console.log("logout", e);
-      return {
-        success: false,
-        entity: e
-      };
+      console.log("tryCreateUserChat", e);
     } finally {
       store.set("chats.fetching", false);
     }
-  }
-
-  async addUser(chatId: number, userId: number): Promise<Action<any>> {
-    try {
-      const user = await this.api.addUsers(chatId, [userId]);
-      store.set("user.user", user);
-      return {
-        success: true,
-        entity: user
-      };
-    } catch (e) {
-      console.log("fetchUser", e);
-      return {
-        success: false,
-        entity: e
-      };
-    }
-  }
-
-  async tryAddChatUser(user: User): Promise<Action<any>> {
-    let chat: Chat = {} as Chat;
-    if (!chat) {
-      const title = user.display_name || user.login;
-      const action = await this.createChat(title);
-      if (action.success) {
-        chat = action.entity;
-      }
-      return action;
-    }
-    return this.addUser(chat?.id, user.id);
   }
 
   search(filter: string) {

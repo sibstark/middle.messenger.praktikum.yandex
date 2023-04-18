@@ -26,7 +26,12 @@ export class UserAPI extends BaseAPI {
   }
 
   findUser(data: FindUserRequest) {
-    return this.http.post<User[]>("/search", { data });
+    return this.http.post<User[]>("/search", {
+      data,
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    });
   }
 
   getUserById(id: number) {

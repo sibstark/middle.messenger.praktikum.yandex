@@ -5,7 +5,7 @@ export type ChatResponse = {
   title: string;
   avatar: string;
   unread_count: number;
-  last_message: {
+  last_message?: {
     user: {
       first_name: string;
       second_name: string;
@@ -24,7 +24,7 @@ export type Chat = {
   title: string;
   avatar: string;
   unread_count: number;
-  last_message: {
+  last_message?: {
     user: Pick<
       User,
       "first_name" | "second_name" | "avatar" | "email" | "login" | "phone"

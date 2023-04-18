@@ -1,24 +1,6 @@
 /* eslint-disable max-len */
 import { Dropdown, DropdownItem } from "../../components";
 
-const ThreeDots = `<svg width="3" height="15" viewBox="0 0 3 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="1.5" cy="1.5" r="1.5" fill="black"/>
-        <circle cx="1.5" cy="7.5" r="1.5" fill="black"/>
-        <circle cx="1.5" cy="13.5" r="1.5" fill="black"/>
-    </svg>`;
-
-const Plus = `<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line x1="11" y1="5.5" x2="11" y2="16.5" stroke="#3369F3" stroke-width="1.5"/>
-        <line x1="5.5" y1="11" x2="16.5" y2="11" stroke="#3369F3" stroke-width="1.5"/>
-        <circle cx="11" cy="11" r="10.25" stroke="#3369F3" stroke-width="1.5"/>
-    </svg>`;
-
-const Cross = `<svg width="22" height="22" viewBox="11 11 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line x1="18.1108" y1="18.111" x2="25.8889" y2="25.8892" stroke="#3369F3" stroke-width="1.5"/>
-        <line x1="18.1108" y1="25.8891" x2="25.889" y2="18.1109" stroke="#3369F3" stroke-width="1.5"/>
-        <circle cx="22" cy="22" r="10.25" stroke="#3369F3" stroke-width="1.5"/>
-    </svg>`;
-
 const Clip = `<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" clip-rule="evenodd"
               d="M7.18661 13.5L14.7628 5.92389L15.7056 6.8667L8.12942 14.4428L7.18661 13.5Z" fill="#3369F3"/>
@@ -55,18 +37,6 @@ const Round = `<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns
               d="M20.5 11C20.5 16.2467 16.2467 20.5 11 20.5C5.75329 20.5 1.5 16.2467 1.5 11C1.5 5.75329 5.75329 1.5 11 1.5C16.2467 1.5 20.5 5.75329 20.5 11ZM22 11C22 17.0751 17.0751 22 11 22C4.92487 22 0 17.0751 0 11C0 4.92487 4.92487 0 11 0C17.0751 0 22 4.92487 22 11ZM11 14C12.6569 14 14 12.6569 14 11C14 9.34315 12.6569 8 11 8C9.34315 8 8 9.34315 8 11C8 12.6569 9.34315 14 11 14Z"
               fill="#3369F3"/>
     </svg>`;
-export const MembersAction = () => {
-  const add = new DropdownItem({ icon: Plus, title: "Добавить пользователя" });
-  const remove = new DropdownItem({
-    icon: Cross,
-    title: "Удалить пользователя"
-  });
-  return new Dropdown({
-    classes: "dropdown_active",
-    trigger: ThreeDots,
-    content: [add, remove]
-  });
-};
 
 export const MessageActions = () => {
   const addMedia = new DropdownItem({ icon: Media, title: "Фото или Видео" });

@@ -3,7 +3,7 @@ import {
   Action,
   UpdateProfileRequest,
   UpdatePasswordRequest,
-  FindUserRequest
+  User
 } from "@types";
 import { store } from "@utils";
 
@@ -88,9 +88,12 @@ class UserController {
     }
   }
 
-  async findUser(data: FindUserRequest): Promise<Action<any>> {
+  async findUsers(login: string): Promise<Action<User[]>> {
     try {
-      const users = await this.api.findUser(data);
+      const users = await this.api.findUser({
+        login
+      });
+      store.set("user.users", users);
       return {
         success: true,
         entity: users
@@ -98,7 +101,7 @@ class UserController {
     } catch (e) {
       return {
         success: false,
-        entity: e
+        entity: []
       };
     }
   }

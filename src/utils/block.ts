@@ -134,6 +134,12 @@ export class Block<T extends TProps = Record<string | symbol, any>>
       return;
     }
 
+    const divided = this._getChildren(nextProps as T);
+    this.children = {
+      ...this.children,
+      ...divided.children
+    };
+
     Object.assign(this.props, nextProps);
   };
 

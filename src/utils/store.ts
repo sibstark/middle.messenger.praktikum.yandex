@@ -1,6 +1,6 @@
 import { Chat, Token, User } from "@types";
 import { EventBus } from "./event-bus";
-import { cloneDeep, isEqual, set } from "./object";
+import { set } from "./object";
 import { Block } from "./block";
 
 export type WithFetching<T> = T & {
@@ -8,6 +8,7 @@ export type WithFetching<T> = T & {
 };
 
 export type UserStore = WithFetching<{
+  users: User[];
   user: User | null;
 }>;
 
@@ -28,6 +29,7 @@ class Store extends EventBus {
   private state: TStore = {
     user: {
       user: null,
+      users: [],
       fetching: false
     },
     chats: {
@@ -48,31 +50,20 @@ class Store extends EventBus {
   }
 }
 export function connect(mapStateToProps: (store: TStore) => any) {
-  // используем class expression
   return (Component: any) => {
     return class extends Component {
       constructor(...args: any) {
-        let state = cloneDeep(mapStateToProps(store.getState()));
-        super(...args, state);
+        const props = mapStateToProps({ ...store.getState() });
+        super(...args, { ...props });
 
         // подписываемся на событие
         store.on(StoreEvents.Updated, () => {
-          const newState = cloneDeep(mapStateToProps(store.getState()));
-          // вызываем обновление компонента, передав данные из хранилища
-          // если что-то из используемых данных поменялось, обновляем компонент
-          if (!isEqual(state, newState)) {
-            this.setProps({ ...newState });
-          }
-
-          // не забываем сохранить новое состояние
-          state = newState;
+          const props = mapStateToProps({ ...store.getState() });
+          this.setProps({ ...props });
         });
       }
     } as typeof Block;
   };
 }
-
-// isEgual нужно дергать в componentDidUpdate и если пропсы изменились
-// то только тогда возвращать true
 
 export const store = new Store();
