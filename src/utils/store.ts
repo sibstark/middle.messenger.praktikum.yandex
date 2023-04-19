@@ -1,4 +1,4 @@
-import { Chat, Token, User } from "@types";
+import { Chat, User } from "@types";
 import { EventBus } from "./event-bus";
 import { set } from "./object";
 import { Block } from "./block";
@@ -15,12 +15,17 @@ export type UserStore = WithFetching<{
 export type ChatsStore = WithFetching<{
   filter: string;
   chats: Chat[];
-  token?: Token;
 }>;
+
+export type ChatStore = {
+  selected: Chat | null;
+  messages: any[];
+};
 
 export type TStore = {
   user: UserStore;
   chats: ChatsStore;
+  chat: ChatStore;
 };
 export enum StoreEvents {
   Updated = "updated"
@@ -35,8 +40,11 @@ class Store extends EventBus {
     chats: {
       filter: "",
       chats: [],
-      fetching: false,
-      token: undefined
+      fetching: false
+    },
+    chat: {
+      selected: null,
+      messages: []
     }
   };
 

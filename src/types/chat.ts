@@ -1,22 +1,28 @@
 import { User } from "./auth";
 
+type MessageUser = Pick<
+  User,
+  "first_name" | "second_name" | "avatar" | "email" | "login" | "phone"
+>;
+
+export type Message = {
+  user: MessageUser;
+  time: Date;
+  content: string;
+};
+
+export type MessageResponse = {
+  user: MessageUser;
+  time: string;
+  content: string;
+};
+
 export type ChatResponse = {
   id: number;
   title: string;
   avatar: string;
   unread_count: number;
-  last_message?: {
-    user: {
-      first_name: string;
-      second_name: string;
-      avatar: string;
-      email: string;
-      login: string;
-      phone: string;
-    };
-    time: string;
-    content: string;
-  };
+  last_message?: MessageResponse;
 };
 
 export type Chat = {
@@ -24,14 +30,7 @@ export type Chat = {
   title: string;
   avatar: string;
   unread_count: number;
-  last_message?: {
-    user: Pick<
-      User,
-      "first_name" | "second_name" | "avatar" | "email" | "login" | "phone"
-    >;
-    time: Date;
-    content: string;
-  };
+  last_message?: Message;
 };
 
 export type Token = {

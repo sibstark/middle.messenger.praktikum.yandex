@@ -145,7 +145,10 @@ export class HTTPTransport implements IHTTPTransport {
           if (xhr.status < 400) {
             resolve(xhr.response);
           } else {
-            reject(xhr.response);
+            reject({
+              status: xhr.status,
+              response: xhr.response
+            });
           }
         }
       };

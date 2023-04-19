@@ -1,4 +1,6 @@
 import { Block } from "@utils";
+import { Cross } from "@components";
+import { chatsController, messageController } from "@controllers";
 import template from "./chat-media-preview.hbs";
 import { Avatar } from "../avatar";
 import { ChatPreviewProps, ConstructChatPreviewProps } from "./types";
@@ -9,7 +11,27 @@ export class ChatPreview extends Block<ChatPreviewProps> {
     const avatar = new Avatar({
       href: props.avatar
     });
-    super("div", { ...props, avatar });
+    const cross = new Cross({
+      classes: "message-timer-bar__action",
+      events: {
+        click: () => {
+          if (!confirm(`Удалить чат с ${this.props.title}?`)) {
+            return;
+          }
+          chatsController.removeChat(this.props.id);
+        }
+      }
+    });
+    super("div", {
+      ...props,
+      avatar,
+      cross,
+      events: {
+        click: () => {
+          messageController.changeChat(props.id);
+        }
+      }
+    });
   }
 
   protected render(): DocumentFragment {

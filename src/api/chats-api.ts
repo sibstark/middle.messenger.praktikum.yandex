@@ -11,13 +11,24 @@ export class ChatsApi extends BaseAPI {
   }
 
   getToken(id: number) {
-    return this.http.post<Token[]>(`/token/${id}`);
+    return this.http.post<Token>(`/token/${id}`);
   }
 
   createChat(title: string) {
     return this.http.post<Pick<Chat, "id">>("/", {
       data: {
         title
+      },
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    });
+  }
+
+  removeChat(id: number) {
+    return this.http.delete("/", {
+      data: {
+        chatId: id
       },
       headers: {
         "Content-type": "application/json; charset=UTF-8"

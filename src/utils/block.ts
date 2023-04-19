@@ -162,9 +162,7 @@ export class Block<T extends TProps = Record<string | symbol, any>>
     Object.entries(propsAndChildren).forEach(([key, value]) => {
       if (
         value instanceof Block ||
-        (Array.isArray(value) &&
-          value.length > 0 &&
-          value.every(_ => _ instanceof Block))
+        (Array.isArray(value) && value.every(_ => _ instanceof Block))
       ) {
         children[key] = value;
       } else {

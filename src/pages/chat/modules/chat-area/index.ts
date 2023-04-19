@@ -1,15 +1,13 @@
 import { Block } from "@utils";
 import template from "./chat-area.hbs";
-import { Avatar } from "../../components";
-import { ChatAreaProps } from "./types";
+import { ChatAreaProps, ConstructChatAreaProps } from "./types";
 import "./chat-area.css";
+import Header from "./header";
 
 export class ChatArea extends Block<ChatAreaProps> {
-  constructor(props: ChatAreaProps) {
-    const avatar = new Avatar({
-      href: ""
-    });
-    super("div", { ...props, avatar });
+  constructor(props: ConstructChatAreaProps) {
+    const header = new Header();
+    super("div", { ...props, header, messages: [] });
   }
 
   protected render(): DocumentFragment {

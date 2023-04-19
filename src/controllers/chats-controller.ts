@@ -1,6 +1,7 @@
 import { ChatsApi } from "@api";
 import { Chat, User } from "@types";
 import { store } from "@utils";
+import { mapChatMessage } from "./helpers";
 
 class ChatsController {
   private api: ChatsApi;
@@ -21,18 +22,7 @@ class ChatsController {
         title: c.title,
         avatar: c.avatar,
         unread_count: c.unread_count,
-        last_message: c.last_message && {
-          user: {
-            first_name: c.last_message.user.first_name,
-            second_name: c.last_message.user.second_name,
-            avatar: c.last_message.user.avatar,
-            email: c.last_message.user.email,
-            login: c.last_message.user.login,
-            phone: c.last_message.user.phone
-          },
-          time: new Date(c.last_message.time),
-          content: c.last_message.content
-        }
+        last_message: c.last_message && mapChatMessage(c.last_message)
       }));
       store.set("chats.chats", chats);
     } catch (e) {
@@ -44,6 +34,11 @@ class ChatsController {
 
   async createChat(title: string): Promise<Pick<Chat, "id">> {
     return this.api.createChat(title);
+  }
+
+  async removeChat(id: number) {
+    await this.api.removeChat(id);
+    await this.getChats();
   }
 
   async addUser(chatId: number, userId: number) {

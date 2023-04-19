@@ -1,13 +1,13 @@
 import { Page } from "@modules";
 import { Main, RoundPill } from "@components";
-import { chatsController } from "@controllers";
+import { chatsController, messageController } from "@controllers";
 import {
   ArrowRight,
   ChatInput,
   ChatMessage,
   ChatMessageProps
 } from "./components";
-import { MessageActions, ChatArea, ChatSidebar, ChatActions } from "./modules";
+import { ChatArea, ChatSidebar } from "./modules";
 
 const messageList: ChatMessageProps[] = [
   {
@@ -48,7 +48,6 @@ const messageList: ChatMessageProps[] = [
 export class RenderChatPage extends Main {
   constructor() {
     const sidebar = new ChatSidebar();
-    const messageActions = MessageActions();
     const input = new ChatInput({
       name: "message",
       placeholder: "Message",
@@ -60,9 +59,7 @@ export class RenderChatPage extends Main {
       events: {
         click: () => {
           if (input.value) {
-            console.log("message", {
-              message: input.value
-            });
+            messageController.sendMessage(input.value);
           }
         }
       }
@@ -70,8 +67,6 @@ export class RenderChatPage extends Main {
     const messages = messageList.map(msg => new ChatMessage(msg));
     const area = new ChatArea({
       name: "Mom",
-      chatActions: new ChatActions(),
-      messageActions,
       messages,
       sendMessage: [input, submit]
     });

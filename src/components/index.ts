@@ -10,3 +10,4 @@ export * from "./form";
 export * from "./main";
 export * from "./nav";
 export * from "./text";
+export * from "./cross";
