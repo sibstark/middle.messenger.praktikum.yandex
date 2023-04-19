@@ -11,6 +11,14 @@ export type Message = {
   content: string;
 };
 
+export type WSMessage = {
+  content: string;
+  time: Date;
+  type: string;
+  user_id: number;
+  id: number;
+};
+
 export type MessageResponse = {
   user: MessageUser;
   time: string;

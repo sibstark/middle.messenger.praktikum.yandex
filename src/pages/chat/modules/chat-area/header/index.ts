@@ -1,11 +1,12 @@
 import { Block, connect, TStore } from "@utils";
+import { Empty } from "@components";
 import template from "./header.hbs";
 import { HeaderProps } from "./types";
 import { Avatar } from "../../../components";
 
 function connector(store: TStore) {
   const chat = store.chat.selected;
-  const avatar = chat ? new Avatar({ href: chat?.avatar || "" }) : null;
+  const avatar = chat ? new Avatar({ href: chat?.avatar || "" }) : new Empty();
   return {
     avatar,
     name: chat?.title

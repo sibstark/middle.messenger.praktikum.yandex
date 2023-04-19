@@ -1,50 +1,10 @@
 import { Page } from "@modules";
 import { Main, RoundPill } from "@components";
 import { chatsController, messageController } from "@controllers";
-import {
-  ArrowRight,
-  ChatInput,
-  ChatMessage,
-  ChatMessageProps
-} from "./components";
+import { store } from "@utils";
+import { ArrowRight, ChatInput } from "./components";
 import { ChatArea, ChatSidebar } from "./modules";
 
-const messageList: ChatMessageProps[] = [
-  {
-    time: "11:32",
-    message:
-      "Jenny and I have been friends for a long time. We usually do everything together and have " +
-      "so much fun. From days out to being each other's support when times are tough, we always " +
-      "have each others back. We have shared so many memories that we will always cherish. Jenny " +
-      "is my best friend and I wouldn't have it any"
-  },
-  {
-    time: "11:52",
-    message:
-      "Jenny and I have been friends for a long time. We usually do everything together and " +
-      "have so much fun. From days out to being each other's support when times are tough, " +
-      "we always have each others back. We have shared so many memories that we will always " +
-      "cherish. Jenny is my best friend and I wouldn't have it any"
-  },
-  {
-    time: "11:54",
-    message: "Hi, Mom! I love you!",
-    classes: "chat-message_own"
-  },
-  {
-    time: "11:52",
-    message:
-      "Jenny and I have been friends for a long time. We usually do everything together and have " +
-      "so much fun. From days out to being each other's support when times are tough, we always " +
-      "have each others back. We have shared so many memories that we will always cherish. Jenny " +
-      "is my best friend and I wouldn't have it any"
-  },
-  {
-    time: "11:54",
-    message: "Hi, Mom! I love you!",
-    classes: "chat-message_own"
-  }
-];
 export class RenderChatPage extends Main {
   constructor() {
     const sidebar = new ChatSidebar();
@@ -60,14 +20,13 @@ export class RenderChatPage extends Main {
         click: () => {
           if (input.value) {
             messageController.sendMessage(input.value);
+            const element = input.getContent() as HTMLInputElement;
+            element.value = "";
           }
         }
       }
     });
-    const messages = messageList.map(msg => new ChatMessage(msg));
     const area = new ChatArea({
-      name: "Mom",
-      messages,
       sendMessage: [input, submit]
     });
     const page = new Page({ body: [sidebar, area], classes: "page_row" });
@@ -76,5 +35,10 @@ export class RenderChatPage extends Main {
 
   componentDidMount() {
     chatsController.getChats();
+  }
+
+  public unmount() {
+    store.set("chat.selected", null);
+    this.getContent().remove();
   }
 }

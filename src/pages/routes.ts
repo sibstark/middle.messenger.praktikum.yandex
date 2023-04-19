@@ -4,8 +4,7 @@ enum Path {
   profile = "profile",
   notFound = "notFound",
   serverError = "serverError",
-  app = "app",
-  nav = "nav"
+  app = "app"
 }
 export const path: Record<Path, string> = {
   [Path.login]: "/",
@@ -13,6 +12,5 @@ export const path: Record<Path, string> = {
   [Path.profile]: "/settings",
   [Path.notFound]: "/not-found",
   [Path.serverError]: "/server-error",
-  [Path.app]: "/messenger",
-  [Path.nav]: "/nav"
+  [Path.app]: "/messenger"
 };

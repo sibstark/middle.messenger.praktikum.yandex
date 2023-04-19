@@ -19,6 +19,8 @@
         border-radius: 0.25rem;
         padding: 1rem;
         transition: all 0.3s linear;
+        max-height: 80vh;
+        overflow-y: auto;
     }
 
     &__header {

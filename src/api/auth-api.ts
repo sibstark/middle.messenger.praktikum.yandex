@@ -7,11 +7,21 @@ export class AuthAPI extends BaseAPI {
   }
 
   signup(data: SignupRequest) {
-    return this.http.post("/signup", { data });
+    return this.http.post("/signup", {
+      data,
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    });
   }
 
   singin(data: SigninRequest) {
-    return this.http.post("/signin", { data });
+    return this.http.post("/signin", {
+      data,
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    });
   }
 
   logout() {

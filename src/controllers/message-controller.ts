@@ -1,6 +1,17 @@
 import { ChatsApi } from "@api";
-import { Router, store } from "@utils";
+import { EventBus, Router, store } from "@utils";
 import { path } from "@routes";
+import { WSMessage } from "@types";
+
+function messageMap(m: Record<string, any>): WSMessage {
+  return {
+    content: m.content,
+    type: m.type,
+    time: new Date(m.time),
+    user_id: m.user_id,
+    id: m.id
+  };
+}
 
 enum SocketEvents {
   Open = "open",
@@ -8,8 +19,12 @@ enum SocketEvents {
   Error = "error",
   Close = "close"
 }
-
-class MessageController {
+export const MessageEvents: Record<string, string> = {
+  Message: "message",
+  Messages: "messages",
+  Dispose: "dispose"
+};
+class MessageController extends EventBus {
   private _url = "wss://ya-praktikum.tech/ws/chats";
 
   private chatsApi: ChatsApi;
@@ -19,6 +34,10 @@ class MessageController {
   private socket: WebSocket | null = null;
 
   private offset = 0;
+
+  private _messages: WSMessage[] = [];
+
+  private isReconnected = false;
 
   // eslint-disable-next-line no-undef
   private interval?: NodeJS.Timer;
@@ -35,8 +54,7 @@ class MessageController {
     }
   }
 
-  private async connect() {
-    this.offset = 0;
+  private async tryMakeUrl() {
     const _store = store.getState();
     const chatId = _store.chat.selected?.id;
     const userId = _store.user.user?.id;
@@ -47,7 +65,13 @@ class MessageController {
     if (!token) {
       throw new Error("Token is empty");
     }
-    const url = `${this._url}/${userId}/${chatId}/${token}`;
+    return `${this._url}/${userId}/${chatId}/${token}`;
+  }
+
+  private async connect() {
+    this.isReconnected = false;
+    this.offset = 0;
+    const url = await this.tryMakeUrl();
     try {
       this.socket = new WebSocket(url);
       this.subscribe();
@@ -60,9 +84,12 @@ class MessageController {
     if (!this.socket) {
       return;
     }
+    this.isReconnected = false;
     clearInterval(this.interval);
     this.unsubscribe();
+    this._messages = [];
     this.offset = 0;
+    this.emit(MessageEvents.Dispose);
     await this.socket.close();
     this.socket = null;
   }
@@ -87,7 +114,10 @@ class MessageController {
 
   private catchOpen() {
     store.set("chat.messages", []);
-    this.loadMessages();
+    if (!this.isReconnected) {
+      this.loadMessages();
+    }
+    /*
     this.interval = setInterval(() => {
       this.socket?.send(
         JSON.stringify({
@@ -96,11 +126,23 @@ class MessageController {
         })
       );
     }, 20000);
+    */
   }
 
   private catchError(e: any) {
     console.log(e.message);
     this.disconnect();
+  }
+
+  private async reconnect() {
+    this.isReconnected = true;
+    const url = await this.tryMakeUrl();
+    try {
+      this.socket = new WebSocket(url);
+      this.subscribe();
+    } catch (e) {
+      console.log("connect", e);
+    }
   }
 
   private catchClose(e: any) {
@@ -115,15 +157,28 @@ class MessageController {
     this.disconnect();
     // error code is usually caused by network issues
     if (e.code === 1006) {
-      this.connect();
+      this.reconnect();
     }
   }
 
-  private catchMessage(e: MessageEvent) {
-    console.log(e.data);
+  private catchMessage(e: MessageEvent<any>) {
+    const data = JSON.parse(e.data);
+    if (Array.isArray(data)) {
+      const msgs = data.map(_ => messageMap(_));
+      msgs.reverse();
+      this._messages = [...msgs, ...this._messages];
+      this.emit(MessageEvents.Messages, msgs);
+    } else {
+      const msg = messageMap(data);
+      if (msg.type === "message") {
+        this._messages = [msg, ...this._messages];
+        this.emit(MessageEvents.Message, msg);
+      }
+    }
   }
 
   constructor() {
+    super();
     this.chatsApi = new ChatsApi();
     this.catchError = this.catchError.bind(this);
     this.catchOpen = this.catchOpen.bind(this);

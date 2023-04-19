@@ -14,6 +14,8 @@ export class Router {
 
   private _currentRoute: Route | null = null;
 
+  private _listener?: Function;
+
   constructor(rootQuery?: string) {
     if (Router.__instance) {
       return Router.__instance;
@@ -26,6 +28,10 @@ export class Router {
     this._currentRoute = null;
 
     Router.__instance = this;
+  }
+
+  public on(listener: Function) {
+    this._listener = listener;
   }
 
   public get path() {
@@ -41,11 +47,6 @@ export class Router {
     return this;
   }
 
-  useCustom(route: Route) {
-    this.routes.push(route);
-    return this;
-  }
-
   start() {
     // Реагируем на изменения в адресной строке и вызываем перерисовку
     window.onpopstate = event => {
@@ -57,7 +58,7 @@ export class Router {
     this._onRoute(window.location.pathname);
   }
 
-  _onRoute(pathname: string) {
+  private _switch(pathname: string) {
     const route = this.getRoute(pathname);
     if (!route) {
       return;
@@ -69,8 +70,16 @@ export class Router {
 
     this._currentRoute = route;
     route.render();
+  }
 
-    // route.render(route, pathname);
+  private _onRoute(pathname: string) {
+    if (this._listener) {
+      this._listener(pathname, () => {
+        this._switch.apply(this, [pathname]);
+      });
+    } else {
+      this._switch(pathname);
+    }
   }
 
   go(pathname: string) {

@@ -12,7 +12,12 @@ export class UserAPI extends BaseAPI {
   }
 
   changeProfile(data: UpdateProfileRequest) {
-    return this.http.put<User>("/profile", { data });
+    return this.http.put<User>("/profile", {
+      data,
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    });
   }
 
   changeAvatar(data: FormData) {
@@ -22,7 +27,12 @@ export class UserAPI extends BaseAPI {
   }
 
   changePassword(data: UpdatePasswordRequest) {
-    return this.http.put("/password", { data });
+    return this.http.put("/password", {
+      data,
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    });
   }
 
   findUser(data: FindUserRequest) {
