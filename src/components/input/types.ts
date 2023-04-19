@@ -7,5 +7,5 @@ export type InputProps = Children &
     type: string;
     placeholder?: string;
     value?: string | number;
-    accept?: string
+    accept?: string;
   }>;

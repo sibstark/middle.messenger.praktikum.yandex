@@ -5,4 +5,3 @@ export type ChatAreaProps = {
   sendMessage?: Block | Block[];
   header?: Block;
 };
-

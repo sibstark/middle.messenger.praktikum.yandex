@@ -1,5 +1,6 @@
 import { Block } from "@utils";
 import "./empty.css";
+
 export class Empty extends Block {
   constructor() {
     super("div", {});
