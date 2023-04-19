@@ -1,13 +1,9 @@
-## Sprint 2
+## Sprint 3
 ### Что сделано:
 
-- В проект добавлен Typescript v4.9.5
-- В проект добавлен ESLint, StyleLint
-- Реализован класс работы с http `src/infrastructure/http`
-- Реализован класс работы с событиями `src/infrastructure/event-bus`
-- Реализован класс отрисовки компонентов `src/infrastructure/block`
-- Реализован механизм валидации форм
----
+- Добавлен роутер
+- Добавлена обработка запросов
+- Добавлен чат на основе вебсокетов
 
 ### Ссылки
 
@@ -19,6 +15,17 @@
 
    https://sparkling-cuchufli-0c2c7d.netlify.app/
 
+---
+
+## Sprint 2
+### Что сделано:
+
+- В проект добавлен Typescript v4.9.5
+- В проект добавлен ESLint, StyleLint
+- Реализован класс работы с http `src/infrastructure/http`
+- Реализован класс работы с событиями `src/infrastructure/event-bus`
+- Реализован класс отрисовки компонентов `src/infrastructure/block`
+- Реализован механизм валидации форм
 ---
 
 ## Установка
