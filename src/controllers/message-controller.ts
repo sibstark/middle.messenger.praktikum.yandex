@@ -39,6 +39,8 @@ class MessageController extends EventBus {
 
   private isReconnected = false;
 
+  private initial = true;
+
   // eslint-disable-next-line no-undef
   private interval?: NodeJS.Timer;
 
@@ -69,7 +71,6 @@ class MessageController extends EventBus {
   }
 
   private async connect() {
-    this.isReconnected = false;
     this.offset = 0;
     const url = await this.tryMakeUrl();
     try {
@@ -87,9 +88,6 @@ class MessageController extends EventBus {
     this.isReconnected = false;
     clearInterval(this.interval);
     this.unsubscribe();
-    this._messages = [];
-    this.offset = 0;
-    this.emit(MessageEvents.Dispose);
     await this.socket.close();
     this.socket = null;
   }
@@ -117,16 +115,6 @@ class MessageController extends EventBus {
     if (!this.isReconnected) {
       this.loadMessages();
     }
-    /*
-    this.interval = setInterval(() => {
-      this.socket?.send(
-        JSON.stringify({
-          content: "",
-          type: ""
-        })
-      );
-    }, 20000);
-    */
   }
 
   private catchError(e: any) {
@@ -167,7 +155,11 @@ class MessageController extends EventBus {
       const msgs = data.map(_ => messageMap(_));
       msgs.reverse();
       this._messages = [...msgs, ...this._messages];
-      this.emit(MessageEvents.Messages, msgs);
+      const status = this.initial ? "initial" : "";
+      this.emit(MessageEvents.Messages, msgs, status);
+      if (this.initial) {
+        this.initial = false;
+      }
     } else {
       const msg = messageMap(data);
       if (msg.type === "message") {
@@ -193,10 +185,13 @@ class MessageController extends EventBus {
     if (!chat) {
       return;
     }
+    this.initial = true;
     if (chat.id !== _store.chat.selected?.id) {
       store.set("chat.selected", {
         ...chat
       });
+      this._messages = [];
+      this.emit(MessageEvents.Dispose);
       await this.disconnect();
       await this.connect();
     }

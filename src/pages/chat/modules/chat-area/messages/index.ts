@@ -3,6 +3,7 @@ import { WSMessage } from "@types";
 import { messageController, MessageEvents } from "@controllers";
 import template from "./messages.hbs";
 import { ChatMessage } from "../../../components";
+import { LoadMore } from "./load-more";
 
 function mapMessage(message: WSMessage, id: number) {
   const classes = message.user_id === id ? "chat-message_own" : "";
@@ -14,21 +15,30 @@ function mapMessage(message: WSMessage, id: number) {
 }
 
 export class Messages extends Block {
-  // classes: "chat-message_own"
   constructor() {
-    super("div", {});
+    const more = new LoadMore({
+      events: {
+        click: () => {
+          messageController.loadMessages();
+        }
+      }
+    });
+    super("div", { loadMore: more });
     messageController.on(MessageEvents.Messages, this.onAddList.bind(this));
     messageController.on(MessageEvents.Message, this.onAdd.bind(this));
     messageController.on(MessageEvents.Dispose, this.dispose.bind(this));
   }
 
-  onAddList(messages: WSMessage[]) {
+  onAddList(messages: WSMessage[], status: string) {
     const user = store.getState().user.user;
     const list = messages.map(_ => mapMessage(_, user!.id));
     const fragment = new DocumentFragment();
     fragment.append(...list);
-    this.getContent().insertBefore(fragment, this.getContent().firstChild);
-    this.getContent().scrollTop = 0;
+    const firstMessage = this.getContent().querySelector("div:first-of-type");
+    this.getContent().insertBefore(fragment, firstMessage);
+    if (status === "initial") {
+      this.getContent().scrollTop = this.getContent().scrollHeight;
+    }
   }
 
   onAdd(message: WSMessage) {
@@ -39,7 +49,15 @@ export class Messages extends Block {
   }
 
   dispose() {
-    this.getContent().innerHTML = "";
+    const divChildren = this.getContent().querySelectorAll("div");
+    divChildren.forEach(div => div.remove());
+  }
+
+  public unmount() {
+    messageController.off(MessageEvents.Messages, this.onAddList.bind(this));
+    messageController.off(MessageEvents.Message, this.onAdd.bind(this));
+    messageController.off(MessageEvents.Dispose, this.dispose.bind(this));
+    this.getContent().remove();
   }
 
   protected render(): DocumentFragment {

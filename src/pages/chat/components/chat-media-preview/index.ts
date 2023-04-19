@@ -1,4 +1,4 @@
-import { Block } from "@utils";
+import { Block, store } from "@utils";
 import { Cross } from "@components";
 import { chatsController, messageController } from "@controllers";
 import template from "./chat-media-preview.hbs";
@@ -14,11 +14,16 @@ export class ChatPreview extends Block<ChatPreviewProps> {
     const cross = new Cross({
       classes: "message-timer-bar__action",
       events: {
-        click: () => {
+        click: (e: MouseEvent) => {
+          e.stopPropagation();
           if (!confirm(`Удалить чат с ${this.props.title}?`)) {
             return;
           }
+          const selected = store.getState().chat.selected;
           chatsController.removeChat(this.props.id);
+          if (selected?.id === this.props.id) {
+            store.set("chat.selected", null);
+          }
         }
       }
     });
