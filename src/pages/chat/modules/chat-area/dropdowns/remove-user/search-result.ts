@@ -1,23 +1,25 @@
 import { Block } from "@utils";
 import { Button } from "@components";
 import { chatsController } from "@controllers";
-import { ConstructSearchResultProps, SearchResultProps } from "./types";
-import result from "./result.hbs";
-import "./styles.css";
+import {
+  ConstructSearchResultProps,
+  SearchResultProps
+} from "../find-user/search-result/types";
+import result from "../find-user/search-result/result.hbs";
 
 export class SearchResult extends Block<SearchResultProps> {
   constructor(props: ConstructSearchResultProps) {
     const button = new Button({
       type: "button",
-      text: "Add",
+      text: "Remove",
       classes: "button_blue",
       events: {
         click: () => {
           const name = props.user.display_name || props.user.login;
-          if (!confirm(`Добавить ${name} в чат?`)) {
+          if (!confirm(`Удалить ${name} из чата?`)) {
             return;
           }
-          chatsController.addUser(this.props.user);
+          chatsController.removeUser(this.props.user);
         }
       }
     });

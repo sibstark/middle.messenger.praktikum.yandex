@@ -10,4 +10,5 @@ export type DropdownProps = ExternalClasses<{
   trigger: Block | string;
   position?: string;
   content: Block[];
+  actions?: Block[];
 }>;

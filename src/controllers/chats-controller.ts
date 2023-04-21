@@ -55,37 +55,48 @@ class ChatsController {
     await this.getChats();
   }
 
-  async addUser(chatId: number, userId: number) {
+  async addUser(user: User) {
     try {
-      await this.api.addUsers(chatId, [userId]);
-      await this.getChats();
+      const chat = store.getState().chat.selected;
+      if (chat) {
+        await this.api.addUsers(chat.id, [user.id]);
+        alert(`Пользователь ${user.login} добавлен в чат ${chat.title}`);
+        this.getChatUsers();
+      }
     } catch (e) {
       console.log("addUser", e);
     }
   }
 
-  async removeUser(chatId: number, userId: number) {
+  async removeUser(user: User) {
     try {
-      await this.api.removeUsers(chatId, [userId]);
-      await this.getChats();
+      const chat = store.getState().chat.selected;
+      if (chat) {
+        await this.api.removeUsers(chat.id, [user.id]);
+        alert(`Пользователь ${user.login} удален из чата ${chat.title}`);
+        this.getChatUsers();
+      }
     } catch (e) {
       console.log("removeUser", e);
     }
   }
 
-  async getChatUsers(chatId: number) {
+  async getChatUsers() {
     try {
-      const users = await this.api.getChatUsers(chatId);
-      store.set("chat.users", users);
+      const chat = store.getState().chat.selected;
+      if (chat) {
+        const users = await this.api.getChatUsers(chat.id);
+        store.set("chat.users", users);
+      }
     } catch (e) {
       console.log("getChatUsers", e);
     }
   }
 
-  async tryAddUserChat(chatId: number, user: User) {
+  async tryAddUserChat(user: User) {
     try {
       store.set("chats.fetching", true);
-      await this.addUser(chatId, user.id);
+      await this.addUser(user);
       await this.getChats();
     } catch (e) {
       console.log("tryCreateUserChat", e);

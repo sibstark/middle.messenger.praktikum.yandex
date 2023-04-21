@@ -2,6 +2,7 @@ import { ChatsApi } from "@api";
 import { EventBus, Router, store } from "@utils";
 import { path } from "@routes";
 import { WSMessage } from "@types";
+import { chatsController } from "./chats-controller";
 
 function messageMap(m: Record<string, any>): WSMessage {
   return {
@@ -190,6 +191,7 @@ class MessageController extends EventBus {
       store.set("chat.selected", {
         ...chat
       });
+      chatsController.getChatUsers();
       this._messages = [];
       this.emit(MessageEvents.Dispose);
       await this.disconnect();

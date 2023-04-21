@@ -1,6 +1,8 @@
 import { Block } from "@utils";
 import { Events } from "@types";
 import { Dropdown, DropdownItem } from "../../../components";
+import { AddChatUser } from "./find-user";
+import { RemoveUser } from "./remove-user";
 
 const template = `<svg width="3" height="15" viewBox="0 0 3 15" 
 fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -40,9 +42,19 @@ export class ChatActions extends Dropdown {
 
   constructor() {
     const trigger = new ThreeDots({});
+    const addUser = new AddChatUser();
+    const removeUser = new RemoveUser();
     const add = new DropdownItem({
       icon: Plus,
-      title: "Добавить пользователя"
+      title: "Добавить пользователя",
+      events: {
+        click: (e: MouseEvent) => {
+          e.stopPropagation();
+          addUser.setProps({
+            classes: "modal_active"
+          });
+        }
+      }
     });
     const remove = new DropdownItem({
       icon: Cross,
@@ -50,7 +62,34 @@ export class ChatActions extends Dropdown {
     });
     super({
       content: [add, remove],
+      actions: [addUser, removeUser],
       trigger
+    });
+    remove.setProps({
+      events: {
+        click: (e: MouseEvent) => {
+          e.stopPropagation();
+          this.setProps({
+            classes: ""
+          });
+          removeUser.setProps({
+            classes: "modal_active"
+          });
+        }
+      }
+    });
+    add.setProps({
+      events: {
+        click: (e: MouseEvent) => {
+          e.stopPropagation();
+          this.setProps({
+            classes: ""
+          });
+          addUser.setProps({
+            classes: "modal_active"
+          });
+        }
+      }
     });
     trigger.setProps({
       events: {

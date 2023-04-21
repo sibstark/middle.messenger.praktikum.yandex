@@ -39,7 +39,7 @@ class ModalBody extends Block<ModalBodyProps> {
 
 const ConnectedModalBody = connect(connectUsers)(ModalBody);
 
-export class AddChat extends Modal {
+export class AddChatUser extends Modal {
   constructor() {
     super({ content: new ConnectedModalBody() });
   }
