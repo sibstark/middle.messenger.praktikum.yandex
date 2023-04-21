@@ -1,10 +1,7 @@
 import { Button, Input } from "@components";
-import { SearchResult } from "./search-result";
+import { Events } from "@types";
 
-export type ModalBodyProps = {
-  users: SearchResult[];
+export type ModalBodyProps = Events & {
   input: Input;
   button: Button;
 };
-
-export type ConstructModalBodyProps = Pick<ModalBodyProps, "users">;

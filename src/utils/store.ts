@@ -18,6 +18,7 @@ export type ChatsStore = WithFetching<{
 }>;
 
 export type ChatStore = {
+  users: User[];
   selected: Chat | null;
   messages: any[];
 };
@@ -44,7 +45,8 @@ class Store extends EventBus {
     },
     chat: {
       selected: null,
-      messages: []
+      messages: [],
+      users: []
     }
   };
 

@@ -1,5 +1,5 @@
 import { ChatsApi } from "@api";
-import { Chat, User } from "@types";
+import { Action, Chat, User } from "@types";
 import { store } from "@utils";
 import { mapChatMessage } from "./helpers";
 
@@ -32,8 +32,22 @@ class ChatsController {
     }
   }
 
-  async createChat(title: string): Promise<Pick<Chat, "id">> {
-    return this.api.createChat(title);
+  async createChat(
+    title: string
+  ): Promise<Action<Pick<Chat, "id"> | undefined>> {
+    try {
+      const chat = await this.api.createChat(title);
+      await this.getChats();
+      return {
+        success: true,
+        entity: chat
+      };
+    } catch (e) {
+      return {
+        success: false,
+        entity: undefined
+      };
+    }
   }
 
   async removeChat(id: number) {
@@ -42,15 +56,36 @@ class ChatsController {
   }
 
   async addUser(chatId: number, userId: number) {
-    await this.api.addUsers(chatId, [userId]);
+    try {
+      await this.api.addUsers(chatId, [userId]);
+      await this.getChats();
+    } catch (e) {
+      console.log("addUser", e);
+    }
   }
 
-  async tryCreateUserChat(user: User) {
+  async removeUser(chatId: number, userId: number) {
+    try {
+      await this.api.removeUsers(chatId, [userId]);
+      await this.getChats();
+    } catch (e) {
+      console.log("removeUser", e);
+    }
+  }
+
+  async getChatUsers(chatId: number) {
+    try {
+      const users = await this.api.getChatUsers(chatId);
+      store.set("chat.users", users);
+    } catch (e) {
+      console.log("getChatUsers", e);
+    }
+  }
+
+  async tryAddUserChat(chatId: number, user: User) {
     try {
       store.set("chats.fetching", true);
-      const title = user.display_name || user.login;
-      const chat = await this.createChat(title);
-      await this.addUser(chat.id, user.id);
+      await this.addUser(chatId, user.id);
       await this.getChats();
     } catch (e) {
       console.log("tryCreateUserChat", e);

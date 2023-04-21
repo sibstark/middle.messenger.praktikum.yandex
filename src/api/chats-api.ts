@@ -1,4 +1,4 @@
-import { Chat, ChatResponse, Token } from "@types";
+import { Chat, ChatResponse, Token, User } from "@types";
 import BaseAPI from "./base-api";
 
 export class ChatsApi extends BaseAPI {
@@ -39,6 +39,23 @@ export class ChatsApi extends BaseAPI {
   addUsers(chatId: number, users: number[]) {
     return this.http.put("/users", {
       data: { chatId, users },
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    });
+  }
+
+  removeUsers(chatId: number, users: number[]) {
+    return this.http.delete("/users", {
+      data: { chatId, users },
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    });
+  }
+
+  getChatUsers(chatId: number) {
+    return this.http.get<User[]>(`/${chatId}/users`, {
       headers: {
         "Content-type": "application/json; charset=UTF-8"
       }
