@@ -38,5 +38,5 @@
 - `npm run lint:css` — запуск проверки StyleLint для css файлов
 
 
-
+=======
 
