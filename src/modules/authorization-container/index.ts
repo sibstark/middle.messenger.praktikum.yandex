@@ -1,4 +1,4 @@
-import { Block } from "@infrastructure";
+import { Block } from "@utils";
 import template from "./authorization-container.hbs";
 import { AuthorizationContainerProps } from "./types";
 import "./authorization-container.css";

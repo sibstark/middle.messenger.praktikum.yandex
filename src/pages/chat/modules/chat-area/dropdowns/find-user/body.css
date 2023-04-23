@@ -1,0 +1,22 @@
+.manage-chat-user-modal {
+  width: 400px;
+
+  &__title {
+    color: var(--color-black);
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    max-height: 350px;
+    overflow-y: scroll;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: center;
+  }
+}

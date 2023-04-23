@@ -1,8 +1,0 @@
-.pages-navigation {
-  display: flex;
-  flex-direction: column;
-
-  a {
-    margin-bottom: 0.5rem;
-  }
-}

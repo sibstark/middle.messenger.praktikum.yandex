@@ -1,4 +1,4 @@
-import { EventBlock } from "@infrastructure";
+import { EventBlock } from "@utils";
 import template from "./input.hbs";
 import { InputProps } from "./types";
 import "./input.css";

@@ -2,13 +2,16 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@types": ["src/types.ts"],
+      "@types": ["src/types"],
       "@utils": ["src/utils"],
       "@components": ["src/components"],
+      "@controllers": ["src/controllers"],
       "@components/*": ["src/components/*"],
       "@modules": ["src/modules"],
       "@pages": ["src/pages"],
-      "@infrastructure": ["src/infrastructure"],
+      "@connectors": ["src/connectors"],
+      "@hocs": ["src/hocs"],
+      "@api": ["src/api"],
       "@routes": ["src/pages/routes.ts"]
     },
     "outDir": "dist",

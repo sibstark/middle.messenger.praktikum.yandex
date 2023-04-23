@@ -1,7 +1,11 @@
 {
-  "extends": "airbnb",
+  "extends": [
+    "airbnb",
+    "prettier",
+    "plugin:prettier/recommended"
+  ],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "import"],
+  "plugins": ["@typescript-eslint", "prettier", "import"],
   "env": {
     "browser": true
   },
@@ -29,7 +33,19 @@
     "no-this-before-super": "off",
     "no-useless-escape": "off",
     "max-classes-per-file": "off",
-    "no-console": "off"
+    "no-console": "off",
+    "no-constructor-return": "off",
+    "no-continue": "off",
+    "no-restricted-syntax": "off",
+    "no-prototype-builtins": "off",
+    "guard-for-in": "off",
+    "no-return-assign": "off",
+    "prefer-promise-reject-errors": "off",
+    "consistent-return": "off",
+    "camelcase": "off",
+    "no-restricted-globals": "off",
+    "no-alert": "off",
+    "no-useless-return": "off"
   },
   "settings": {
     "import/resolver": {

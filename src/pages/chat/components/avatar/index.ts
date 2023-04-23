@@ -1,4 +1,4 @@
-import { Block } from "@infrastructure";
+import { Block } from "@utils";
 import template from "./avatar.hbs";
 import { AvatarProps } from "./types";
 import "./avatar.css";

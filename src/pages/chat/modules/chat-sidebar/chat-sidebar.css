@@ -18,7 +18,7 @@
 .chat-header-profile-nav {
     color: var(--color-grey);
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     font-size: 0.75rem;
 
     &__link {

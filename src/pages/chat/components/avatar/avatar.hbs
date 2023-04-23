@@ -1,1 +1,10 @@
-<div class="person-avatar {{classes}}"></div>
+<div class="person-avatar {{classes}}">
+  {{#if href}}
+    <img
+      src="https://ya-praktikum.tech/api/v2/resources{{href}}"
+      alt="User avatar"
+      height="46"
+      width="46"
+    />
+  {{/if}}
+</div>

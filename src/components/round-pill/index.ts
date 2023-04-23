@@ -1,5 +1,4 @@
-import { Block } from "@infrastructure";
-import { classnames } from "@utils";
+import { Block, classnames } from "@utils";
 import template from "./round-pill.hbs";
 import { RoundPillProps } from "./types";
 import "./round-pill.css";

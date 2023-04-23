@@ -6,4 +6,6 @@ export type InputProps = Children &
     name?: string;
     type: string;
     placeholder?: string;
+    value?: string | number;
+    accept?: string;
   }>;

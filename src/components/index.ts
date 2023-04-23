@@ -1,6 +1,7 @@
 export * from "./button";
 export * from "./form-control";
 export * from "./link";
+export * from "./loader";
 export * from "./modal";
 export * from "./round-pill";
 export * from "./label";
@@ -8,3 +9,6 @@ export * from "./input";
 export * from "./form";
 export * from "./main";
 export * from "./nav";
+export * from "./text";
+export * from "./cross";
+export * from "./empty";

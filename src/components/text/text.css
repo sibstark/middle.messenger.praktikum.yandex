@@ -1,0 +1,11 @@
+.text {
+    font-size: 0.75rem;
+
+    &_success {
+        color: var(--color-success);
+    }
+
+    &_danger {
+        color: var(--color-danger);
+    }
+}

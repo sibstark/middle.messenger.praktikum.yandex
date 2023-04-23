@@ -2,7 +2,7 @@
     {{{avatar}}}
     <div class="chat-media-preview__content message-preview">
         <div>
-            <h5>{{name}}</h5>
+            <h5>{{title}}</h5>
             <div class="message-preview__text">
                 {{text}}
             </div>
@@ -10,16 +10,10 @@
         <div class="message-preview__meta">
             <div class="message-timer-bar">
                 <span class="message-timer-bar__time">{{time}}</span>
-                <svg class="message-timer-bar__action" width="8" height="8" viewBox="0 0 8 8" fill="none"
-                     xmlns="http://www.w3.org/2000/svg">
-                    <rect x="6.36401" y="7.07129" width="9" height="1" transform="rotate(-135 6.36401 7.07129)"
-                          fill="#999999"/>
-                    <rect x="0.00012207" y="6.36401" width="9" height="1" transform="rotate(-45 0.00012207 6.36401)"
-                          fill="#999999"/>
-                </svg>
+                {{{cross}}}
             </div>
             <div class="message-preview__counter">
-                <span>{{count}}</span>
+                <span>{{unreadCount}}</span>
             </div>
         </div>
     </div>

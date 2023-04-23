@@ -1,6 +1,8 @@
-import { ExternalClasses } from "@types";
+import { Events, ExternalClasses } from "@types";
 
-export type ChatInputProps = ExternalClasses<{
-  placeholder: string;
-  name?: string;
-}>;
+export type ChatInputProps = ExternalClasses<
+  Events & {
+    placeholder: string;
+    name?: string;
+  }
+>;

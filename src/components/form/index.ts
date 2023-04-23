@@ -1,18 +1,18 @@
-import { Block, EventBlock } from "@infrastructure";
+import { Block, EventBlock } from "@utils";
 import { IValidation } from "@types";
 import template from "./form.hbs";
-import { FromProps, TValidationScheme } from "./types";
+import { FormProps, TValidationScheme } from "./types";
 import { FormControl } from "../form-control";
 
-export class Form extends Block<FromProps> {
+export class Form extends Block<FormProps> {
   validationScheme: TValidationScheme;
 
-  constructor(props: FromProps, scheme: TValidationScheme) {
+  constructor(props: FormProps, scheme: TValidationScheme) {
     super("form", props);
     this.validationScheme = scheme;
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+    this._onSubmit = this._onSubmit.bind(this);
     this.subscribe();
   }
 
@@ -54,15 +54,15 @@ export class Form extends Block<FromProps> {
     });
   }
 
-  addEvents() {
-    this._element!.addEventListener("submit", this.onSubmit.bind(this));
+  protected addEvents() {
+    this._element!.addEventListener("submit", this._onSubmit.bind(this));
   }
 
   protected removeEvents() {
-    this._element!.removeEventListener("submit", this.onSubmit.bind(this));
+    this._element!.removeEventListener("submit", this._onSubmit.bind(this));
   }
 
-  onSubmit(e: Event) {
+  private _onSubmit(e: Event) {
     e.preventDefault();
     const context = this._constructContext();
     const blocks = (this.children.content as Block[]).filter(
@@ -82,7 +82,7 @@ export class Form extends Block<FromProps> {
       }
     });
     if (isValid) {
-      console.log(`Form ${this.props.name}`, context);
+      this.props.onSubmit?.(context);
     }
   }
 
@@ -111,3 +111,5 @@ export class Form extends Block<FromProps> {
     return this.compile(template, this.props);
   }
 }
+
+export * from "./types";

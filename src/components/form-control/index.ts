@@ -1,7 +1,7 @@
 import { Input, Label } from "@components";
-import { EventBlock } from "@infrastructure";
+import { EventBlock } from "@utils";
 import template from "./form-control.hbs";
-import { EmptyFormControlProps, FormControlProps } from "./types";
+import { FormControlProps } from "./types";
 import "./form-control.css";
 
 export class FormControl extends EventBlock<FormControlProps> {
@@ -22,7 +22,8 @@ export class FormControl extends EventBlock<FormControlProps> {
       type: props.type,
       placeholder: props.placeholder,
       classes: "form-control__input",
-      events: props.events
+      events: props.events,
+      value: props.value
     });
     props.children.label = label;
     props.children.input = input;
@@ -72,15 +73,5 @@ export class FormControl extends EventBlock<FormControlProps> {
     });
   }
 }
-
-export class EmptyFormControl extends EventBlock<EmptyFormControlProps> {
-  constructor(props: EmptyFormControlProps) {
-    super("div", props);
-  }
-
-  protected render(): DocumentFragment {
-    return this.compile(template, this.props);
-  }
-}
-
+export * from "./empty-form-control";
 export * from "./types";

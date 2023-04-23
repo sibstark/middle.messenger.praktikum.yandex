@@ -1,12 +1,12 @@
 {
-  "name": "sprint_2",
+  "name": "sprint_3",
   "version": "1.1.0",
   "author": "Oleg Briukhanov",
   "license": "ISC",
   "description": "Yandex.Практикум проект",
   "scripts": {
     "start": "parcel index.html --no-cache --port 3000 --open",
-    "server": "parcel build index.html --no-source-maps & node server.js",
+    "server": "parcel build index.html --no-source-maps && node server.js",
     "build": "parcel build index.html --no-source-maps",
     "lint": "eslint '**/*.ts' '**/*.js'",
     "lint:css": "stylelint '**/*.css'"
@@ -40,13 +40,16 @@
     "uuid": "^9.0.0"
   },
   "alias": {
-    "@types": "./src/types.ts",
+    "@types": "./src/types",
     "@utils": "./src/utils",
+    "@controllers": "./src/controllers",
     "@components": "./src/components",
     "@components/*": "./src/components/*",
     "@modules": "./src/modules",
     "@pages": "./src/pages",
-    "@infrastructure": "./src/infrastructure",
+    "@hocs": "./src/hocs",
+    "@api": "./src/api",
+    "@connectors": "./src/connectors",
     "@routes": "./src/pages/routes.ts"
   }
 }
