@@ -46,7 +46,8 @@
     "camelcase": "off",
     "no-restricted-globals": "off",
     "no-alert": "off",
-    "no-useless-return": "off"
+    "no-useless-return": "off",
+    "no-unused-expressions": "off"
   },
   "settings": {
     "import/resolver": {
