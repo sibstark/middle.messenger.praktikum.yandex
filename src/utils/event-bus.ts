@@ -29,7 +29,7 @@ export class EventBus {
   emit(event: string, ...args: any[]) {
     const listener = this.listeners[event];
     if (!Array.isArray(listener)) {
-      throw new Error(`Нет события: ${event}`);
+      throw new Error(`No event: ${event}`);
     }
     listener.forEach(callback => callback(...args));
   }
