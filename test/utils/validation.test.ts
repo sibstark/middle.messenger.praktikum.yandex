@@ -168,7 +168,7 @@ describe("nameValidation tests", () => {
   });
 });
 
-describe("emailValidation", () => {
+describe("emailValidation tests", () => {
   it("Returns no error for a valid email", () => {
     const email = "example@example.com";
     const result = emailValidation(email, null);
