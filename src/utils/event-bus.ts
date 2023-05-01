@@ -23,7 +23,6 @@ export class EventBus {
     if (listener.length === 0) {
       delete this.listeners[event];
     }
-    this.listeners[event] = listener;
   }
 
   emit(event: string, ...args: any[]) {
