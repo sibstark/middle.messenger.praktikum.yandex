@@ -1,6 +1,8 @@
 // webpack.config.js
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+const ESLintPlugin = require("eslint-webpack-plugin");
+
 const path = require("path");
 
 const isProd = process.env.NODE_ENV === "production";
@@ -15,7 +17,21 @@ module.exports = {
     filename: "main.js"
   },
   resolve: {
-    extensions: [".ts", ".js", ".json"]
+    extensions: [".tsx", ".ts", ".jsx", ".js", "..."],
+    alias: {
+      "@types": path.resolve(__dirname, "/src/types"),
+      "@utils": path.resolve(__dirname, "/src/utils"),
+      "@controllers": path.resolve(__dirname, "/src/controllers"),
+      "@components": path.resolve(__dirname, "/src/components"),
+      "@components/*": path.resolve(__dirname, "/src/components/*"),
+      "@modules": path.resolve(__dirname, "/src/modules"),
+      "@pages": path.resolve(__dirname, "/src/pages"),
+      "@hocs": path.resolve(__dirname, "/src/hocs"),
+      "@api": path.resolve(__dirname, "/src/api"),
+      "@connectors": path.resolve(__dirname, "/src/connectors"),
+      "@routes": path.resolve(__dirname, "/src/pages/routes.ts"),
+      handlebars: "handlebars/dist/handlebars.min.js"
+    }
   },
   module: {
     rules: [
@@ -37,34 +53,34 @@ module.exports = {
       },
       // шрифты и SVG
       {
-        test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
+        test: /\.(woff(2)?|eot|ttf|otf|svg|png|jpg|)$/,
         type: "asset/inline"
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"]
+      },
+      {
+        test: /\.hbs$/, // Apply the loader only to .hbs files
+        use: [
+          {
+            loader: path.resolve(__dirname, "inline-loader.js") // Path to the loader
+          }
+        ]
       }
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: "public/index.html",
-      hash: config.__PROD__
-    })
+      hash: isProd
+    }),
+    new ESLintPlugin()
   ],
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
-    compress: true,
+    // contentBase: path.join(__dirname, "dist"),
     port,
-    proxy: [
-      {
-        context: ["/proxy-api/**"],
-        target: "https://proxy-api/api/",
-        pathRewrite: { "^/api/": "/" },
-        secure: false,
-        onProxyReq: proxyReq => {
-          proxyReq.setHeader("Host", "my-custom-host");
-        }
-      }
-    ],
     open: true,
-    watch: true,
-    hot: true
+    host: "localhost"
   }
 };

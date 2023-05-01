@@ -31,7 +31,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+    "noEmit": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "lib": ["esnext", "dom", "dom.iterable"]

@@ -8,6 +8,7 @@ import { RenderProfilePage } from "./pages/profile";
 import { Render404Page } from "./pages/404";
 import { Render500Page } from "./pages/500";
 import { RenderChatPage } from "./pages/chat";
+import "./main.css";
 
 const protectedRouts = [path.profile, path.serverError, path.app];
 const router = new Router("root");

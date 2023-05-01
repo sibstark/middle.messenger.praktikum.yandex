@@ -140,7 +140,9 @@ export class Block<T extends TProps = Record<string | symbol, any>>
       ...divided.children
     };
 
-    Object.assign(this.props, nextProps);
+    if (nextProps) {
+      Object.assign(this.props, nextProps);
+    }
   };
 
   private get element() {
