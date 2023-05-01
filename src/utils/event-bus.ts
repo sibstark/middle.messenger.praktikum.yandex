@@ -20,6 +20,7 @@ export class EventBus {
       return;
     }
     listener = listener.filter(l => l !== callback);
+    this.listeners[event] = listener;
     if (listener.length === 0) {
       delete this.listeners[event];
     }
