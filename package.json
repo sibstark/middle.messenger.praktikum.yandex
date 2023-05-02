@@ -41,11 +41,12 @@
     "eslint-plugin-import": "2.27.5",
     "eslint-plugin-prettier": "4.2.1",
     "eslint-webpack-plugin": "^4.0.1",
-    "handlebars-loader": "^1.7.3",
     "html-webpack-plugin": "^5.5.1",
     "jsdom": "^21.1.1",
     "mocha": "^10.2.0",
     "parcel": "2.8.3",
+    "postcss": "^8.4.23",
+    "postcss-loader": "^7.3.0",
     "postcss-nested": "6.0.1",
     "prettier": "^2.8.6",
     "sinon": "^15.0.4",
@@ -65,18 +66,5 @@
     "handlebars": "4.7.7",
     "path": "0.12.7",
     "uuid": "^9.0.0"
-  },
-  "alias": {
-    "@types": "./src/types",
-    "@utils": "./src/utils",
-    "@controllers": "./src/controllers",
-    "@components": "./src/components",
-    "@components/*": "./src/components/*",
-    "@modules": "./src/modules",
-    "@pages": "./src/pages",
-    "@hocs": "./src/hocs",
-    "@api": "./src/api",
-    "@connectors": "./src/connectors",
-    "@routes": "./src/pages/routes.ts"
   }
 }
