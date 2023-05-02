@@ -11,7 +11,9 @@
     "lint": "eslint '**/*.ts' '**/*.js'",
     "lint:css": "stylelint '**/*.css'",
     "test": "mocha test",
-    "start:wp": "webpack"
+    "start:wp": "webpack",
+    "docker:build": "docker build -t chat-app .",
+    "docker:start": "docker run -p 3000:3000 chat-app"
   },
   "devDependencies": {
     "@babel/cli": "7.21.5",
