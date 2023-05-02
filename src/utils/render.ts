@@ -5,8 +5,6 @@ export function renderTemplate(
   template: string,
   context: Record<string, string | any>
 ): string {
-  console.log("hbs template", template);
-  // @ts-ignore
   const compiledTemplate = Handlebars.compile(template);
   return compiledTemplate(context);
 }

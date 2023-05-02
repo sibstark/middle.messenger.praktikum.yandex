@@ -1,4 +1,6 @@
 // webpack.config.js
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const ESLintPlugin = require("eslint-webpack-plugin");
@@ -58,7 +60,7 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader", "postcss-loader"]
+        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"]
       },
       {
         test: /\.hbs$/, // Apply the loader only to .hbs files
@@ -75,7 +77,10 @@ module.exports = {
       template: "public/index.html",
       hash: isProd
     }),
-    new ESLintPlugin()
+    new ESLintPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "[name].css"
+    })
   ],
   devServer: {
     // contentBase: path.join(__dirname, "dist"),
