@@ -29,6 +29,7 @@ describe("HTTPTransport tests", () => {
     expect(request.url).to.equal("https://ya-praktikum.tech/api/v2/method");
   });
 
+  // eslint-disable-next-line func-names
   it("Should throw an error if the request fails", async function () {
     const url = "/method";
     const http = new HTTPTransport(url);
