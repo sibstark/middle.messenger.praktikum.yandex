@@ -1,6 +1,6 @@
 import { expect } from "chai";
-import { Block } from "@utils";
 import sinon from "sinon";
+import { Block } from "./block";
 
 describe("Block tests", () => {
   function blockFabric() {

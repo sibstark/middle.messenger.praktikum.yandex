@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { classnames, trim } from "@utils";
+import { classnames, trim } from "./string";
 
 describe("classnames tests", () => {
   it("Should return a string with all defined classnames", () => {

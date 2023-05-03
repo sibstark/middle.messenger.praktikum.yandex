@@ -1,7 +1,7 @@
 import { expect } from "chai";
-import { HTTPTransport } from "@utils";
 import sinon from "sinon";
 import { afterEach } from "mocha";
+import { HTTPTransport } from "./http";
 
 describe("HTTPTransport tests", () => {
   beforeEach(() => {

@@ -1,7 +1,6 @@
 import { expect } from "chai";
-import { EventBus } from "@utils";
-import { describe, it } from "mocha";
 import sinon from "sinon";
+import { EventBus } from "./event-bus";
 
 describe("EventBus tests", () => {
   describe("on", () => {

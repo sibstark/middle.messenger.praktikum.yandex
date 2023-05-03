@@ -6,7 +6,7 @@ import {
   phoneValidation,
   nameValidation,
   emailValidation
-} from "@utils";
+} from "./validation";
 
 describe("loginValidation tests", () => {
   it("Returns an error for empty value", () => {

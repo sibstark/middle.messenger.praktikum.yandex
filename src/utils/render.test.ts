@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { renderTemplate } from "@utils";
+import { renderTemplate } from "./render";
 
 describe("renderTemplate tests", () => {
   it("Should render a simple template with context", () => {

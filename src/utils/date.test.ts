@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { formatDate } from "@utils";
+import { formatDate } from "./date";
 
 describe("formatDate tests", () => {
   it("Date with the smallest possible hour value", () => {

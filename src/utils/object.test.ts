@@ -7,7 +7,7 @@ import {
   isEqual,
   set,
   cloneDeep
-} from "@utils";
+} from "./object";
 
 describe("isPlainObject tests", () => {
   it("Should return true for an empty object", () => {

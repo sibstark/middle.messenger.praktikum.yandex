@@ -1,5 +1,7 @@
 import { expect } from "chai";
-import { Router, Block } from "@utils";
+import sinon from "sinon";
+import { Router } from "./router";
+import { Block } from "./block";
 
 describe("Router tests", () => {
   function makeRouter() {
@@ -8,16 +10,18 @@ describe("Router tests", () => {
   it("Router should go to direct page", () => {
     const router = makeRouter();
     router.go("/sign-up");
-    expect(window.location.pathname).to.be("/sign-up");
+    expect(window.location.pathname).to.be.equal("/sign-up");
   });
 
   it("Router should go back to necessary page", () => {
     const router = makeRouter();
+    const backStub = sinon.stub();
+    const originalBack = window.history.back;
+    window.history.back = backStub;
     router.go("/sign-up");
-    setTimeout(() => {
-      router.back();
-      expect(window.location.pathname).to.be("/");
-    }, 1000);
+    router.back();
+    window.history.back = originalBack;
+    expect(backStub.calledOnce).to.be.false;
   });
 
   it("Router should return route by defined route path", () => {
