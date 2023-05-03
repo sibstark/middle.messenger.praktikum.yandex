@@ -1,3 +1,15 @@
+
+## Установка
+
+- `npm install` — установка пакетов
+- `npm run start` — запуск собранной версии (http://localhost:3000)
+- `npm run build` — сборка стабильной версии
+- `npm run test` — запуск тестов
+- `npm run docker:build` — сборка контейнера
+- `npm run docker:start` — запуск контейнера
+- `npm run lint` — запуск проверки ESLint для ts, js файлов
+- `npm run lint:css` — запуск проверки StyleLint для css файлов
+
 ## Sprint 4
 
 1. Ссылка на опубликованное приложение render.com
@@ -5,8 +17,9 @@
    https://chat-w9g3.onrender.com
 
 ### Что сделано:
-- Добавлены Chai, Mocha тесты основых утилит - папка test
+- Добавлены Chai, Mocha тесты основых утилит - папка src/utils
 - Сборка с помощью webpack
+- Написан свой загрузчик hbs шаблонов
 - Докеризация
 - Обновлены пакеты до последней (на тот момент) версии
 
@@ -40,15 +53,5 @@
 - Реализован механизм валидации форм
 ---
 
-## Установка
-
-- `npm install` — установка пакетов
-- `npm run start` — запуск собранной версии (http://localhost:3000)
-- `npm run build` — сборка стабильной версии
-- `npm run test` — запуск тестов
-- `npm run docker:build` — сборка контейнера
-- `npm run docker:start` — запуск контейнера
-- `npm run lint` — запуск проверки ESLint для ts, js файлов
-- `npm run lint:css` — запуск проверки StyleLint для css файлов
 
 
