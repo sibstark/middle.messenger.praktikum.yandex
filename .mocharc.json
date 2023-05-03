@@ -1,5 +1,5 @@
 {
   "extension": ["ts"],
-  "spec": "test/**/*.test.ts",
-  "require": ["mocha.setup.js", "test/babel-register.js"]
+  "spec": "src/**/*.test.ts",
+  "require": ["mocha.setup.js", "babel-register.js"]
 }
