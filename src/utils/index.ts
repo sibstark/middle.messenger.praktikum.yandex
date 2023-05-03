@@ -9,3 +9,4 @@ export * from "./router";
 export * from "./route";
 export * from "./http";
 export * from "./date";
+export * from "./object";

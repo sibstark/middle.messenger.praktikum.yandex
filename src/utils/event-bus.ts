@@ -20,16 +20,16 @@ export class EventBus {
       return;
     }
     listener = listener.filter(l => l !== callback);
+    this.listeners[event] = listener;
     if (listener.length === 0) {
       delete this.listeners[event];
     }
-    this.listeners[event] = listener;
   }
 
   emit(event: string, ...args: any[]) {
     const listener = this.listeners[event];
     if (!Array.isArray(listener)) {
-      throw new Error(`Нет события: ${event}`);
+      throw new Error(`No event: ${event}`);
     }
     listener.forEach(callback => callback(...args));
   }

@@ -41,7 +41,10 @@ export function merge(lhs: Indexed, rhs: Indexed): Indexed {
   return lhs;
 }
 
-export function isEqual(a: object, b: object): boolean {
+export function isEqual(a: object | string, b: object | string): boolean {
+  if (typeof a === "string" && typeof b === "string") {
+    return a === b;
+  }
   if (!isPlainObject(a) || !isPlainObject(b)) {
     return false;
   }
