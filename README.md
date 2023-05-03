@@ -1,3 +1,15 @@
+## Sprint 4
+
+1. Ссылка на опубликованное приложение render.com
+
+   https://chat-w9g3.onrender.com
+
+### Что сделано:
+- Добавлены Chai, Mocha тесты основых утилит - папка test
+- Сборка с помощью webpack
+- Докеризация
+- Обновлены пакеты до последней (на тот момент) версии
+
 ## Sprint 3
 ### Что сделано:
 
@@ -31,12 +43,12 @@
 ## Установка
 
 - `npm install` — установка пакетов
-- `npm run start` — запуск версии для разработчика (http://localhost:3000)
+- `npm run start` — запуск собранной версии (http://localhost:3000)
 - `npm run build` — сборка стабильной версии
-- `npm run server` — сборка и запуск стабильной версии (http://localhost:3000)
+- `npm run test` — запуск тестов
+- `npm run docker:build` — сборка контейнера
+- `npm run docker:start` — запуск контейнера
 - `npm run lint` — запуск проверки ESLint для ts, js файлов
 - `npm run lint:css` — запуск проверки StyleLint для css файлов
 
-
-=======
 

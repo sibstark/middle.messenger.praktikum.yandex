@@ -21,7 +21,7 @@ describe("Router tests", () => {
     router.go("/sign-up");
     router.back();
     window.history.back = originalBack;
-    expect(backStub.calledOnce).to.be.false;
+    expect(backStub.calledOnce).to.be.true;
   });
 
   it("Router should return route by defined route path", () => {

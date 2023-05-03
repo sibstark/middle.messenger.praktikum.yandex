@@ -63,10 +63,10 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"]
       },
       {
-        test: /\.hbs$/, // Apply the loader only to .hbs files
+        test: /\.hbs$/,
         use: [
           {
-            loader: path.resolve(__dirname, "inline-loader.js") // Path to the loader
+            loader: path.resolve(__dirname, "inline-loader.js") // my hbs loader
           }
         ]
       }
@@ -83,7 +83,6 @@ module.exports = {
     })
   ],
   devServer: {
-    // contentBase: path.join(__dirname, "dist"),
     port,
     open: true,
     host: "localhost"

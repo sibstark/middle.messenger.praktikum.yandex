@@ -5,15 +5,14 @@
   "license": "ISC",
   "description": "Yandex.Практикум проект",
   "scripts": {
-    "build": "webpack --mode=production --node-env=production",
     "start": "npm run build && node server.js",
-    "server": "webpack --mode=production --node-env=production && node server.js",
+    "build": "webpack --mode=production --node-env=production",
     "lint": "eslint '**/*.ts' '**/*.js'",
     "lint:css": "stylelint '**/*.css'",
     "test": "mocha test",
-    "start:wp": "webpack",
     "docker:build": "docker build -t chat-app .",
-    "docker:start": "docker run -p 3000:3000 chat-app"
+    "docker:start": "docker run -p 3000:3000 chat-app",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@babel/cli": "7.21.5",
@@ -68,7 +67,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint && npm run lint:css && npm run test "
+      "pre-commit": "npm run lint && npm run lint:css && npm run test"
     }
   }
 }
