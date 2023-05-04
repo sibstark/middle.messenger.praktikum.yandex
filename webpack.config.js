@@ -21,17 +21,17 @@ module.exports = {
   resolve: {
     extensions: [".tsx", ".ts", ".jsx", ".js", "..."],
     alias: {
-      "@types": path.resolve(__dirname, "/src/types"),
-      "@utils": path.resolve(__dirname, "/src/utils"),
-      "@controllers": path.resolve(__dirname, "/src/controllers"),
-      "@components": path.resolve(__dirname, "/src/components"),
-      "@components/*": path.resolve(__dirname, "/src/components/*"),
-      "@modules": path.resolve(__dirname, "/src/modules"),
-      "@pages": path.resolve(__dirname, "/src/pages"),
-      "@hocs": path.resolve(__dirname, "/src/hocs"),
-      "@api": path.resolve(__dirname, "/src/api"),
-      "@connectors": path.resolve(__dirname, "/src/connectors"),
-      "@routes": path.resolve(__dirname, "/src/pages/routes.ts"),
+      "@types": path.resolve(__dirname, "./src/types"),
+      "@utils": path.resolve(__dirname, "./src/utils"),
+      "@controllers": path.resolve(__dirname, "./src/controllers"),
+      "@components": path.resolve(__dirname, "./src/components"),
+      "@components/*": path.resolve(__dirname, "./src/components/*"),
+      "@modules": path.resolve(__dirname, "./src/modules"),
+      "@pages": path.resolve(__dirname, "./src/pages"),
+      "@hocs": path.resolve(__dirname, "./src/hocs"),
+      "@api": path.resolve(__dirname, "./src/api"),
+      "@connectors": path.resolve(__dirname, "./src/connectors"),
+      "@routes": path.resolve(__dirname, "./src/pages/routes.ts"),
       handlebars: "handlebars/dist/handlebars.min.js"
     }
   },
