@@ -9,6 +9,7 @@
     "build": "webpack --mode=production --node-env=production",
     "lint": "eslint '**/*.ts' '**/*.js'",
     "lint:css": "stylelint '**/*.css'",
+    "dev": "webpack serve",
     "test": "mocha test",
     "docker:build": "docker build -t chat-app .",
     "docker:start": "docker run -p 3000:3000 chat-app",
